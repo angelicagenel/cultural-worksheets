@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postal Cultural Interactiva – Tzolk'in Maya</title>
+    <style>
+        body {
+            font-family: 'Montserrat', serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+        }
+        
+        h1 {
+            color: #6366f1;
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            background: #f8fafc;
+            padding: 25px;
+            border-left: 6px solid #6366f1;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .cultural-note {
+            background: linear-gradient(45deg, #e0e7ff, #f3e8ff);
+            border-left-color: #6366f1;
+        }
+        
+        .calculator-section {
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            border-left-color: #64748b;
+        }
+        
+        .postcard-section {
+            background: linear-gradient(45deg, #f8fafc, #f1f5f9);
+            border-left-color: #475569;
+        }
+        
+        .reflection-section {
+            background: linear-gradient(45deg, #e0e7ff, #f8fafc);
+            border-left-color: #8b5cf6;
+        }
+        
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #6366f1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        button {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #4f46e5, #6366f1);
+            transform: translateY(-1px);
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 20px;
+            background: linear-gradient(45deg, #e0e7ff, #f1f5f9);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #c4b5fd;
+        }
+        
+        .nawal-info {
+            margin-top: 15px;
+            padding: 20px;
+            background: linear-gradient(45deg, #f8fafc, #e2e8f0);
+            border-radius: 8px;
+            border: 2px solid #64748b;
+        }
+        
+        .glyph-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .glyph-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .glyph-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
+        
+        .glyph-name {
+            font-weight: bold;
+            color: #6366f1;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .glyph-meaning {
+            font-size: 0.9rem;
+            color: #475569;
+            font-style: italic;
+        }
+        
+        .attribution {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #475569;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        label {
+            font-weight: bold;
+            color: #475569;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #e0e7ff, #f1f5f9);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #6366f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Postal Cultural Interactiva – Tzolk'in Maya 🌟</h1>
+        
+        <div class="section cultural-note">
+            <h2>📚 Sobre el Calendario Sagrado Maya</h2>
+            <p>El <strong>Tzolk'in</strong> es el calendario sagrado de 260 días usado por los pueblos mayas desde hace más de 2,000 años. Combina 13 números con 20 signos (nawales) para crear una rueda del tiempo que refleja los ritmos cósmicos y la naturaleza humana.</p>
+            <p><strong>Nota:</strong> Este calculador usa los nombres <em>Yucatecos</em> (como Imix, Ik', Ak'bal) del estándar del Smithsonian, que pueden diferir de otras tradiciones mayas como la K'iche' de Guatemala.</p>
+            <p><em>Este conocimiento pertenece a las comunidades mayas que mantienen estas tradiciones vivas hasta hoy.</em></p>
+        </div>
+
+        <div class="section calculator-section">
+            <h2>🎯 Descubre tu Día Maya</h2>
+            <label for="birthdate">📅 Ingresa tu fecha de nacimiento:</label>
+            <input type="date" id="birthdate" />
+            <button onclick="calculateTzolkin()">✨ Calcular mi Nawal Maya</button>
+            
+            <div id="tzolkinResult" class="result" style="display: none;"></div>
+            <div id="nawalInfo" class="nawal-info" style="display: none;"></div>
+        </div>
+
+        <div class="section postcard-section">
+            <h2>✏️ Tu Postal Cultural</h2>
+            
+            <label for="mayaDay">Tu día maya:</label>
+            <input type="text" id="mayaDay" placeholder="Ej. Cinco Kimi" readonly />
+            
+            <label for="symbolMeaning">¿Qué representa este símbolo para ti?</label>
+            <textarea id="symbolMeaning" rows="3" placeholder="Reflexiona sobre las cualidades de tu nawal y cómo se manifiestan en tu vida..."></textarea>
+            
+            <label for="favoriteTime">¿A qué hora naciste o qué hora te gusta más del día?</label>
+            <input type="text" id="favoriteTime" placeholder="Ej. Me gusta la mañana, a las nueve." />
+            
+            <label for="birthDateSpanish">Tu fecha de nacimiento en español:</label>
+            <input type="text" id="birthDateSpanish" placeholder="Ej. quince de marzo de mil novecientos noventa y cinco" readonly />
+        </div>
+
+        <div class="section reflection-section">
+            <h2>🧠 Reflexión Cultural</h2>
+            <p><strong>Usa uno de estos verbos regulares:</strong> <span class="highlight">caminar, trabajar, comer, bailar, escuchar, cuidar, dibujar, leer, visitar, ayudar</span></p>
+            
+            <label for="dailyConnection">¿Cómo se relaciona tu nawal con tu rutina diaria?</label>
+            <textarea id="dailyConnection" rows="4" placeholder="Ejemplo: Yo ayudo a mi familia con mis manos porque mi nawal representa sanación. / Yo camino todos los días porque mi símbolo es el camino."></textarea>
+        </div>
+
+        <div class="section">
+            <h2>🌀 Los 20 Nawales del Tzolk'in</h2>
+            <div class="glyph-grid" id="glyphGrid"></div>
+        </div>
+
+        <div class="attribution">
+            <p><strong>Reconocimiento Cultural:</strong> Este conocimiento pertenece a las comunidades mayas. La sabiduría del Tzolk'in es mantenida por los Ajq'ijab (guías espirituales mayas) y debe ser respetada como tradición viva, no como curiosidad histórica.</p>
+            <p><em>Algoritmo corregido - correlación GMT 584283 con ajuste arqueológico (posición 0 = 4 Ajaw)</em></p>
+            <p><strong>Diferencias regionales:</strong> Las diferentes comunidades mayas (Yucateco, K'iche', Kaqchikel, etc.) pueden usar nombres y ordenamientos ligeramente diferentes para los mismos conceptos sagrados.</p>
+        </div>
+    </div>
+
+    <script>
+        // Accurate Julian Day calculation (Fliegel-van Flandern algorithm)
+        function gregorianToJulianDay(year, month, day) {
+            const a = Math.floor((14 - month) / 12);
+            const y = year - a;
+            const m = month + 12 * a - 3;
+            
+            return day + Math.floor((153 * m + 2) / 5) + 365 * y + 
+                   Math.floor(y / 4) - Math.floor(y / 100) + 
+                   Math.floor(y / 400) + 1721119;
+        }
+
+        // 20 Day Signs - Using Smithsonian/Yucatec standard order for compatibility
+        const tzolkinDaySigns = [
+            { name: "Imix", spanish: "Lagarto", meaning: "Agua primordial, madre cósmica, inicio de la vida." },
+            { name: "Ik'", spanish: "Viento", meaning: "Espíritu, aliento vital, comunicación." },
+            { name: "Ak'bal", spanish: "Noche", meaning: "Oscuridad, casa, introspección, sueños." },
+            { name: "K'an", spanish: "Maíz", meaning: "Semilla, crecimiento, abundancia." },
+            { name: "Chikchan", spanish: "Serpiente", meaning: "Fuerza vital, poder, sabiduría ancestral." },
+            { name: "Kimi", spanish: "Muerte", meaning: "Transformación, renacimiento, cambio." },
+            { name: "Manik'", spanish: "Venado", meaning: "Mano, sanación, herramientas, destrezas." },
+            { name: "Lamat", spanish: "Estrella", meaning: "Venus, armonía, arte, belleza." },
+            { name: "Muluk", spanish: "Agua", meaning: "Luna, emociones, purificación." },
+            { name: "Ok", spanish: "Perro", meaning: "Lealtad, amor incondicional, guía." },
+            { name: "Chuwen", spanish: "Mono", meaning: "Arte, creatividad, tiempo, tejedor del destino." },
+            { name: "Eb'", spanish: "Escalera", meaning: "Camino, sendero vital, destino." },
+            { name: "B'en", spanish: "Caña", meaning: "Hogar, autoridad, crecimiento hacia arriba." },
+            { name: "Ix", spanish: "Jaguar", meaning: "Magia, poder femenino, intuición." },
+            { name: "Men", spanish: "Águila", meaning: "Visión superior, sabiduría, luna." },
+            { name: "K'ib'", spanish: "Búho", meaning: "Conocimiento, perdón, ancestros." },
+            { name: "Kab'an", spanish: "Tierra", meaning: "Pensamiento, evolución, terremotos." },
+            { name: "Etz'nab", spanish: "Pedernal", meaning: "Cuchillo, curación por corte, claridad." },
+            { name: "Kawak", spanish: "Tormenta", meaning: "Lluvia, purificación, energía femenina." },
+            { name: "Ajaw", spanish: "Señor", meaning: "Sol, flor, liderazgo espiritual." }
+        ];
+
+        // Number words in Spanish
+        const spanishNumbers = [
+            "", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", 
+            "ocho", "nueve", "diez", "once", "doce", "trece"
+        ];
+
+        // Months in Spanish
+        const spanishMonths = [
+            "", "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+
+        function numberToSpanish(num) {
+            const ones = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"];
+            const teens = ["diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve"];
+            const tens = ["", "", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"];
+            const hundreds = ["", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"];
+            const thousands = ["", "mil", "dos mil", "tres mil", "cuatro mil", "cinco mil", "seis mil", "siete mil", "ocho mil", "nueve mil"];
+
+            if (num === 0) return "cero";
+            if (num === 1) return "uno";
+            if (num < 10) return ones[num];
+            if (num < 20) return teens[num - 10];
+            if (num < 100) {
+                return tens[Math.floor(num / 10)] + (num % 10 ? " y " + ones[num % 10] : "");
+            }
+            if (num === 100) return "cien";
+            if (num < 1000) {
+                return hundreds[Math.floor(num / 100)] + (num % 100 ? " " + numberToSpanish(num % 100) : "");
+            }
+            if (num < 10000) {
+                const thousand = Math.floor(num / 1000);
+                const remainder = num % 1000;
+                if (thousand === 1) {
+                    return "mil" + (remainder ? " " + numberToSpanish(remainder) : "");
+                }
+                return thousands[thousand] + (remainder ? " " + numberToSpanish(remainder) : "");
+            }
+            
+            return num.toString(); // Fallback for larger numbers
+        }
+
+        function calculateTzolkin() {
+            const input = document.getElementById("birthdate").value;
+            if (!input) {
+                alert("Por favor, introduce una fecha.");
+                return;
+            }
+
+            const [year, month, day] = input.split("-").map(Number);
+            
+            // Convert to Julian Day Number
+            const jdn = gregorianToJulianDay(year, month, day);
+            
+            // GMT correlation constant (584283)
+            const gmtCorrelation = 584283;
+            const daysSinceCreation = jdn - gmtCorrelation;
+            
+            // Calculate Tzolk'in position (260-day cycle)
+            const tzolkinPosition = ((daysSinceCreation % 260) + 260) % 260;
+            
+            // Calculate number (1-13) and day sign (0-19)
+            // CORRECCIÓN: Ajuste para que posición 0 = 4 Ajaw (fecha creación maya)
+            const number = ((tzolkinPosition + 3) % 13) + 1;
+            const daySignIndex = (tzolkinPosition + 19) % 20;
+            const daySign = tzolkinDaySigns[daySignIndex];
+            
+            // Display results
+            const resultDiv = document.getElementById("tzolkinResult");
+            const nawalDiv = document.getElementById("nawalInfo");
+            
+            resultDiv.innerHTML = `
+                <strong>🌟 Tu día en el Tzolk'in Maya:</strong><br>
+                <span style="font-size: 1.3rem; color: #6366f1;">${spanishNumbers[number]} ${daySign.spanish}</span><br>
+                <span style="font-size: 1.1rem; color: #64748b;">(${number} ${daySign.name})</span>
+            `;
+            
+            nawalDiv.innerHTML = `
+                <h3>🔮 Significado de tu Nawal</h3>
+                <p><strong>${daySign.name} (${daySign.spanish}):</strong> ${daySign.meaning}</p>
+                <p><em>El número ${number} amplifica estas cualidades con su propia energía numerológica maya.</em></p>
+            `;
+            
+            // Fill postcard fields
+            document.getElementById("mayaDay").value = `${spanishNumbers[number]} ${daySign.spanish}`;
+            
+            // Convert date to Spanish
+            const daySpanish = numberToSpanish(day);
+            const monthSpanish = spanishMonths[month];
+            const yearSpanish = numberToSpanish(year);
+            document.getElementById("birthDateSpanish").value = `${daySpanish} de ${monthSpanish} de ${yearSpanish}`;
+            
+            resultDiv.style.display = "block";
+            nawalDiv.style.display = "block";
+        }
+
+        // Create glyph grid
+        function createGlyphGrid() {
+            const grid = document.getElementById("glyphGrid");
+            
+            tzolkinDaySigns.forEach((sign, index) => {
+                const card = document.createElement("div");
+                card.className = "glyph-card";
+                card.innerHTML = `
+                    <div class="glyph-name">${sign.name}</div>
+                    <div style="font-weight: bold; margin: 5px 0;">(${sign.spanish})</div>
+                    <div class="glyph-meaning">${sign.meaning}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize
+        document.addEventListener("DOMContentLoaded", function() {
+            createGlyphGrid();
+        });
+    </script>
+</body>
+</html>
