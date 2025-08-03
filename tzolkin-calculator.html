@@ -116,36 +116,38 @@
         
         .glyph-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
         }
         
         .glyph-card {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
             text-align: center;
             transition: all 0.3s ease;
+            font-size: 0.85rem;
         }
         
         .glyph-card:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
         }
         
         .glyph-name {
             font-weight: bold;
             color: #6366f1;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
         }
         
         .glyph-meaning {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #475569;
             font-style: italic;
+            line-height: 1.2;
         }
         
         .attribution {
@@ -189,13 +191,13 @@
         }
         
         .date-note {
-            background: linear-gradient(45deg, #fef3c7, #fef9e7);
+            background-color: #f8ebec;
             padding: 12px;
             border-radius: 5px;
             margin-top: 10px;
             font-size: 0.9rem;
             color: #92400e;
-            border: 1px solid #f59e0b;
+            border: 1px solid #ef7c8e;
             font-style: normal;
         }
         
@@ -255,22 +257,43 @@
             <label for="mayaDay">Tu día maya:</label>
             <input type="text" id="mayaDay" placeholder="Ej. Cinco Kimi" readonly />
             
-            <label for="symbolMeaning">¿Qué representa este símbolo para ti?</label>
-            <textarea id="symbolMeaning" rows="3" placeholder="Reflexiona sobre las cualidades de tu nawal y cómo se manifiestan en tu vida..."></textarea>
-            
-            <label for="favoriteTime">¿A qué hora naciste o qué hora te gusta más del día?</label>
-            <input type="text" id="favoriteTime" placeholder="Ej. Me gusta la mañana, a las nueve." />
+            <label for="favoriteTime">¿Qué hora te gusta más del día? ¿Prefieres el día, la tarde o la noche?</label>
+            <input type="text" id="favoriteTime" placeholder="Ej. Me gusta la mañana porque..." />
             
             <label for="birthDateSpanish">Tu fecha de nacimiento en español:</label>
             <input type="text" id="birthDateSpanish" placeholder="Ej. quince de marzo de mil novecientos noventa y cinco" readonly />
         </div>
 
         <div class="section reflection-section">
-            <h2>🧠 Reflexión Cultural</h2>
-            <p><strong>Usa uno de estos verbos regulares:</strong> <span class="highlight">caminar, trabajar, comer, bailar, escuchar, cuidar, dibujar, leer, visitar, ayudar</span></p>
+            <h2>✨ Reflexión: Tu nawal y el tiempo</h2>
+<p style="margin-top: 20px; margin-bottom: 10px;"><strong>Instrucciones:</strong> Responde a las siguientes preguntas usando vocabulario de tiempo y frecuencia:</p>
+<div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                <p style="margin-bottom: 8px;">• <strong>Momentos del día:</strong> la madrugada, el amanecer, la mañana, el mediodía, la tarde, la noche, la medianoche</p>
+                <p style="margin: 0;">• <strong>Frecuencia:</strong> siempre, a veces, nunca, con frecuencia, de vez en cuando</p>
+            </div>
             
-            <label for="dailyConnection">¿Cómo se relaciona tu nawal con tu rutina diaria?</label>
-            <textarea id="dailyConnection" rows="4" placeholder="Ejemplo: Yo ayudo a mi familia con mis manos porque mi nawal representa sanación. / Yo camino todos los días porque mi símbolo es el camino."></textarea>
+            <p>Tu nawal maya tiene una energía especial: puede ser <strong>tranquila, fuerte, creativa, sabia, alegre o mágica.</strong></p>
+            
+            <div style="margin: 20px 0;">
+                <p style="margin-bottom: 15px;">1. 🌿 ¿Qué palabra describe mejor tu energía?</p>
+                <input type="text" id="energyWord" placeholder="Ej. creativa, tranquila, fuerte..." style="width: 100%; padding: 10px;" />
+                
+                <p style="margin: 15px 0;">2. 🔥 ¿A qué hora del día te sientes muy bien y feliz? ¿Por la mañana, en la tarde, en la noche?</p>
+                <textarea id="timeOfDay" rows="2" placeholder="Ej. Me siento muy bien por la mañana..." style="width: 100%; padding: 10px;"></textarea>
+                
+                <p style="margin: 15px 0;">3. 🕐 ¿Qué haces con más o menos frecuencia en ese momento del día?</p>
+                <textarea id="frequencyActivity" rows="3" placeholder="Ej. Siempre leo en la mañana. A veces medito al amanecer..." style="width: 100%; padding: 10px;"></textarea>
+            </div>
+            
+            
+            
+            
+            
+            <button onclick="checkTimeReflection()" style="margin-top: 15px; background: linear-gradient(45deg, #ef7c8e, #e89a8a);">
+                ✓ Verificar mi reflexión
+            </button>
+            
+            <div id="reflectionFeedback" style="display: none; margin-top: 15px; padding: 15px; border-radius: 8px;"></div>
         </div>
 
         <div class="section">
@@ -279,9 +302,9 @@
         </div>
 
         <div class="attribution">
-            <p><strong>Cultural Recognition / Reconocimiento Cultural:</strong> This knowledge belongs to the Maya communities who keep these traditions alive today. The wisdom of the Tzolk'in is maintained by the Ajq'ijab (Maya spiritual guides) and must be respected as a living tradition, not as historical curiosity. / Este conocimiento pertenece a las comunidades mayas que mantienen estas tradiciones vivas hasta hoy. La sabiduría del Tzolk'in es mantenida por los Ajq'ijab (guías espirituales mayas) y debe ser respetada como tradición viva, no como curiosidad histórica.</p>
-            <p><strong>Technical Note / Nota técnica:</strong> This calculator uses Yucatec names from the Smithsonian standard. Different Maya communities (Yucatec, K'iche', Kaqchikel, etc.) may use slightly different names and orderings for the same sacred concepts. / Este calculador usa los nombres <em>Yucatecos</em> del estándar del Smithsonian. Las diferentes comunidades mayas (Yucateco, K'iche', Kaqchikel, etc.) pueden usar nombres y ordenamientos ligeramente diferentes para los mismos conceptos sagrados.</p>
-            <p><em>Algorithm / Algoritmo: GMT correlation 584283 with archaeological adjustment / correlación GMT 584283 con ajuste arqueológico (position 0 = 4 Ajaw / posición 0 = 4 Ajaw)</em></p>
+            <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Maya communities who keep these traditions alive today. The wisdom of the Tzolk'in is maintained by the Ajq'ijab (Maya spiritual guides) and must be respected as a living tradition, not as historical curiosity.</p>
+            <p><strong>Technical Note:</strong> This calculator uses Yucatec names from the Smithsonian standard. Different Maya communities (Yucatec, K'iche', Kaqchikel, etc.) may use slightly different names and orderings for the same sacred concepts.</p>
+            <p><em>Algorithm: GMT correlation 584283 with archaeological adjustment (position 0 = 4 Ajaw)</em></p>
         </div>
         
         <div class="footer">
@@ -539,9 +562,9 @@
                 card.className = "glyph-card";
                 card.innerHTML = `
                     <div class="glyph-name">${sign.name}</div>
-                    <div style="font-weight: bold; margin: 5px 0;">(${sign.spanish})</div>
+                    <div style="font-weight: bold; margin: 2px 0; font-size: 0.8rem;">(${sign.spanish})</div>
                     <div class="glyph-meaning">${sign.meaning}</div>
-                    <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 5px;">${sign.meaningEn}</div>
+                    <div style="color: #94a3b8; font-size: 0.7rem; margin-top: 3px;">${sign.meaningEn}</div>
                 `;
                 grid.appendChild(card);
             });
@@ -551,6 +574,90 @@
         document.addEventListener("DOMContentLoaded", function() {
             createGlyphGrid();
         });
+        
+        // Check reflection function
+        function checkTimeReflection() {
+            const energyWord = document.getElementById("energyWord").value.trim();
+            const timeOfDay = document.getElementById("timeOfDay").value.trim();
+            const frequencyActivity = document.getElementById("frequencyActivity").value.trim();
+            const feedbackDiv = document.getElementById("reflectionFeedback");
+            
+            let feedback = "";
+            let points = 0;
+            let suggestions = [];
+            
+            // Check Question 1 - Energy word
+            const energyWords = ['tranquila', 'fuerte', 'creativa', 'sabia', 'alegre', 'mágica'];
+            if (energyWord.length === 0) {
+                suggestions.push("No olvides describir tu energía con una palabra");
+            } else {
+                feedback += "✅ <strong>Pregunta 1:</strong> ¡Bien! Has identificado tu energía.<br>";
+                points++;
+            }
+            
+            // Check Question 2 - Time of day
+            const timesOfDay = ['madrugada', 'amanecer', 'mañana', 'mediodía', 'tarde', 'noche', 'medianoche'];
+            const hasTimeOfDay = timesOfDay.some(time => timeOfDay.toLowerCase().includes(time));
+            
+            if (timeOfDay.length < 10) {
+                suggestions.push("Escribe más sobre cuándo te sientes bien");
+            } else if (!hasTimeOfDay) {
+                suggestions.push("Usa vocabulario de momentos del día (mañana, tarde, noche, etc.)");
+            } else {
+                feedback += "✅ <strong>Pregunta 2:</strong> Excelente uso del vocabulario de tiempo.<br>";
+                points += 2;
+            }
+            
+            // Check Question 3 - Frequency and activities
+            const frequency = ['siempre', 'a veces', 'nunca', 'con frecuencia', 'de vez en cuando'];
+            const hasFrequency = frequency.some(freq => frequencyActivity.toLowerCase().includes(freq));
+            
+            if (frequencyActivity.length < 15) {
+                suggestions.push("Describe qué haces con más detalle");
+            } else if (!hasFrequency) {
+                suggestions.push("Usa palabras de frecuencia (siempre, a veces, nunca, etc.)");
+            } else {
+                feedback += "✅ <strong>Pregunta 3:</strong> ¡Muy bien! Usaste vocabulario de frecuencia.<br>";
+                points += 2;
+            }
+            
+            // Overall feedback
+            if (points >= 4) {
+                feedbackDiv.style.background = "linear-gradient(45deg, #ffe8e3, #ef7c8e)";
+                feedbackDiv.style.border = "2px solid #e89a8a";
+                feedback = "🌟 <strong>¡Excelente trabajo!</strong><br>" + feedback;
+                feedback += "<br>Has conectado perfectamente tu nawal con tu experiencia del tiempo. ";
+                feedback += "Tu reflexión muestra comprensión del vocabulario y una conexión personal con tu nawal maya.";
+            } else if (points >= 2) {
+                feedbackDiv.style.background = "linear-gradient(45deg, #ffe8e3, #ef7c8e)";
+                feedbackDiv.style.border = "2px solid #e89a8a";
+                feedback = "💪 <strong>¡Buen trabajo!</strong><br>" + feedback;
+                if (suggestions.length > 0) {
+                    feedback += "<br><strong>Para mejorar:</strong><br>";
+                    suggestions.forEach(s => feedback += `• ${s}<br>`);
+                }
+            } else {
+                feedbackDiv.style.background = "linear-gradient(45deg, #fee2e2, #fecaca)";
+                feedbackDiv.style.border = "2px solid #ef4444";
+                feedback = "📝 <strong>Necesitas completar más.</strong><br>";
+                if (suggestions.length > 0) {
+                    feedback += "<strong>Recuerda:</strong><br>";
+                    suggestions.forEach(s => feedback += `• ${s}<br>`);
+                }
+            }
+            
+            // Add helpful reminder if needed
+            if (points < 4) {
+                feedback += '<br><div style="background: #f3f4f6; padding: 10px; border-radius: 5px; margin-top: 10px;">';
+                feedback += '<strong>Recuerda usar:</strong><br>';
+                feedback += '• Momentos del día: mañana, tarde, noche, amanecer...<br>';
+                feedback += '• Frecuencia: siempre, a veces, nunca, con frecuencia...';
+                feedback += '</div>';
+            }
+            
+            feedbackDiv.innerHTML = feedback;
+            feedbackDiv.style.display = "block";
+        }
     </script>
 </body>
 </html>
