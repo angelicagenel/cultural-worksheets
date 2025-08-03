@@ -159,6 +159,20 @@
             border: 1px solid #e2e8f0;
         }
         
+        .footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
         label {
             font-weight: bold;
             color: #475569;
@@ -173,6 +187,42 @@
             font-weight: bold;
             color: #6366f1;
         }
+        
+        .date-note {
+            background: linear-gradient(45deg, #fef3c7, #fef9e7);
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+            font-style: normal;
+        }
+        
+        .translation {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .bilingual-meaning {
+            margin-top: 10px;
+            padding: 15px;
+            background: #f8fafc;
+            border-left: 3px solid #64748b;
+            border-radius: 5px;
+        }
+        
+        .bilingual-meaning .spanish {
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        
+        .bilingual-meaning .english {
+            color: #64748b;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -182,8 +232,7 @@
         <div class="section cultural-note">
             <h2>📚 Sobre el Calendario Sagrado Maya</h2>
             <p>El <strong>Tzolk'in</strong> es el calendario sagrado de 260 días usado por los pueblos mayas desde hace más de 2,000 años. Combina 13 números con 20 signos (nawales) para crear una rueda del tiempo que refleja los ritmos cósmicos y la naturaleza humana.</p>
-            <p><strong>Nota:</strong> Este calculador usa los nombres <em>Yucatecos</em> (como Imix, Ik', Ak'bal) del estándar del Smithsonian, que pueden diferir de otras tradiciones mayas como la K'iche' de Guatemala.</p>
-            <p><em>Este conocimiento pertenece a las comunidades mayas que mantienen estas tradiciones vivas hasta hoy.</em></p>
+            <p class="translation">The Tzolk'in is the sacred 260-day calendar used by Mayan peoples for over 2,000 years. It combines 13 numbers with 20 signs (nawales) to create a wheel of time that reflects cosmic rhythms and human nature.</p>
         </div>
 
         <div class="section calculator-section">
@@ -191,6 +240,10 @@
             <label for="birthdate">📅 Ingresa tu fecha de nacimiento:</label>
             <input type="date" id="birthdate" />
             <button onclick="calculateTzolkin()">✨ Calcular mi Nawal Maya</button>
+            
+            <div class="date-note">
+                📝 Cultural Note / Nota cultural: In Spanish, dates are written starting with the day, not the month. For example: 25 de diciembre de 2023 (day/month/year) instead of December 25, 2023 (month/day/year).
+            </div>
             
             <div id="tzolkinResult" class="result" style="display: none;"></div>
             <div id="nawalInfo" class="nawal-info" style="display: none;"></div>
@@ -226,9 +279,14 @@
         </div>
 
         <div class="attribution">
-            <p><strong>Reconocimiento Cultural:</strong> Este conocimiento pertenece a las comunidades mayas. La sabiduría del Tzolk'in es mantenida por los Ajq'ijab (guías espirituales mayas) y debe ser respetada como tradición viva, no como curiosidad histórica.</p>
-            <p><em>Algoritmo corregido - correlación GMT 584283 con ajuste arqueológico (posición 0 = 4 Ajaw)</em></p>
-            <p><strong>Diferencias regionales:</strong> Las diferentes comunidades mayas (Yucateco, K'iche', Kaqchikel, etc.) pueden usar nombres y ordenamientos ligeramente diferentes para los mismos conceptos sagrados.</p>
+            <p><strong>Cultural Recognition / Reconocimiento Cultural:</strong> This knowledge belongs to the Maya communities who keep these traditions alive today. The wisdom of the Tzolk'in is maintained by the Ajq'ijab (Maya spiritual guides) and must be respected as a living tradition, not as historical curiosity. / Este conocimiento pertenece a las comunidades mayas que mantienen estas tradiciones vivas hasta hoy. La sabiduría del Tzolk'in es mantenida por los Ajq'ijab (guías espirituales mayas) y debe ser respetada como tradición viva, no como curiosidad histórica.</p>
+            <p><strong>Technical Note / Nota técnica:</strong> This calculator uses Yucatec names from the Smithsonian standard. Different Maya communities (Yucatec, K'iche', Kaqchikel, etc.) may use slightly different names and orderings for the same sacred concepts. / Este calculador usa los nombres <em>Yucatecos</em> del estándar del Smithsonian. Las diferentes comunidades mayas (Yucateco, K'iche', Kaqchikel, etc.) pueden usar nombres y ordenamientos ligeramente diferentes para los mismos conceptos sagrados.</p>
+            <p><em>Algorithm / Algoritmo: GMT correlation 584283 with archaeological adjustment / correlación GMT 584283 con ajuste arqueológico (position 0 = 4 Ajaw / posición 0 = 4 Ajaw)</em></p>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Spanish Learning Edge LLC. All rights reserved.</p>
+            <p>Designed using instructional expertise and AI-assisted tools. Not for redistribution without permission.</p>
         </div>
     </div>
 
@@ -246,26 +304,126 @@
 
         // 20 Day Signs - Using Smithsonian/Yucatec standard order for compatibility
         const tzolkinDaySigns = [
-            { name: "Imix", spanish: "Lagarto", meaning: "Agua primordial, madre cósmica, inicio de la vida." },
-            { name: "Ik'", spanish: "Viento", meaning: "Espíritu, aliento vital, comunicación." },
-            { name: "Ak'bal", spanish: "Noche", meaning: "Oscuridad, casa, introspección, sueños." },
-            { name: "K'an", spanish: "Maíz", meaning: "Semilla, crecimiento, abundancia." },
-            { name: "Chikchan", spanish: "Serpiente", meaning: "Fuerza vital, poder, sabiduría ancestral." },
-            { name: "Kimi", spanish: "Muerte", meaning: "Transformación, renacimiento, cambio." },
-            { name: "Manik'", spanish: "Venado", meaning: "Mano, sanación, herramientas, destrezas." },
-            { name: "Lamat", spanish: "Estrella", meaning: "Venus, armonía, arte, belleza." },
-            { name: "Muluk", spanish: "Agua", meaning: "Luna, emociones, purificación." },
-            { name: "Ok", spanish: "Perro", meaning: "Lealtad, amor incondicional, guía." },
-            { name: "Chuwen", spanish: "Mono", meaning: "Arte, creatividad, tiempo, tejedor del destino." },
-            { name: "Eb'", spanish: "Escalera", meaning: "Camino, sendero vital, destino." },
-            { name: "B'en", spanish: "Caña", meaning: "Hogar, autoridad, crecimiento hacia arriba." },
-            { name: "Ix", spanish: "Jaguar", meaning: "Magia, poder femenino, intuición." },
-            { name: "Men", spanish: "Águila", meaning: "Visión superior, sabiduría, luna." },
-            { name: "K'ib'", spanish: "Búho", meaning: "Conocimiento, perdón, ancestros." },
-            { name: "Kab'an", spanish: "Tierra", meaning: "Pensamiento, evolución, terremotos." },
-            { name: "Etz'nab", spanish: "Pedernal", meaning: "Cuchillo, curación por corte, claridad." },
-            { name: "Kawak", spanish: "Tormenta", meaning: "Lluvia, purificación, energía femenina." },
-            { name: "Ajaw", spanish: "Señor", meaning: "Sol, flor, liderazgo espiritual." }
+            { 
+                name: "Imix", 
+                spanish: "Lagarto", 
+                meaning: "Agua primordial, madre cósmica, inicio de la vida.",
+                meaningEn: "Primordial water, cosmic mother, beginning of life."
+            },
+            { 
+                name: "Ik'", 
+                spanish: "Viento", 
+                meaning: "Espíritu, aliento vital, comunicación.",
+                meaningEn: "Spirit, vital breath, communication."
+            },
+            { 
+                name: "Ak'bal", 
+                spanish: "Noche", 
+                meaning: "Oscuridad, casa, introspección, sueños.",
+                meaningEn: "Darkness, house, introspection, dreams."
+            },
+            { 
+                name: "K'an", 
+                spanish: "Maíz", 
+                meaning: "Semilla, crecimiento, abundancia.",
+                meaningEn: "Seed, growth, abundance."
+            },
+            { 
+                name: "Chikchan", 
+                spanish: "Serpiente", 
+                meaning: "Fuerza vital, poder, sabiduría ancestral.",
+                meaningEn: "Life force, power, ancestral wisdom."
+            },
+            { 
+                name: "Kimi", 
+                spanish: "Muerte", 
+                meaning: "Transformación, renacimiento, cambio.",
+                meaningEn: "Transformation, rebirth, change."
+            },
+            { 
+                name: "Manik'", 
+                spanish: "Venado", 
+                meaning: "Mano, sanación, herramientas, destrezas.",
+                meaningEn: "Hand, healing, tools, skills."
+            },
+            { 
+                name: "Lamat", 
+                spanish: "Estrella", 
+                meaning: "Venus, armonía, arte, belleza.",
+                meaningEn: "Venus, harmony, art, beauty."
+            },
+            { 
+                name: "Muluk", 
+                spanish: "Agua", 
+                meaning: "Luna, emociones, purificación.",
+                meaningEn: "Moon, emotions, purification."
+            },
+            { 
+                name: "Ok", 
+                spanish: "Perro", 
+                meaning: "Lealtad, amor incondicional, guía.",
+                meaningEn: "Loyalty, unconditional love, guide."
+            },
+            { 
+                name: "Chuwen", 
+                spanish: "Mono", 
+                meaning: "Arte, creatividad, tiempo, tejedor del destino.",
+                meaningEn: "Art, creativity, time, weaver of destiny."
+            },
+            { 
+                name: "Eb'", 
+                spanish: "Escalera", 
+                meaning: "Camino, sendero vital, destino.",
+                meaningEn: "Path, life journey, destiny."
+            },
+            { 
+                name: "B'en", 
+                spanish: "Caña", 
+                meaning: "Hogar, autoridad, crecimiento hacia arriba.",
+                meaningEn: "Home, authority, upward growth."
+            },
+            { 
+                name: "Ix", 
+                spanish: "Jaguar", 
+                meaning: "Magia, poder femenino, intuición.",
+                meaningEn: "Magic, feminine power, intuition."
+            },
+            { 
+                name: "Men", 
+                spanish: "Águila", 
+                meaning: "Visión superior, sabiduría, luna.",
+                meaningEn: "Higher vision, wisdom, moon."
+            },
+            { 
+                name: "K'ib'", 
+                spanish: "Búho", 
+                meaning: "Conocimiento, perdón, ancestros.",
+                meaningEn: "Knowledge, forgiveness, ancestors."
+            },
+            { 
+                name: "Kab'an", 
+                spanish: "Tierra", 
+                meaning: "Pensamiento, evolución, terremotos.",
+                meaningEn: "Thought, evolution, earthquakes."
+            },
+            { 
+                name: "Etz'nab", 
+                spanish: "Pedernal", 
+                meaning: "Cuchillo, curación por corte, claridad.",
+                meaningEn: "Knife, healing through cutting, clarity."
+            },
+            { 
+                name: "Kawak", 
+                spanish: "Tormenta", 
+                meaning: "Lluvia, purificación, energía femenina.",
+                meaningEn: "Rain, purification, feminine energy."
+            },
+            { 
+                name: "Ajaw", 
+                spanish: "Señor", 
+                meaning: "Sol, flor, liderazgo espiritual.",
+                meaningEn: "Sun, flower, spiritual leadership."
+            }
         ];
 
         // Number words in Spanish
@@ -340,15 +498,23 @@
             const nawalDiv = document.getElementById("nawalInfo");
             
             resultDiv.innerHTML = `
-                <strong>🌟 Tu día en el Tzolk'in Maya:</strong><br>
+                <strong>🌟 Tu día en el Tzolk'in Maya / Your Mayan Tzolk'in Day:</strong><br>
                 <span style="font-size: 1.3rem; color: #6366f1;">${spanishNumbers[number]} ${daySign.spanish}</span><br>
                 <span style="font-size: 1.1rem; color: #64748b;">(${number} ${daySign.name})</span>
             `;
             
             nawalDiv.innerHTML = `
-                <h3>🔮 Significado de tu Nawal</h3>
-                <p><strong>${daySign.name} (${daySign.spanish}):</strong> ${daySign.meaning}</p>
-                <p><em>El número ${number} amplifica estas cualidades con su propia energía numerológica maya.</em></p>
+                <h3>🔮 Significado de tu Nawal / Your Nawal's Meaning</h3>
+                <div class="bilingual-meaning">
+                    <div class="spanish">
+                        <strong>${daySign.name} (${daySign.spanish}):</strong> ${daySign.meaning}
+                    </div>
+                    <div class="english">
+                        <strong>${daySign.name} (${daySign.spanish}):</strong> ${daySign.meaningEn}
+                    </div>
+                </div>
+                <p style="margin-top: 15px;"><em>El número ${number} amplifica estas cualidades con su propia energía numerológica maya.</em></p>
+                <p style="color: #64748b; font-style: italic;">The number ${number} amplifies these qualities with its own Mayan numerological energy.</p>
             `;
             
             // Fill postcard fields
@@ -375,6 +541,7 @@
                     <div class="glyph-name">${sign.name}</div>
                     <div style="font-weight: bold; margin: 5px 0;">(${sign.spanish})</div>
                     <div class="glyph-meaning">${sign.meaning}</div>
+                    <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 5px;">${sign.meaningEn}</div>
                 `;
                 grid.appendChild(card);
             });
