@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradiciones Culinarias Mexicanas - Actividad Cultural Interactiva</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+        }
+        
+        h1 {
+            color: #6366f1;
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #373f45;
+        }
+        
+        .section {
+            background: #f8fafc;
+            padding: 25px;
+            border-left: 6px solid #6366f1;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .tradition-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tradition-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+        }
+        
+        .tradition-card.selected {
+            background: linear-gradient(45deg, #e0e7ff, #f1f5f9);
+            border-color: #6366f1;
+            transform: scale(1.02);
+        }
+        
+        .region-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #6366f1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ingredient-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .ingredient-card {
+            background: #ffe8e3;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #e89a8a;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .ingredient-card:hover {
+            background: #f8ebec;
+            transform: translateY(-2px);
+        }
+        
+        .ingredient-card.correct {
+            background: linear-gradient(45deg, #d1fae5, #a7f3d0);
+            border-color: #059669;
+        }
+        
+        .ingredient-card.incorrect {
+            background: linear-gradient(45deg, #fee2e2, #fecaca);
+            border-color: #ef4444;
+        }
+        
+        .ingredient-translation {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .gender-indicator {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+        
+        .masculine { color: #2563eb; }
+        .feminine { color: #dc2626; }
+        
+        .quiz-section {
+            background: linear-gradient(45deg, #7ba1a5, #6b8d94);
+            color: white;
+            border-left-color: #6b8d94;
+        }
+        
+        .quiz-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .exercise-box {
+            background: white;
+            color: #373f45;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .dropdown-container {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .questions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .question-item p {
+            margin: 8px 0;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+        
+        select {
+            padding: 6px 10px;
+            border: 2px solid #e89a8a;
+            border-radius: 5px;
+            font-size: 14px;
+            background: white;
+            color: #373f45;
+        }
+        
+        select:focus {
+            border-color: #da2c55;
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #4f46e5, #6366f1);
+            transform: translateY(-1px);
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .success {
+            background: linear-gradient(45deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border: 2px solid #059669;
+        }
+        
+        .warning {
+            background: linear-gradient(45deg, #fef3c7, #fde68a);
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+        
+        .error {
+            background: linear-gradient(45deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+        
+        .cultural-note {
+            background: linear-gradient(45deg, #e0e7ff, #c7d2fe);
+            border-left-color: #6366f1;
+            color: #1e1b4b;
+        }
+        
+        .cultural-note h3 {
+            color: #4338ca;
+            margin-bottom: 15px;
+        }
+        
+        .cultural-note p strong {
+            color: #373f45;
+        }
+        
+        .cultural-note p:not(:first-child) {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        .story-section {
+            background: linear-gradient(45deg, #f8ebec, #ffe8e3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #ef7c8e;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #373f45;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-word {
+            background: linear-gradient(45deg, #fef3c7, #fde68a);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #92400e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-word:hover {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: white;
+        }
+        
+        .footer {
+            background: #373f45;
+            color: #cbd5e1;
+            padding: 25px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .gender-buttons {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        
+        .gender-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: normal;
+            margin: 0;
+            width: auto;
+        }
+        
+        .masculine-btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+        
+        .masculine-btn:hover {
+            background: linear-gradient(45deg, #4f46e5, #6366f1);
+            transform: translateY(-1px);
+        }
+        
+        .feminine-btn {
+            background: linear-gradient(45deg, #ef7c8e, #e89a8a);
+            color: white;
+        }
+        
+        .feminine-btn:hover {
+            background: linear-gradient(45deg, #da2c55, #ef7c8e);
+            transform: translateY(-1px);
+        }
+        
+        .check-button {
+            background: linear-gradient(45deg, #7ba1a5, #6b8d94);
+            margin-top: 20px;
+        }
+        
+        .check-button:hover {
+            background: linear-gradient(45deg, #6b8d94, #5a7c83);
+        }
+        
+        .translation {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☕ Tradiciones Culinarias Mexicanas 🌽</h1>
+        
+        <div class="section cultural-note">
+            <h3>📚 Sobre esta Actividad Cultural</h3>
+            <p><strong>Explora las tradiciones culinarias mexicanas mientras practicas los artículos definidos e indefinidos y el género de los sustantivos. Cada tradición nos enseña sobre la rica herencia cultural de México.</strong></p>
+            <p class="translation">Explore Mexican culinary traditions while practicing definite and indefinite articles and noun gender. Each tradition teaches us about Mexico's rich cultural heritage.</p>
+            <p><em>Cultural traditions are systems of meaning that 🤝 unite communities and preserve cultural identity across generations.</em></p>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Explora las Tres Tradiciones</h2>
+            <p><strong>Instrucciones:</strong> Haz clic en cada región para descubrir su tradición culinaria.</p>
+            <p class="translation">Click on each region to discover its culinary tradition.</p>
+            
+            <div class="tradition-card" onclick="selectTradition('veracruz')" id="card-veracruz">
+                <div class="region-header">
+                    ☕ <strong>Veracruz</strong> - Café de las Montañas
+                </div>
+                <p>En las tierras altas de Veracruz, <span class="highlight-word" onclick="showGender('el', 'café', 'masculino')">el café</span> ☕ <span class="highlight-word" onclick="showGender('conecta', 'conecta', 'verbo')">conecta</span> <span class="highlight-word" onclick="showGender('las', 'familias', 'femenino')">las familias</span> 👨‍👩‍👧‍👦 con <span class="highlight-word" onclick="showGender('la', 'tradición', 'femenino')">la tradición</span> ancestral.</p>
+                <div class="tradition-details" id="details-veracruz" style="display: none;">
+                    <p><strong>📍 Ubicación:</strong> Tierras altas de Veracruz</p>
+                    <p><strong>🛡️ Protección:</strong> Denominación de Origen</p>
+                    <p><strong>👥 Impacto:</strong> 86,000 productores en 842 comunidades</p>
+                </div>
+            </div>
+            
+            <div class="tradition-card" onclick="selectTradition('tlaxcala')" id="card-tlaxcala">
+                <div class="region-header">
+                    🍞 <strong>Tlaxcala</strong> - Pan de Fiesta
+                </div>
+                <p>En San Juan Huactzinco, <span class="highlight-word" onclick="showGender('el', 'pan', 'masculino')">el pan</span> 🍞 de fiesta <span class="highlight-word" onclick="showGender('une', 'une', 'verbo')">une</span> 🤝 <span class="highlight-word" onclick="showGender('la', 'comunidad', 'femenino')">la comunidad</span> durante <span class="highlight-word" onclick="showGender('las', 'celebraciones', 'femenino')">las celebraciones</span> 🎉 religiosas.</p>
+                <div class="tradition-details" id="details-tlaxcala" style="display: none;">
+                    <p><strong>📍 Ubicación:</strong> San Juan Huactzinco y San Juan Totolac</p>
+                    <p><strong>🛡️ Reconocimiento:</strong> Patrimonio Cultural Inmaterial (2021)</p>
+                    <p><strong>👥 Impacto:</strong> Más de 200 familias panaderas</p>
+                </div>
+            </div>
+            
+            <div class="tradition-card" onclick="selectTradition('morelos')" id="card-morelos">
+                <div class="region-header">
+                    🌾 <strong>Morelos</strong> - Amaranto Sagrado
+                </div>
+                <p>En Huazulco, <span class="highlight-word" onclick="showGender('el', 'amaranto', 'masculino')">el amaranto</span> 🌾 preserva <span class="highlight-word" onclick="showGender('una', 'tradición', 'femenino')">una tradición</span> de más de 6,000 años. Los artesanos usan 🔨 <span class="highlight-word" onclick="showGender('moldes', 'moldes', 'masculino')">moldes de madera</span> 🪵.</p>
+                <div class="tradition-details" id="details-morelos" style="display: none;">
+                    <p><strong>📍 Ubicación:</strong> Huazulco, Temoac (Tierra del Amaranto)</p>
+                    <p><strong>🛡️ Historia:</strong> Más de 6,000 años de continuidad</p>
+                    <p><strong>👥 Tradición:</strong> Figuras tzoalli para rituales prehispánicos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section quiz-section">
+            <h2>✏️ Practica: Artículos y Género</h2>
+            
+            <div class="exercise-box">
+                <h3>Ejercicio 1: Completa con el artículo correcto</h3>
+                <p><strong>Instrucciones:</strong> Selecciona el artículo definido (el, la, los, las) o indefinido (un, una, unos, unas) correcto para cada sustantivo.</p>
+                
+                <div class="questions-grid">
+                    <div class="question-item">
+                        <p>1. En Veracruz, 
+                            <select id="article1">
+                                <option value="">...</option>
+                                <option value="el">el</option>
+                                <option value="la">la</option>
+                                <option value="los">los</option>
+                                <option value="las">las</option>
+                            </select>
+                            café crece en las montañas.</p>
+                        
+                        <p>2. Durante la cosecha,
+                            <select id="article2">
+                                <option value="">...</option>
+                                <option value="las">las</option>
+                                <option value="los">los</option>
+                                <option value="una">una</option>
+                                <option value="un">un</option>
+                            </select>
+                            familias trabajan juntas.</p>
+                        
+                        <p>3. El pan de fiesta es
+                            <select id="article3">
+                                <option value="">...</option>
+                                <option value="una">una</option>
+                                <option value="un">un</option>
+                                <option value="la">la</option>
+                                <option value="el">el</option>
+                            </select>
+                            tradición importante.</p>
+                    </div>
+                    
+                    <div class="question-item">
+                        <p>4. En Morelos,
+                            <select id="article4">
+                                <option value="">...</option>
+                                <option value="los">los</option>
+                                <option value="las">las</option>
+                                <option value="el">el</option>
+                                <option value="la">la</option>
+                            </select>
+                            artesanos usan moldes.</p>
+                        
+                        <p>5. Necesitamos
+                            <select id="article5">
+                                <option value="">...</option>
+                                <option value="un">un</option>
+                                <option value="una">una</option>
+                                <option value="el">el</option>
+                                <option value="la">la</option>
+                            </select>
+                            horno para el pan.</p>
+                        
+                        <p>6. 
+                            <select id="article6">
+                                <option value="">...</option>
+                                <option value="Las">Las</option>
+                                <option value="Los">Los</option>
+                                <option value="Una">Una</option>
+                                <option value="Un">Un</option>
+                            </select>
+                            alegrías son dulces de amaranto.</p>
+                    </div>
+                    
+                    <div class="question-item">
+                        <p>7. Compramos
+                            <select id="article7">
+                                <option value="">...</option>
+                                <option value="unos">unos</option>
+                                <option value="unas">unas</option>
+                                <option value="los">los</option>
+                                <option value="las">las</option>
+                            </select>
+                            granos de café.</p>
+                        
+                        <p>8. 
+                            <select id="article8">
+                                <option value="">...</option>
+                                <option value="La">La</option>
+                                <option value="El">El</option>
+                                <option value="Una">Una</option>
+                                <option value="Un">Un</option>
+                            </select>
+                            cosecha es en octubre.</p>
+                        
+                        <p>9. Visitamos
+                            <select id="article9">
+                                <option value="">...</option>
+                                <option value="una">una</option>
+                                <option value="un">un</option>
+                                <option value="la">la</option>
+                                <option value="el">el</option>
+                            </select>
+                            panadería tradicional.</p>
+                    </div>
+                </div>
+                
+                <button onclick="checkArticles()">Verificar Respuestas</button>
+                <div id="articleFeedback"></div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>Ejercicio 2: Identifica el Género</h3>
+                <p><strong>Instrucciones:</strong> Selecciona el género correcto para cada ingrediente.</p>
+                <p class="translation">Select the correct gender for each ingredient.</p>
+                
+                <div class="ingredient-grid">
+                    <div class="ingredient-card" data-gender="femenino" id="masa-card">
+                        <div class="gender-indicator">🌽</div>
+                        <div><strong>La masa</strong></div>
+                        <div class="ingredient-translation">corn dough</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('masa-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('masa-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="masa-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="masculino" id="maiz-card">
+                        <div class="gender-indicator">🌾</div>
+                        <div><strong>El maíz</strong></div>
+                        <div class="ingredient-translation">corn</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('maiz-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('maiz-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="maiz-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="femenino" id="miel-card">
+                        <div class="gender-indicator">🍯</div>
+                        <div><strong>La miel</strong></div>
+                        <div class="ingredient-translation">honey</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('miel-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('miel-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="miel-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="masculino" id="trigo-card">
+                        <div class="gender-indicator">🌰</div>
+                        <div><strong>El trigo</strong></div>
+                        <div class="ingredient-translation">wheat</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('trigo-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('trigo-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="trigo-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="femenino" id="harina-card">
+                        <div class="gender-indicator">🥖</div>
+                        <div><strong>La harina</strong></div>
+                        <div class="ingredient-translation">flour</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('harina-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('harina-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="harina-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="masculino" id="piloncillo-card">
+                        <div class="gender-indicator">🟤</div>
+                        <div><strong>El piloncillo</strong></div>
+                        <div class="ingredient-translation">brown sugar cone</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('piloncillo-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('piloncillo-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="piloncillo-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="femenino" id="leche-card">
+                        <div class="gender-indicator">🥛</div>
+                        <div><strong>La leche</strong></div>
+                        <div class="ingredient-translation">milk</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('leche-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('leche-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="leche-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="masculino" id="cacao-card">
+                        <div class="gender-indicator">🍫</div>
+                        <div><strong>El cacao</strong></div>
+                        <div class="ingredient-translation">cocoa</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('cacao-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('cacao-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="cacao-feedback"></div>
+                    </div>
+                    
+                    <div class="ingredient-card" data-gender="masculino" id="amaranto-card">
+                        <div class="gender-indicator">🌻</div>
+                        <div><strong>El amaranto</strong></div>
+                        <div class="ingredient-translation">amaranth</div>
+                        <div class="gender-buttons">
+                            <button onclick="selectGender('amaranto-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
+                            <button onclick="selectGender('amaranto-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
+                        </div>
+                        <div class="feedback-area" id="amaranto-feedback"></div>
+                    </div>
+                </div>
+                
+                <button onclick="checkGenders()" class="check-button">✓ Verificar Géneros</button>
+                <div id="genderFeedback"></div>
+            </div>
+        </div>
+
+        <div class="section story-section">
+            <h2>📖 Historia Cultural: El Amaranto Sagrado</h2>
+            <div class="story-text">
+                En <span class="highlight-word" onclick="showGender('la', 'época', 'femenino')">la época</span> prehispánica, <span class="highlight-word" onclick="showGender('el', 'amaranto', 'masculino')">el amaranto</span> es más que <span class="highlight-word" onclick="showGender('un', 'alimento', 'masculino')">un alimento</span>. <span class="highlight-word" onclick="showGender('Los', 'aztecas', 'masculino')">Los aztecas</span> crean figuras sagradas con <span class="highlight-word" onclick="showGender('la', 'semilla', 'femenino')">la semilla</span> y <span class="highlight-word" onclick="showGender('la', 'miel', 'femenino')">la miel</span> de maguey. Estas figuras, llamadas "tzoalli", representan a <span class="highlight-word" onclick="showGender('los', 'dioses', 'masculino')">los dioses</span> y se comparten en <span class="highlight-word" onclick="showGender('las', 'ceremonias', 'femenino')">las ceremonias</span>.
+            </div>
+            
+            <div class="cultural-note">
+                <h3>📝 Nota Cultural</h3>
+                <p class="translation">During the Spanish conquest, ceremonial use of amaranth was banned due to its religious connections. However, Mexican families secretly preserved this tradition, adapting it to create the "alegrías" candies we know today.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 Reflexión Cultural</h2>
+            <div class="exercise-box">
+                <h3>Pregunta de Reflexión</h3>
+                <p><strong>¿Cómo conectan estas tradiciones culinarias el pasado con el presente?</strong></p>
+                <p>Escribe tu respuesta usando al menos <strong>cinco artículos diferentes</strong> (el, la, un, una, los) y menciona cómo estas tradiciones preservan <strong>la identidad cultural</strong>:</p>
+                <textarea id="reflection" rows="6" style="width: 100%; padding: 15px; border: 2px solid #e89a8a; border-radius: 8px; font-size: 16px;" placeholder="Ejemplo: El café de Veracruz representa una conexión entre las familias y la tierra..."></textarea>
+                <button onclick="analyzeReflection()">Analizar mi Reflexión</button>
+                <div id="reflectionFeedback"></div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Mexican communities who keep these traditions alive today. Their ancestral wisdom must be respected as a living tradition, not as historical curiosity.</p>
+            <p>© 2025 Spanish Learning Edge LLC. All rights reserved.</p>
+            <p>Designed using instructional expertise and AI-assisted tools. Not for redistribution without permission.</p>
+        </div>
+    </div>
+
+    <script>
+        let selectedTradition = null;
+        let progress = 0;
+
+        // Datos de las tradiciones
+        const traditions = {
+            veracruz: {
+                name: "Café de Veracruz",
+                description: "El café de Veracruz tiene Denominación de Origen y sustenta a 86,000 productores en 842 comunidades. Los ecosistemas de café de sombra protegen la biodiversidad y absorben carbono.",
+                ingredients: ["el café", "la montaña", "las familias", "la cosecha"]
+            },
+            tlaxcala: {
+                name: "Pan de Fiesta",
+                description: "Reconocido como Patrimonio Cultural Inmaterial, este pan se hornea en hornos de leña y fortalece redes de reciprocidad y cuidado mutuo en la comunidad.",
+                ingredients: ["el pan", "la masa", "el horno", "las celebraciones"]
+            },
+            morelos: {
+                name: "Amaranto de Huazulco",
+                description: "Con más de 6,000 años de continuidad, el amaranto conecta rituales prehispánicos con medios de vida contemporáneos en la 'Tierra del Amaranto'.",
+                ingredients: ["el amaranto", "la tradición", "los moldes", "las alegrías"]
+            }
+        };
+
+        // Seleccionar tradición y mostrar detalles
+        function selectTradition(tradition) {
+            // Remover selección previa
+            const cards = document.querySelectorAll('.tradition-card');
+            cards.forEach(card => {
+                card.classList.remove('selected');
+                const details = card.querySelector('.tradition-details');
+                if (details) details.style.display = 'none';
+            });
+            
+            // Seleccionar nueva tarjeta
+            const selectedCard = document.getElementById(`card-${tradition}`);
+            selectedCard.classList.add('selected');
+            
+            // Mostrar detalles
+            const details = document.getElementById(`details-${tradition}`);
+            details.style.display = 'block';
+            
+            selectedTradition = tradition;
+            updateProgress(25);
+            
+            // Feedback visual
+            setTimeout(() => {
+                selectedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        // Función mejorada para seleccionar género
+        function selectGender(cardId, selectedGender) {
+            const card = document.getElementById(cardId);
+            const correctGender = card.getAttribute('data-gender');
+            const feedbackArea = document.getElementById(cardId.replace('-card', '-feedback'));
+            
+            // Limpiar clases previas
+            card.classList.remove('correct', 'incorrect');
+            
+            if (selectedGender === correctGender) {
+                card.classList.add('correct');
+                feedbackArea.innerHTML = '<div style="color: #059669; font-weight: bold; margin-top: 10px;">✅ ¡Correcto!</div>';
+            } else {
+                card.classList.add('incorrect');
+                feedbackArea.innerHTML = `<div style="color: #ef4444; font-weight: bold; margin-top: 10px;">❌ Es ${correctGender}</div>`;
+            }
+        }
+
+        function checkArticles() {
+            const answers = {
+                article1: 'el',    // el café (masculino)
+                article2: 'las',   // las familias (femenino plural)
+                article3: 'una',   // una tradición (femenino indefinido)
+                article4: 'los',   // los artesanos (masculino plural)
+                article5: 'un',    // un horno (masculino indefinido)
+                article6: 'Las',   // Las alegrías (femenino plural)
+                article7: 'unos',  // unos granos (masculino plural indefinido)
+                article8: 'La',    // La cosecha (femenino)
+                article9: 'una'    // una panadería (femenino indefinido)
+            };
+
+            let correct = 0;
+            let feedback = '<h4>Resultados:</h4>';
+
+            for (let id in answers) {
+                const userAnswer = document.getElementById(id).value;
+                const correctAnswer = answers[id];
+                
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    feedback += `<p style="color: #059669;">✅ Pregunta ${id.replace('article', '')}: "${correctAnswer}" - ¡Correcto!</p>`;
+                } else {
+                    feedback += `<p style="color: #ef4444;">❌ Pregunta ${id.replace('article', '')}: Tu respuesta "${userAnswer}" / Correcto: "${correctAnswer}"</p>`;
+                }
+            }
+
+            const percentage = (correct / Object.keys(answers).length) * 100;
+            
+            if (percentage >= 75) {
+                feedback = `<div class="success">${feedback}<p><strong>¡Excelente! ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+                updateProgress(50);
+            } else if (percentage >= 50) {
+                feedback = `<div class="warning">${feedback}<p><strong>Bien! ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+                updateProgress(35);
+            } else {
+                feedback = `<div class="error">${feedback}<p><strong>Sigue practicando: ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+            }
+
+            document.getElementById('articleFeedback').innerHTML = feedback;
+        }
+
+        function checkGenders() {
+            const cards = ['masa-card', 'maiz-card', 'miel-card', 'trigo-card', 'harina-card', 'piloncillo-card', 'leche-card', 'cacao-card', 'amaranto-card'];
+            let correctCount = 0;
+            let totalCount = cards.length;
+            
+            cards.forEach(cardId => {
+                const card = document.getElementById(cardId);
+                if (card.classList.contains('correct')) {
+                    correctCount++;
+                }
+            });
+            
+            const percentage = Math.round((correctCount / totalCount) * 100);
+            let feedback = `<p><strong>Resultado: ${correctCount}/${totalCount} correctas (${percentage}%)</strong></p>`;
+            
+            if (percentage >= 75) {
+                feedback = `<div class="success">${feedback}<p>¡Excelente comprensión del género!</p></div>`;
+                updateProgress(75);
+            } else if (percentage >= 50) {
+                feedback = `<div class="warning">${feedback}<p>Buen trabajo, sigue practicando.</p></div>`;
+                updateProgress(60);
+            } else {
+                feedback = `<div class="error">${feedback}<p>Recuerda: los sustantivos tienen género masculino o femenino.</p></div>`;
+            }
+
+            document.getElementById('genderFeedback').innerHTML = feedback;
+        }
+
+        function showGender(article, noun, gender) {
+            if (gender === 'verbo') {
+                alert(`"${noun}" es un verbo que significa "connects" o "unites" en inglés`);
+                return;
+            }
+            
+            const genderSpanish = gender === 'masculino' ? 'masculino' : 'femenino';
+            const genderEnglish = gender === 'masculino' ? 'masculine' : 'feminine';
+            const examples = gender === 'masculino' ? 
+                'Artículos masculinos: el, un, los, unos' : 
+                'Artículos femeninos: la, una, las, unas';
+            
+            alert(`"${article} ${noun}" es ${genderSpanish} (${genderEnglish})\n\n📝 Regla: ${examples}`);
+        }
+
+        function analyzeReflection() {
+            const text = document.getElementById('reflection').value;
+            const articles = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas'];
+            let foundArticles = [];
+            
+            articles.forEach(article => {
+                if (text.toLowerCase().includes(' ' + article + ' ')) {
+                    foundArticles.push(article);
+                }
+            });
+
+            const uniqueArticles = [...new Set(foundArticles)];
+            const wordCount = text.split(' ').length;
+
+            let feedback = '';
+            
+            if (wordCount < 30) {
+                feedback = '<div class="warning"><p><strong>Escribe más:</strong> Tu reflexión es muy breve. Expande tus ideas sobre cómo estas tradiciones conectan pasado y presente.</p></div>';
+            } else if (uniqueArticles.length >= 5) {
+                feedback = `<div class="success"><p><strong>¡Excelente reflexión!</strong> Usaste ${uniqueArticles.length} artículos diferentes: ${uniqueArticles.join(', ')}. Tu análisis cultural muestra comprensión profunda de cómo las tradiciones preservan la identidad.</p></div>`;
+                updateProgress(100);
+            } else {
+                feedback = `<div class="warning"><p><strong>Buena reflexión:</strong> Usaste ${uniqueArticles.length} artículos diferentes. Trata de incluir más variedad: ${uniqueArticles.join(', ')}.</p></div>`;
+                updateProgress(85);
+            }
+
+            document.getElementById('reflectionFeedback').innerHTML = feedback;
+        }
+
+        function updateProgress(newProgress) {
+            progress = Math.max(progress, newProgress);
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Actividad Cultural: Tradiciones Culinarias Mexicanas cargada');
+        });
+    </script>
+</body>
+</html>
