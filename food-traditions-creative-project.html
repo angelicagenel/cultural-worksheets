@@ -8,24 +8,42 @@
 
   <style>
     :root{
-      --brand:#4f46e5; --brand-light:#6366f1; --accent:#7c3aed; --accent-light:#8b5cf6;
-      --success:#ef7c8e; --success-light:#ffe8e3; --warning:#d97706; --ink:#0f172a;
-      --text-muted:#64748b; --text-light:#94a3b8; --bg-primary:#ffffff; --bg-secondary:#f8fafc; --bg-tertiary:#f1f5f9;
-      --border-light:#e2e8f0; --border-medium:#cbd5e1;
-      --shadow-sm:0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-xl:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
-      --transition-fast:.15s ease-out; --transition-medium:.25s ease-out; --transition-slow:.35s cubic-bezier(0.4,0,0.2,1);
+      --brand: #4f46e5;
+      --brand-light: #6366f1;
+      --accent: #7c3aed;
+      --accent-light: #8b5cf6;
+      --success: #ef7c8e;
+      --success-light: #ffe8e3;
+      --warning: #d97706;
+      --ink: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition-fast: 0.15s ease-out;
+      --transition-medium: 0.25s ease-out;
+      --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { box-sizing: border-box; }
 
     html, body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 16px; line-height: 1.6; color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
       background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
       scroll-behavior: smooth;
     }
@@ -45,9 +63,13 @@
     /* Layout */
     .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
     .section { margin-bottom: 3rem; }
+
     .card {
-      background: var(--bg-primary); border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
       transition: box-shadow var(--transition-medium);
     }
     .card:hover { box-shadow: var(--shadow-lg); }
@@ -55,9 +77,13 @@
     /* Header */
     .header {
       background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-      border: 2px solid var(--border-light); border-left: 6px solid var(--brand);
-      border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-xl);
-      margin-bottom: 3rem; text-align: center;
+      border: 2px solid var(--border-light);
+      border-left: 6px solid var(--brand);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-xl);
+      margin-bottom: 3rem;
+      text-align: center;
     }
     .header h1 { margin-bottom: 1rem; }
     .header-links { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
@@ -86,7 +112,10 @@
     .flip-front { border-top: 6px solid var(--brand); }
     .flip-back  { border-top: 6px solid var(--accent); transform: rotateY(180deg); }
 
-    .flip-badge { align-self: flex-start; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%); color: #fff; padding: .5rem 1rem; border-radius: 999px; font-size: .875rem; font-weight: 600; box-shadow: var(--shadow-md); }
+    .flip-badge {
+      align-self: flex-start; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+      color: white; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; box-shadow: var(--shadow-md);
+    }
 
     .translation-btn {
       align-self: flex-start; background: var(--bg-secondary); border: 1px solid var(--border-medium);
@@ -123,7 +152,7 @@
     }
     .research-links a:hover { background: var(--brand); color: white; transform: translateX(4px); box-shadow: var(--shadow-md); }
 
-    /* Notes box */
+    /* Notes */
     .notes-textarea { width: 100%; min-height: 200px; border: 2px solid var(--border-light); border-radius: var(--radius-md); padding: 1.5rem; font-family: inherit; font-size: 1rem; line-height: 1.6; resize: vertical; transition: border-color var(--transition-medium); background: var(--success-light); }
     .notes-textarea:focus { outline: none; border-color: var(--success); background: var(--bg-primary); box-shadow: 0 0 0 3px rgb(239 124 142 / 0.1); }
     .notes-status { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--success); color: white; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500; opacity: 0; transition: opacity var(--transition-medium); }
@@ -329,21 +358,32 @@
           <input type="range" id="brushSize" min="2" max="50" value="8" style="width:100px;"/>
           <span id="sizeDisplay">8px</span>
         </div>
+
+        <!-- Nueva herramienta Move/Select -->
+        <button class="btn" id="moveTool" onclick="setTool('move')">🖱️ Move/Select</button>
         <button class="btn" id="penTool" onclick="setTool('pen')">✏️ Pen</button>
         <button class="btn" id="eraserTool" onclick="setTool('eraser')">🧽 Eraser</button>
         <button class="btn" id="clearAllBtn" onclick="clearCanvas()">🗑️ Clear All</button>
         <button class="btn" onclick="undoLast()">↶ Undo</button>
+
         <input type="file" id="imageUpload" accept="image/*" style="display: none;">
         <button class="btn" onclick="document.getElementById('imageUpload').click()">🖼️ Add Image</button>
 
         <!-- Mini Post-it text tools -->
         <div class="toolbar-group">
           <label for="noteText">Mini Post-it</label>
-          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:200px;">
+          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:220px;">
           <select id="noteSize" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;">
             <option value="14">Small</option>
             <option value="16" selected>Medium</option>
             <option value="20">Large</option>
+          </select>
+          <select id="noteColor" title="Note color" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;">
+            <option value="0" selected>Yellow</option>
+            <option value="1">Blue</option>
+            <option value="2">Gold</option>
+            <option value="3">Rose</option>
+            <option value="4">Lavender</option>
           </select>
           <button class="btn" id="addNoteBtn" onclick="activateNoteMode()">🗒️ Add Note</button>
         </div>
@@ -462,57 +502,22 @@
     const notesCanvas = document.getElementById('notesCanvas');
     const notesCtx    = notesCanvas.getContext('2d');
 
-    // Base blanca para el canvas de dibujo
+    // Base blanca para dibujo
     drawCtx.fillStyle = 'white';
     drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-    const colorPicker = document.getElementById('colorPicker');
-    const brushSize   = document.getElementById('brushSize');
-    const sizeDisplay = document.getElementById('sizeDisplay');
-    const penTool     = document.getElementById('penTool');
-    const eraserTool  = document.getElementById('eraserTool');
-
-    let currentTool = 'pen';
-    let isDrawing = false;
-    let lastPoint = { x: 0, y: 0 };
-
-    // ===== Herramientas: control de pointer-events por capa =====
-    function setTool(tool) {
-      currentTool = tool;
-      penTool.classList.toggle('active', tool === 'pen');
-      eraserTool.classList.toggle('active', tool === 'eraser');
-
-      const drawingMode = (tool === 'pen' || tool === 'eraser');
-      // Si estamos dibujando/borrando, las capas superiores NO deben capturar eventos
-      notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
-      mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
-
-      // Cursores
-      if (drawingMode) {
-        notesCanvas.style.cursor = 'crosshair';
-        mediaCanvas.style.cursor = 'default';
-      } else {
-        notesCanvas.style.cursor = 'grab';
-        mediaCanvas.style.cursor = 'grab';
-      }
+    // HiDPI para media y notas
+    function fitHiDPI(canvas, ctx){
+      const ratio = window.devicePixelRatio || 1;
+      const w = 1200, h = 720; // tamaño lógico
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     }
-    window.setTool = setTool;
-    setTool('pen');
+    fitHiDPI(mediaCanvas, mediaCtx);
+    fitHiDPI(notesCanvas, notesCtx);
 
-    sizeDisplay.textContent = brushSize.value + 'px';
-    brushSize.addEventListener('input', () => sizeDisplay.textContent = brushSize.value + 'px');
-
-    // Historial de dibujo
-    let drawingHistory = [];
-    let historyStep = -1;
-    function saveDrawState() {
-      historyStep++;
-      if (historyStep < drawingHistory.length) drawingHistory.length = historyStep;
-      drawingHistory.push(drawCanvas.toDataURL());
-      if (drawingHistory.length > 20) { drawingHistory.shift(); historyStep--; }
-    }
-    saveDrawState();
-
+    // Util pos
     function getPos(canvas, evt) {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
@@ -522,9 +527,49 @@
       return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
     }
 
-    // Dibujo
-    function startDrawing(evt) {
-      if (currentTool !== 'pen' && currentTool !== 'eraser') return;
+    // Toolbar / tools
+    const colorPicker = document.getElementById('colorPicker');
+    const brushSize   = document.getElementById('brushSize');
+    const sizeDisplay = document.getElementById('sizeDisplay');
+    const penTool     = document.getElementById('penTool');
+    const eraserTool  = document.getElementById('eraserTool');
+    const moveTool    = document.getElementById('moveTool');
+
+    let currentTool = 'pen';
+    function setTool(tool) {
+      currentTool = tool;
+      [penTool, eraserTool, moveTool].forEach(b => b && b.classList.remove('active'));
+      if (tool === 'pen') penTool.classList.add('active');
+      else if (tool === 'eraser') eraserTool.classList.add('active');
+      else if (tool === 'move' || tool === 'note') moveTool.classList.add('active');
+
+      const drawingMode = (tool === 'pen' || tool === 'eraser');
+      mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+      notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+
+      if (drawingMode) { mediaCanvas.style.cursor = 'default'; notesCanvas.style.cursor = 'crosshair'; }
+      else { mediaCanvas.style.cursor = 'grab'; notesCanvas.style.cursor = 'grab'; }
+    }
+    window.setTool = setTool;
+    setTool('pen');
+
+    sizeDisplay.textContent = brushSize.value + 'px';
+    brushSize.addEventListener('input', () => sizeDisplay.textContent = brushSize.value + 'px');
+
+    /* ===== Dibujo ===== */
+    let isDrawing = false, lastPoint = {x:0,y:0};
+    // Historial
+    let drawingHistory = [], historyStep = -1;
+    function saveDrawState(){
+      historyStep++;
+      if (historyStep < drawingHistory.length) drawingHistory.length = historyStep;
+      drawingHistory.push(drawCanvas.toDataURL());
+      if (drawingHistory.length > 20) { drawingHistory.shift(); historyStep--; }
+    }
+    saveDrawState();
+
+    function startDrawing(evt){
+      if (!(currentTool === 'pen' || currentTool === 'eraser')) return;
       evt.preventDefault();
       isDrawing = true;
       lastPoint = getPos(drawCanvas, evt);
@@ -534,7 +579,7 @@
       if (currentTool === 'pen') { drawCtx.globalCompositeOperation = 'source-over'; drawCtx.strokeStyle = colorPicker.value; }
       else { drawCtx.globalCompositeOperation = 'destination-out'; }
     }
-    function drawMove(evt) {
+    function drawMove(evt){
       if (!isDrawing) return;
       evt.preventDefault();
       const p = getPos(drawCanvas, evt);
@@ -544,7 +589,7 @@
       drawCtx.stroke();
       lastPoint = p;
     }
-    function stopDrawing() { if (isDrawing) { isDrawing = false; saveDrawState(); } }
+    function stopDrawing(){ if (isDrawing){ isDrawing = false; saveDrawState(); } }
 
     drawCanvas.addEventListener('mousedown', startDrawing);
     drawCanvas.addEventListener('mousemove', drawMove);
@@ -554,7 +599,7 @@
     drawCanvas.addEventListener('touchmove',  drawMove, { passive:false });
     drawCanvas.addEventListener('touchend',   stopDrawing);
 
-    function undoLast() {
+    function undoLast(){
       if (historyStep > 0) {
         historyStep--;
         const img = new Image();
@@ -567,21 +612,12 @@
     }
     window.undoLast = undoLast;
 
-    /* ===== Capa de imágenes arrastrables ===== */
-    // HiDPI
-    (function fitHiDPI(canvas, ctx){
-      const ratio = window.devicePixelRatio || 1;
-      const w = canvas.width, h = canvas.height;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    })(mediaCanvas, mediaCtx);
-
+    /* ===== Imágenes arrastrables (mediaCanvas) ===== */
     let images = []; // {img,w,h,x,y}
-    let draggingImg = null; // {index, offsetX, offsetY}
+    let draggingImg = null;
 
     function renderMedia(){
-      mediaCtx.clearRect(0,0,mediaCanvas.width,mediaCanvas.height);
+      mediaCtx.clearRect(0,0,mediaCanvas.width, mediaCanvas.height);
       images.forEach(o => mediaCtx.drawImage(o.img, o.x, o.y, o.w, o.h));
     }
 
@@ -599,7 +635,7 @@
           const y = Math.round((mediaCanvas.height - h) / 2);
           images.push({ img, w, h, x, y });
           renderMedia();
-          setTool('move'); // habilita arrastre
+          setTool('move'); // listo para arrastrar
         };
         img.src = event.target.result;
       };
@@ -614,8 +650,7 @@
         const o = images[i];
         if (p.x >= o.x && p.x <= o.x + o.w && p.y >= o.y && p.y <= o.y + o.h){
           const picked = images.splice(i,1)[0]; images.push(picked);
-          const idx = images.length - 1;
-          draggingImg = { index: idx, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
+          draggingImg = { index: images.length - 1, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
           mediaCanvas.style.cursor = 'grabbing';
           renderMedia();
           return;
@@ -636,38 +671,34 @@
     const endDragImg = ()=>{ draggingImg = null; mediaCanvas.style.cursor = 'grab'; };
     mediaCanvas.addEventListener('mouseup', endDragImg);
     mediaCanvas.addEventListener('mouseleave', endDragImg);
-    // Touch
     mediaCanvas.addEventListener('touchstart', (e)=> mediaCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
     mediaCanvas.addEventListener('touchmove',  (e)=>{ e.preventDefault(); mediaCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
     mediaCanvas.addEventListener('touchend',   ()=> mediaCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
 
     /* ===== Notas (post-its) ===== */
-    (function fitHiDPI(canvas, ctx){
-      const ratio = window.devicePixelRatio || 1;
-      const w = canvas.width, h = canvas.height;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    })(notesCanvas, notesCtx);
-
     const NOTE_COLORS = [
-      { bg:'#fff8c5', border:'#facc15' }, { bg:'#e0f2fe', border:'#38bdf8' },
-      { bg:'#fde68a', border:'#f59e0b' }, { bg:'#fee2e2', border:'#f87171' },
-      { bg:'#e9d5ff', border:'#a78bfa' }
+      { bg: '#fff8c5', border: '#facc15' }, // Yellow
+      { bg: '#e0f2fe', border: '#38bdf8' }, // Blue
+      { bg: '#fde68a', border: '#f59e0b' }, // Gold
+      { bg: '#fee2e2', border: '#f87171' }, // Rose
+      { bg: '#e9d5ff', border: '#a78bfa' }  // Lavender
     ];
 
     let notes = []; // {x,y,w,h,text,fontPx,bg,border,urls:[]}
     let noteModeActive = false;
-    let draggingNote = null; // {index, offsetX, offsetY}
-    const noteInput = document.getElementById('noteText');
+    let draggingNote = null;
+
+    const noteText  = document.getElementById('noteText');
     const noteSize  = document.getElementById('noteSize');
+    const noteColor = document.getElementById('noteColor');
     const noteHint  = document.getElementById('noteHint');
 
     const urlRegex = /\bhttps?:\/\/[^\s)]+/gi;
 
     function wrapLines(ctx, text, maxWidth) {
       const words = text.split(' ');
-      let line = '', lines = [];
+      let line = '';
+      const lines = [];
       for (let n = 0; n < words.length; n++) {
         const test = line + words[n] + ' ';
         if (ctx.measureText(test).width > maxWidth && n > 0) { lines.push(line.trim()); line = words[n] + ' '; }
@@ -676,7 +707,6 @@
       if (line) lines.push(line.trim());
       return lines;
     }
-
     function drawRoundedRect(ctx, x, y, w, h, r) {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -686,19 +716,23 @@
       ctx.arcTo(x, y, x + w, y, r);
       ctx.closePath();
     }
-
     function renderNotes() {
       notesCtx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
       notes.forEach((n, idx) => {
         notesCtx.save();
-        notesCtx.shadowColor = 'rgba(0,0,0,0.15)'; notesCtx.shadowBlur = 8; notesCtx.shadowOffsetX = 2; notesCtx.shadowOffsetY = 3;
+        notesCtx.shadowColor = 'rgba(0,0,0,0.15)';
+        notesCtx.shadowBlur = 8;
+        notesCtx.shadowOffsetX = 2;
+        notesCtx.shadowOffsetY = 3;
 
-        notesCtx.fillStyle = n.bg || '#fff8c5';
-        notesCtx.strokeStyle = n.border || '#facc15';
+        notesCtx.fillStyle   = n.bg;
+        notesCtx.strokeStyle = n.border;
         notesCtx.lineWidth = 2;
         drawRoundedRect(notesCtx, n.x, n.y, n.w, n.h, 10);
-        notesCtx.fill(); notesCtx.stroke();
+        notesCtx.fill();
+        notesCtx.stroke();
 
+        // folded corner
         notesCtx.shadowColor = 'transparent';
         notesCtx.fillStyle = 'rgba(0,0,0,0.06)';
         notesCtx.beginPath();
@@ -708,28 +742,36 @@
         notesCtx.closePath();
         notesCtx.fill();
 
+        // text
         notesCtx.fillStyle = '#111827';
         notesCtx.font = `bold ${n.fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
         const padding = 12;
         const lines = wrapLines(notesCtx, n.text, n.w - padding * 2);
         const lineHeight = Math.round(n.fontPx * 1.35);
-        lines.forEach((ln, i) => notesCtx.fillText(ln, n.x + padding, n.y + padding + n.fontPx + i * lineHeight));
+        lines.forEach((ln, i) => {
+          notesCtx.fillText(ln, n.x + padding, n.y + padding + n.fontPx + i * lineHeight);
+        });
 
-        if (n.urls && n.urls.length){
-          notesCtx.fillStyle='#2563eb';
-          notesCtx.font=`bold ${Math.max(12, n.fontPx-2)}px Inter`;
+        // link indicator
+        if (n.urls && n.urls.length) {
+          notesCtx.fillStyle = '#2563eb';
+          notesCtx.font = `bold ${Math.max(12, n.fontPx - 2)}px Inter`;
           notesCtx.fillText('🔗', n.x + n.w - 26, n.y + n.h - 12);
         }
 
-        if (draggingNote && draggingNote.index === idx){
-          notesCtx.strokeStyle='#4f46e5'; notesCtx.lineWidth=2; notesCtx.setLineDash([6,4]);
-          drawRoundedRect(notesCtx, n.x-2, n.y-2, n.w+4, n.h+4, 12);
-          notesCtx.stroke(); notesCtx.setLineDash([]);
+        // selection ring
+        if (draggingNote && draggingNote.index === idx) {
+          notesCtx.strokeStyle = '#4f46e5';
+          notesCtx.lineWidth = 2;
+          notesCtx.setLineDash([6, 4]);
+          drawRoundedRect(notesCtx, n.x - 2, n.y - 2, n.w + 4, n.h + 4, 12);
+          notesCtx.stroke();
+          notesCtx.setLineDash([]);
         }
+
         notesCtx.restore();
       });
     }
-
     function placeNoteAt(x, y, text, fontPx) {
       const maxTextWidth = 260;
       notesCtx.save();
@@ -740,35 +782,52 @@
       const padding = 12;
       const w = maxTextWidth + padding * 2;
       const h = textHeight + padding * 2;
+
       if (x + w > notesCanvas.width) x = notesCanvas.width - w - 8;
       if (y + h > notesCanvas.height) y = notesCanvas.height - h - 8;
 
-      const palette = [{bg:'#fff8c5',border:'#facc15'},{bg:'#e0f2fe',border:'#38bdf8'},{bg:'#fde68a',border:'#f59e0b'},{bg:'#fee2e2',border:'#f87171'},{bg:'#e9d5ff',border:'#a78bfa'}][parseInt(document.getElementById('noteColor')?.value ?? '0',10)] || {bg:'#fff8c5',border:'#facc15'};
-      const urls = (text.match(urlRegex) || []).slice(0,5);
+      const palette = NOTE_COLORS[parseInt(noteColor?.value ?? '0', 10)] || NOTE_COLORS[0];
+      const urls = (text.match(urlRegex) || []).slice(0, 5);
 
       notes.push({ x, y, w, h, text, fontPx, bg: palette.bg, border: palette.border, urls });
       notesCtx.restore();
       renderNotes();
     }
+    function pointerOnNotes(evt){ return getPos(notesCanvas, evt); }
 
-    function getPointerOnNotes(evt){ return getPos(notesCanvas, evt); }
+    function activateNoteMode() {
+      if (!noteText.value.trim()) {
+        noteText.focus();
+        noteText.placeholder = 'Type a tip… (required)';
+        return;
+      }
+      noteModeActive = true;
+      noteHint.style.display = 'block';
+      setTool('note');                 // habilita eventos en capa superior
+      notesCanvas.style.cursor = 'copy';
+    }
+    window.activateNoteMode = activateNoteMode;
 
     notesCanvas.addEventListener('mousedown', (e) => {
       if (notesCanvas.style.pointerEvents === 'none') return; // en modo dibujo
-      const p = getPointerOnNotes(e);
+      const p = pointerOnNotes(e);
       if (noteModeActive) {
-        const text = (document.getElementById('noteText').value || '').trim();
-        const fontPx = parseInt(document.getElementById('noteSize').value, 10) || 16;
+        const text = noteText.value.trim();
+        const fontPx = parseInt(noteSize.value, 10) || 16;
         if (text) placeNoteAt(p.x, p.y, text, fontPx);
-        noteModeActive = false; document.getElementById('noteHint').style.display='none';
-        notesCanvas.style.cursor = 'crosshair';
+        // reset
+        noteModeActive = false;
+        noteHint.style.display = 'none';
         setTool('move');
+        notesCanvas.style.cursor = 'grab';
         return;
       }
+      // hit test topmost first
       for (let i = notes.length - 1; i >= 0; i--) {
         const n = notes[i];
         if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h) {
-          const picked = notes.splice(i, 1)[0]; notes.push(picked);
+          const picked = notes.splice(i, 1)[0];
+          notes.push(picked);
           const index = notes.length - 1;
           draggingNote = { index, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
           notesCanvas.style.cursor = 'grabbing';
@@ -776,44 +835,52 @@
           return;
         }
       }
-      draggingNote = null; renderNotes();
+      draggingNote = null;
+      renderNotes();
     });
-
     notesCanvas.addEventListener('mousemove', (e) => {
       if (!draggingNote) return;
-      const p = getPointerOnNotes(e);
+      const p = pointerOnNotes(e);
       const n = notes[draggingNote.index];
       n.x = Math.max(4, Math.min(p.x - draggingNote.offsetX, notesCanvas.width - n.w - 4));
       n.y = Math.max(4, Math.min(p.y - draggingNote.offsetY, notesCanvas.height - n.h - 4));
       renderNotes();
     });
-
-    const endDragNote = ()=>{ draggingNote = null; notesCanvas.style.cursor='grab'; renderNotes(); };
+    const endDragNote = ()=>{ draggingNote = null; notesCanvas.style.cursor = 'grab'; renderNotes(); };
     notesCanvas.addEventListener('mouseup', endDragNote);
-    notesCanvas.addEventListener('mouseleave', ()=>{ draggingNote=null; });
+    notesCanvas.addEventListener('mouseleave', ()=>{ draggingNote = null; });
 
-    // Double-click para abrir enlaces si hay
-    notesCanvas.addEventListener('dblclick', (e)=>{
-      const p = getPointerOnNotes(e);
-      for (let i = notes.length - 1; i >= 0; i--){
+    // Double-click to open links
+    notesCanvas.addEventListener('dblclick', (e) => {
+      const p = pointerOnNotes(e);
+      for (let i = notes.length - 1; i >= 0; i--) {
         const n = notes[i];
-        if (p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
+        if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h) {
           if (!n.urls || !n.urls.length) return;
-          if (n.urls.length === 1){ window.open(n.urls[0],'_blank'); }
-          else{
-            const choice = prompt('Open which link?\n' + n.urls.map((u,idx)=> `${idx+1}. ${u}`).join('\n'));
-            const idx = parseInt(choice,10);
-            if (!isNaN(idx) && idx>=1 && idx<=n.urls.length) window.open(n.urls[idx-1],'_blank');
+          if (n.urls.length === 1) window.open(n.urls[0], '_blank');
+          else {
+            const choice = prompt('Open which link?\n' + n.urls.map((u, idx) => `${idx+1}. ${u}`).join('\n'));
+            const idx = parseInt(choice, 10);
+            if (!isNaN(idx) && idx >= 1 && idx <= n.urls.length) window.open(n.urls[idx-1], '_blank');
           }
           return;
         }
       }
     });
 
-    // Touch para notas
-    notesCanvas.addEventListener('touchstart', (e)=> notesCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
-    notesCanvas.addEventListener('touchmove',  (e)=>{ e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
-    notesCanvas.addEventListener('touchend',   ()=> notesCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
+    // Touch for notes
+    notesCanvas.addEventListener('touchstart', (e) => notesCanvas.dispatchEvent(new MouseEvent('mousedown', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    notesCanvas.addEventListener('touchmove',  (e) => { e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    notesCanvas.addEventListener('touchend',   () => notesCanvas.dispatchEvent(new MouseEvent('mouseup', {bubbles:true})));
+
+    // Esc para cancelar modo nota
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && noteModeActive) {
+        noteModeActive = false;
+        noteHint.style.display = 'none';
+        setTool('move');
+      }
+    });
 
     /* ===== Clear All (todo) ===== */
     function clearCanvas() {
@@ -830,10 +897,12 @@
 
       // Notas
       notes = []; renderNotes();
+
+      setTool('move');
     }
     window.clearCanvas = clearCanvas;
 
-    /* ===== Guardar (merge 3 capas) ===== */
+    /* -------- Save Poster (merge 3 capas) -------- */
     function savePoster(ev) {
       const merged = document.createElement('canvas');
       merged.width = drawCanvas.width;
@@ -842,9 +911,9 @@
 
       // base dibujo
       mctx.drawImage(drawCanvas, 0, 0);
-      // imágenes (usamos posiciones actuales)
+      // imágenes (desde su lista para evitar escalado HiDPI)
       images.forEach(o => mctx.drawImage(o.img, o.x, o.y, o.w, o.h));
-      // notas (bitmap del canvas de notas)
+      // notas
       mctx.drawImage(notesCanvas, 0, 0);
 
       const link = document.createElement('a');
@@ -853,7 +922,7 @@
       link.click();
 
       const btn = ev.target; const originalText = btn.textContent; btn.textContent = '✔ Saved!'; btn.disabled = true;
-      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 2000);
+      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1500);
     }
     window.savePoster = savePoster;
 
@@ -867,7 +936,7 @@
     }
     window.toggleReferences = toggleReferences;
 
-    console.log('🌽 Poster Studio ready: pen/eraser OK, Clear All total, draggable images.');
+    console.log('🌽 Poster Studio ready: pen/eraser OK, Clear All total, draggable images, colored sticky notes.');
   </script>
 </body>
 </html>
