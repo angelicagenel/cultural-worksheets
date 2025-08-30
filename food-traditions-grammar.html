@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -625,19 +624,7 @@
                     </div>
                     
                     <div class="question-item">
-                        <p>7. Compramos
-                            <select id="article7">
-                                <option value="">...</option>
-                                <option value="unos">unos</option>
-                                <option value="unas">unas</option>
-                                <option value="los">los</option>
-                                <option value="las">las</option>
-                            </select>
-                            granos de café.</p>
-                    </div>
-                    
-                    <div class="question-item">
-                        <p>8. 
+                        <p>7. 
                             <select id="article8">
                                 <option value="">...</option>
                                 <option value="La">La</option>
@@ -646,18 +633,6 @@
                                 <option value="Un">Un</option>
                             </select>
                             cosecha es en octubre.</p>
-                    </div>
-                    
-                    <div class="question-item">
-                        <p>9. Visitamos
-                            <select id="article9">
-                                <option value="">...</option>
-                                <option value="una">una</option>
-                                <option value="un">un</option>
-                                <option value="la">la</option>
-                                <option value="el">el</option>
-                            </select>
-                            panadería tradicional.</p>
                     </div>
                 </div>
                 
@@ -735,17 +710,6 @@
                             <button onclick="selectGender('piloncillo-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
                         </div>
                         <div class="feedback-area" id="piloncillo-feedback"></div>
-                    </div>
-                    
-                    <div class="ingredient-card" data-gender="femenino" id="leche-card">
-                        <div class="gender-indicator">🥛</div>
-                        <div><strong>La leche</strong></div>
-                        <div class="ingredient-translation">milk</div>
-                        <div class="gender-buttons">
-                            <button onclick="selectGender('leche-card', 'masculino')" class="gender-btn masculine-btn">Masculino</button>
-                            <button onclick="selectGender('leche-card', 'femenino')" class="gender-btn feminine-btn">Femenino</button>
-                        </div>
-                        <div class="feedback-area" id="leche-feedback"></div>
                     </div>
                     
                     <div class="ingredient-card" data-gender="masculino" id="cacao-card">
@@ -887,9 +851,7 @@
                 article4: 'los',   // los artesanos (masculino plural)
                 article5: 'un',    // un horno (masculino indefinido)
                 article6: 'Las',   // Las alegrías (femenino plural)
-                article7: 'unos',  // unos granos (masculino plural indefinido)
-                article8: 'La',    // La cosecha (femenino)
-                article9: 'una'    // una panadería (femenino indefinido)
+                article8: 'La'     // La cosecha (femenino)
             };
 
             let correct = 0;
@@ -898,32 +860,33 @@
             for (let id in answers) {
                 const userAnswer = document.getElementById(id).value;
                 const correctAnswer = answers[id];
+                const questionNumber = id === 'article8' ? '7' : id.replace('article', '');
                 
                 if (userAnswer === correctAnswer) {
                     correct++;
-                    feedback += `<p style="color: #059669;">✅ Pregunta ${id.replace('article', '')}: "${correctAnswer}" - ¡Correcto!</p>`;
+                    feedback += `<p style="color: #059669;">✅ Pregunta ${questionNumber}: "${correctAnswer}" - ¡Correcto!</p>`;
                 } else {
-                    feedback += `<p style="color: #ef4444;">❌ Pregunta ${id.replace('article', '')}: Tu respuesta "${userAnswer}" / Correcto: "${correctAnswer}"</p>`;
+                    feedback += `<p style="color: #ef4444;">❌ Pregunta ${questionNumber}: Tu respuesta "${userAnswer}" / Correcto: "${correctAnswer}"</p>`;
                 }
             }
 
             const percentage = (correct / Object.keys(answers).length) * 100;
             
             if (percentage >= 75) {
-                feedback = `<div class="success">${feedback}<p><strong>¡Excelente! ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+                feedback = `<div class="success">${feedback}<p><strong>¡Excelente! ${correct}/7 correctas (${Math.round(percentage)}%)</strong></p></div>`;
                 updateProgress(50);
             } else if (percentage >= 50) {
-                feedback = `<div class="warning">${feedback}<p><strong>Bien! ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+                feedback = `<div class="warning">${feedback}<p><strong>Bien! ${correct}/7 correctas (${Math.round(percentage)}%)</strong></p></div>`;
                 updateProgress(35);
             } else {
-                feedback = `<div class="error">${feedback}<p><strong>Sigue practicando: ${correct}/9 correctas (${Math.round(percentage)}%)</strong></p></div>`;
+                feedback = `<div class="error">${feedback}<p><strong>Sigue practicando: ${correct}/7 correctas (${Math.round(percentage)}%)</strong></p></div>`;
             }
 
             document.getElementById('articleFeedback').innerHTML = feedback;
         }
 
         function checkGenders() {
-            const cards = ['masa-card', 'maiz-card', 'miel-card', 'trigo-card', 'harina-card', 'piloncillo-card', 'leche-card', 'cacao-card', 'amaranto-card'];
+            const cards = ['masa-card', 'maiz-card', 'miel-card', 'trigo-card', 'harina-card', 'piloncillo-card', 'cacao-card', 'amaranto-card'];
             let correctCount = 0;
             let totalCount = cards.length;
             
