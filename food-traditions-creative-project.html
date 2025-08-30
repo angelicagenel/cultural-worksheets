@@ -38,10 +38,10 @@
     * { box-sizing: border-box; }
 
     html, body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 16px; 
+      font-size: 16px;
       line-height: 1.6;
       color: var(--ink);
       background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -49,26 +49,15 @@
     }
 
     /* Typography */
-    h1, h2, h3 {
-      font-family: 'Crimson Text', serif;
-      font-weight: 600;
-      line-height: 1.2;
-      margin: 0;
-    }
-
+    h1, h2, h3 { font-family: 'Crimson Text', serif; font-weight: 600; line-height: 1.2; margin: 0; }
     h1 { font-size: 2.5rem; color: var(--brand); }
     h2 { font-size: 1.875rem; color: var(--ink); margin-bottom: 1rem; }
     h3 { font-size: 1.5rem; color: var(--brand); margin-bottom: 0.75rem; }
-
     p { margin: 0 0 1rem; }
     .text-sm { font-size: 0.875rem; color: var(--text-muted); }
     .text-xs { font-size: 0.75rem; color: var(--text-light); }
 
-    a { 
-      color: var(--accent); 
-      text-decoration: none;
-      transition: color var(--transition-fast);
-    }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition-fast); }
     a:hover { color: var(--brand); }
 
     /* Layout */
@@ -97,10 +86,7 @@
       text-align: center;
     }
     .header h1 { margin-bottom: 1rem; }
-
-    .header-links {
-      display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap;
-    }
+    .header-links { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
     .header-link {
       display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--bg-primary);
       border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
@@ -124,21 +110,30 @@
       background: var(--bg-primary); box-shadow: var(--shadow-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; font-size: 0.9rem;
     }
     .flip-front { border-top: 6px solid var(--brand); }
-    .flip-back { border-top: 6px solid var(--accent); transform: rotateY(180deg); }
+    .flip-back  { border-top: 6px solid var(--accent); transform: rotateY(180deg); }
 
-    .flip-badge { align-self: flex-start; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%); color: white; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; box-shadow: var(--shadow-md); }
+    .flip-badge {
+      align-self: flex-start; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+      color: white; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; box-shadow: var(--shadow-md);
+    }
 
     .translation-btn {
-      align-self: flex-start; background: var(--bg-secondary); border: 1px solid var(--border-medium); padding: 0.5rem 1rem; border-radius: var(--radius-md);
-      font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
+      align-self: flex-start; background: var(--bg-secondary); border: 1px solid var(--border-medium);
+      padding: 0.5rem 1rem; border-radius: var(--radius-md); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
     }
-    .translation-btn:hover { background: var(--brand); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .translation-btn.active { background: var(--brand); color: white; }
+    .translation-btn:hover, .translation-btn.active { background: var(--brand); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
-    .quote { font-family: 'Crimson Text', serif; font-size: 0.95rem; line-height: 1.5; font-style: italic; color: var(--ink); background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%); padding: 1rem; border-radius: var(--radius-md); border: 2px solid var(--brand); margin: 0.5rem 0; }
+    .quote {
+      font-family: 'Crimson Text', serif; font-size: 0.95rem; line-height: 1.5; font-style: italic; color: var(--ink);
+      background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%); padding: 1rem; border-radius: var(--radius-md); border: 2px solid var(--brand); margin: 0.5rem 0;
+    }
     .attribution { font-size: 0.75rem; color: var(--text-muted); padding: 0.75rem; background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: auto; }
 
-    .translation { display: none; font-style: italic; color: var(--text-muted); background: var(--success-light); padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid var(--success); font-size: 0.85rem; margin: 0.5rem 0; animation: fadeIn var(--transition-medium); }
+    .translation {
+      display: none; font-style: italic; color: var(--text-muted);
+      background: var(--success-light); padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid var(--success);
+      font-size: 0.85rem; margin: 0.5rem 0; animation: fadeIn var(--transition-medium);
+    }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     .flip-hint { margin-top: auto; text-align: center; color: var(--text-light); font-size: 0.8rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: var(--radius-sm); animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
@@ -151,7 +146,10 @@
     .research-links strong { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
     .research-links ul { margin: 0; padding: 0; list-style: none; }
     .research-links li { margin-bottom: 0.5rem; }
-    .research-links a { display: block; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-sm); transition: all var(--transition-medium); box-shadow: var(--shadow-sm); font-size: 0.8rem; }
+    .research-links a {
+      display: block; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); transition: all var(--transition-medium); box-shadow: var(--shadow-sm); font-size: 0.8rem;
+    }
     .research-links a:hover { background: var(--brand); color: white; transform: translateX(4px); box-shadow: var(--shadow-md); }
 
     /* Notes */
@@ -169,7 +167,10 @@
     .references-content.show { display: block; }
 
     /* Poster studio */
-    .toolbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-light); }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem;
+      padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-light);
+    }
     .toolbar-group { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
     .toolbar-group label { font-weight: 500; color: var(--text-muted); font-size: 0.875rem; }
     .btn { appearance: none; border: 1px solid var(--border-medium); background: var(--bg-primary); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 0.5rem; }
@@ -177,8 +178,11 @@
     .btn.active { background: var(--brand); color: white; border-color: var(--brand); }
     .btn-primary { background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white; border: none; font-weight: 600; box-shadow: var(--shadow-md); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .canvas-wrapper { border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-primary); box-shadow: var(--shadow-lg); border: 2px solid var(--border-light); }
-    #posterCanvas { width: 100%; height: auto; display: block; cursor: crosshair; }
+
+    .canvas-wrapper { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-primary); box-shadow: var(--shadow-lg); border: 2px solid var(--border-light); }
+    #drawCanvas, #notesCanvas { width: 100%; height: auto; display: block; }
+    #drawCanvas { position: relative; z-index: 1; }
+    #notesCanvas { position: absolute; inset: 0; z-index: 2; cursor: crosshair; }
 
     /* Step indicators */
     .step-indicator { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--brand); color: white; border-radius: 50%; font-weight: 600; margin-right: 1rem; }
@@ -204,10 +208,8 @@
     /* Misc */
     .loading { opacity: 0.7; pointer-events: none; }
     .flip-card.transitioning { pointer-events: none; }
-
     @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-
-    button:focus, input:focus, textarea:focus, .flip-card:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+    button:focus, input:focus, textarea:focus, .flip-card:focus { outline: 2px solid --brand; outline-offset: 2px; }
   </style>
 </head>
 
@@ -216,7 +218,6 @@
     <!-- Header -->
     <header class="header">
       <h1>🌽 Exploring Mexican Culinary Heritage</h1>
-      <!-- A) Learning Objectives (replaces the old sentence) -->
       <p class="text-sm"><strong>🎯 Learning Objectives:</strong> Analyze how Mexican foodways demonstrate <em>Economic Sustainability</em>, <em>Indigenous Reciprocity</em>, or <em>Cultural Resistance</em> | Evaluate contemporary challenges these traditions face | Create connections between Mexican cultural practices and your own community food traditions.</p>
       <div class="header-links">
         <a href="https://www.spanish-learning-edge.com/post/mexican-food-traditions-an-enduring-heritage" target="_blank" rel="noopener" class="header-link">📖 Related Blog Post</a>
@@ -226,9 +227,8 @@
     <!-- Step 1 & 2 - Instructions + Flip Cards -->
     <section class="section card">
       <h2><span class="step-indicator">1</span>Read the Testimonials</h2>
-      <!-- B1) Clearer purpose + action language -->
       <p class="text-sm"><strong>Purpose:</strong> Build cultural understanding from community voices. <strong>What to do:</strong> Read each short quote in Spanish. Click <em>Show English</em> as needed to confirm meaning. Jot 1–2 keywords per quote that hint at <em>sustainability</em>, <em>reciprocity</em>, or <em>resistance</em>.</p>
-      
+
       <h2 style="margin-top: 2rem;"><span class="step-indicator">2</span>Select ONE Research Topic</h2>
       <p class="text-sm"><strong>What to do:</strong> Click any card to flip and reveal guiding questions and vetted sources. Choose the topic that best matches the keywords you noticed.</p>
 
@@ -279,7 +279,7 @@
             </div>
             <div class="flip-back">
               <div class="research-topic">
-                <h3>🤝🏽 Indigenous Reciprocity</h3>
+                <h3>🤝 Indigenous Reciprocity</h3>
                 <ul>
                   <li>How does reciprocity appear in work, celebration, or exchange?</li>
                   <li>What responsibilities accompany the benefits within the community?</li>
@@ -305,14 +305,14 @@
             <div class="flip-front">
               <span class="flip-badge">🌾 Amaranto</span>
               <button class="translation-btn" data-trans="amaranto">Show English</button>
-              <div class="quote">"En la época prehispánica, el amaranto conectaba a nuestros ancestros con los dioses. Hoy, las 'alegrías' que producimos conectan el pasado con el presente; son el sustento económico de nuestras familias mientras preservamos 6,000 años de historia."</div>
+              <div class="quote">"En la época prehispánica, el amaranto conectaba a nuestros ancestros con los dioses. Hoy, las 'alegrías' que producimos conectan pasado y presente y sostienen a nuestras familias mientras preservamos 6,000 años de historia."</div>
               <div class="translation" id="trans-amaranto">"In pre-Hispanic times, amaranth connected our ancestors with the gods. Today, the 'alegrías' we make connect past and present, providing income for our families while we preserve 6,000 years of history."</div>
               <div class="attribution"><strong>Attribution:</strong> Artisan, Temoac/Huazulco, Morelos. Source: Sistema de Información Cultural & academic reports.</div>
               <div class="flip-hint">Click card to reveal research topic ↻</div>
             </div>
             <div class="flip-back">
               <div class="research-topic">
-                <h3>✊🏼 Cultural Resistance</h3>
+                <h3>✊ Cultural Resistance</h3>
                 <ul>
                   <li>In what ways do these practices resist homogenization/globalization?</li>
                   <li>Which elements of the tradition are non-negotiable for community identity?</li>
@@ -337,25 +337,15 @@
     <!-- Step 3 - Research & Comparative Analysis -->
     <section class="section card">
       <h2><span class="step-indicator">3</span>Research & Comparative Analysis</h2>
-      <!-- B2) Clear, actionable steps -->
-      <p class="text-sm"><strong>What to do (three outputs):</strong></p>
-      <ol class="text-sm" style="margin-top:-0.25rem; padding-left:1.25rem; color:var(--text-muted)">
-        <li><strong>Collect Evidence:</strong> From the sources provided (and any you add), capture 3–5 specific pieces of evidence (data points, quotes, policies, dates) that show how your topic exemplifies <em>sustainability</em>, <em>reciprocity</em>, or <em>resistance</em>.</li>
-        <li><strong>Analyze Mechanisms:</strong> For each piece of evidence, finish this sentence: “This matters because it enables/strengthens __________.” Name the concrete mechanism (e.g., shade-grown certification; fiesta-based mutual aid; seed-saving networks).</li>
-        <li><strong>Compare Locally:</strong> Contrast your findings with a food tradition in <em>your family</em>, <em>local community</em>, or a <em>specific region</em> in your country. State whether you observe similar patterns of sustainability, reciprocity, or resistance—and where they differ.</li>
-      </ol>
-
-      <p class="text-sm" style="margin-top:0.75rem"><strong>How to document:</strong> Use the notes box to draft bullet points with brief citations (author/site + year). Aim for clarity over length.</p>
-      
-      <textarea id="notesBox" class="notes-textarea" placeholder="Evidence → Mechanism → Why it matters → Local comparison…"></textarea>
+      <p class="text-sm">Investigate your chosen focus area. Document evidence that supports your analysis of how this foodway demonstrates sustainability, reciprocity, or resistance. Then contrast your findings with food traditions in your family, local community, or a specific region in your country. Explain whether they demonstrate similar patterns of sustainability, reciprocity, or resistance.</p>
+      <textarea id="notesBox" class="notes-textarea" placeholder="Evidence → Analysis → Local comparison… "></textarea>
       <div class="notes-status" id="notesStatus">💾 Saved automatically</div>
     </section>
 
     <!-- Step 4 - Poster Studio -->
     <section class="section card">
       <h2><span class="step-indicator">4</span>Poster Studio: Create Your Visual Synthesis</h2>
-      <!-- B3) Clearer build specs for the visual -->
-      <p class="text-sm"><strong>What to include:</strong> Title; 3–5 keywords; 2–3 arrows or connectors that show cause → effect or tension (e.g., <em>policy → market access</em>); 1 concise quote or data point with attribution; and 1 panel mapping your local comparison.</p>
+      <p class="text-sm">Include links to videos, add photos, and draw to synthesize your research findings into a visual presentation. Connect your analysis to patterns from your family, community, or country.</p>
 
       <div class="toolbar">
         <div class="toolbar-group">
@@ -373,27 +363,42 @@
         <button class="btn" onclick="undoLast()">↶ Undo</button>
         <input type="file" id="imageUpload" accept="image/*" style="display: none;">
         <button class="btn" onclick="document.getElementById('imageUpload').click()">🖼️ Add Image</button>
+
+        <!-- Mini Post-it text tools -->
+        <div class="toolbar-group">
+          <label for="noteText">Mini Post-it</label>
+          <input id="noteText" type="text" placeholder="Type a tip…" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:200px;">
+          <select id="noteSize" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;">
+            <option value="14">Small</option>
+            <option value="16" selected>Medium</option>
+            <option value="20">Large</option>
+          </select>
+          <button class="btn" id="addNoteBtn" onclick="activateNoteMode()">🗒️ Add Note</button>
+        </div>
+
         <button class="btn btn-primary" onclick="savePoster(event)">💾 Save Poster (PNG)</button>
       </div>
 
       <div class="canvas-wrapper">
-        <canvas id="posterCanvas" width="1200" height="720"></canvas>
+        <!-- Two-layer canvas: drawing and notes -->
+        <canvas id="drawCanvas" width="1200" height="720"></canvas>
+        <canvas id="notesCanvas" width="1200" height="720"></canvas>
       </div>
+      <p class="text-xs" id="noteHint" style="margin-top:0.5rem; display:none;">Tip: click anywhere on the canvas to place your note. Drag notes to reposition. Press Esc to cancel.</p>
     </section>
 
     <!-- Step 5 - Present -->
     <section class="section card">
       <h2><span class="step-indicator">5</span>Present Your Findings</h2>
-      <!-- B4) Sharpened speaking prompts -->
-      <p class="text-sm"><strong>Explain clearly:</strong> (a) your claim about sustainability/reciprocity/resistance; (b) the strongest piece of evidence and why it’s credible; (c) one contrast with your local example; (d) one recommendation for community-centered preservation.</p>
+      <p class="text-sm">Present your research analysis using your visual synthesis as a guide.</p>
       <ul class="checklist">
-        <li>Show one concrete mechanism you identified and how it works.</li>
-        <li>Cite at least one vetted source and justify its reliability.</li>
-        <li>Name one open question or next step for community stewardship.</li>
+        <li>(a) Clearly explain your analysis about sustainability, reciprocity, or resistance.</li>
+        <li>(b) Cite the strongest piece of evidence and say why it’s credible.</li>
+        <li>(c) Contrast with your personal example (family, community, or country).</li>
       </ul>
     </section>
 
-    <!-- C) Cultural Note moved AFTER the presentation as a closing element -->
+    <!-- Cultural Note – Closing -->
     <section class="section cultural-note">
       <h3>🌡️ Cultural Note – Closing Reflection</h3>
       <p>
@@ -411,8 +416,8 @@
           Municipio de San Juan Huactzinco. "Pan de Fiesta." <em>Official Municipal Website</em>, huactzinco.gob.mx/cultura/pan-de-fiesta/.<br><br>
           Native Seeds/Search. "Amaranth 'Huazulco Alegría' – Variety Information." <em>Native Seeds/SEARCH</em>, nativeseeds.org/products/c020.<br><br>
           Secretaría de Cultura. "Boletines de Prensa." <em>Gobierno de México</em>, gob.mx/cultura/prensa/.<br><br>
-          "Sin Maíz, No Hay País: How Free Trade Hurts Indigenous Food Sovereignty in Mexico." <em>Center for World Indigenous Studies</em>, 19 Feb. 2025, cwis.org/2025/02/sin-maiz-no-hay-pais-how-free-trade-hurts-indigenous-food-sovereignty-in-mexico/.<br><br>
-          UNESCO. "Traditional Mexican Cuisine: Ancestral, Ongoing Community Culture." <em>Intangible Cultural Heritage Lists</em>, 2010, ich.unesco.org/en/RL/traditional-mexican-cuisine-00400.
+          "Sin Maíz, No Hay País: How Free Trade Hurts Indigenous Food Sovereignty in Mexico." <em>CIWS</em>, 19 Feb. 2025.<br><br>
+          UNESCO. "Traditional Mexican Cuisine: Ancestral, Ongoing Community Culture." 2010, ich.unesco.org/en/RL/traditional-mexican-cuisine-00400.
         </div>
       </div>
     </section>
@@ -426,7 +431,7 @@
   </div>
 
   <script>
-    // Flip cards interactions
+    /* -------- Flip cards interactions -------- */
     document.querySelectorAll('.flip-card').forEach(card => {
       card.addEventListener('click', function(e) {
         if (e.target.closest('button, a')) return;
@@ -444,7 +449,7 @@
       });
     });
 
-    // Translation toggle
+    /* -------- Translation toggle -------- */
     document.querySelectorAll('.translation-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -459,7 +464,7 @@
       });
     });
 
-    // Notes autosave
+    /* -------- Notes autosave -------- */
     const notesBox = document.getElementById('notesBox');
     const notesStatus = document.getElementById('notesStatus');
     let saveTimeout;
@@ -476,137 +481,358 @@
       });
     }
 
-    // Drawing tools
+    /* ====== Drawing Layer (drawCanvas) ====== */
+    const drawCanvas = document.getElementById('drawCanvas');
+    const drawCtx = drawCanvas.getContext('2d', { willReadFrequently: true });
+
+    // Initialize background
+    drawCtx.fillStyle = 'white';
+    drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+
+    const colorPicker = document.getElementById('colorPicker');
+    const brushSize = document.getElementById('brushSize');
+    const sizeDisplay = document.getElementById('sizeDisplay');
+    const penTool = document.getElementById('penTool');
+    const eraserTool = document.getElementById('eraserTool');
+
     let currentTool = 'pen';
     let isDrawing = false;
     let lastPoint = { x: 0, y: 0 };
+
+    function setTool(tool) {
+      currentTool = tool;
+      penTool.classList.toggle('active', tool === 'pen');
+      eraserTool.classList.toggle('active', tool === 'eraser');
+      // pointer on top canvas always; set on notesCanvas
+      notesCanvas.style.cursor = tool === 'pen' ? 'crosshair' : 'grab';
+    }
+    window.setTool = setTool;
+    setTool('pen');
+
+    sizeDisplay.textContent = brushSize.value + 'px';
+    brushSize.addEventListener('input', () => sizeDisplay.textContent = brushSize.value + 'px');
+
+    // History for drawing layer only
     let drawingHistory = [];
     let historyStep = -1;
+    function saveDrawState() {
+      historyStep++;
+      if (historyStep < drawingHistory.length) drawingHistory.length = historyStep;
+      drawingHistory.push(drawCanvas.toDataURL());
+      if (drawingHistory.length > 20) { drawingHistory.shift(); historyStep--; }
+    }
+    saveDrawState();
 
-    const canvas = document.getElementById('posterCanvas');
-    const ctx = canvas ? canvas.getContext('2d', { willReadFrequently: true }) : null;
-    if (ctx) {
-      const colorPicker = document.getElementById('colorPicker');
-      const brushSize = document.getElementById('brushSize');
-      const sizeDisplay = document.getElementById('sizeDisplay');
-      const penTool = document.getElementById('penTool');
-      const eraserTool = document.getElementById('eraserTool');
-
-      // Initialize canvas background
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      brushSize.addEventListener('input', function() { sizeDisplay.textContent = this.value + 'px'; });
-
-      window.setTool = function(tool) {
-        currentTool = tool;
-        penTool.classList.toggle('active', tool === 'pen');
-        eraserTool.classList.toggle('active', tool === 'eraser');
-        canvas.style.cursor = tool === 'pen' ? 'crosshair' : 'grab';
-      };
-      setTool('pen');
-
-      function saveState() {
-        historyStep++;
-        if (historyStep < drawingHistory.length) drawingHistory.length = historyStep;
-        drawingHistory.push(canvas.toDataURL());
-        if (drawingHistory.length > 20) { drawingHistory.shift(); historyStep--; }
-      }
-      saveState();
-
-      window.undoLast = function() {
-        if (historyStep > 0) {
-          historyStep--;
-          const img = new Image();
-          img.onload = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(img, 0, 0); };
-          img.src = drawingHistory[historyStep];
-        }
-      };
-
-      function getPointerPos(evt) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-        const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-        return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
-      }
-
-      function startDrawing(evt) {
-        evt.preventDefault();
-        isDrawing = true;
-        lastPoint = getPointerPos(evt);
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.lineWidth = parseInt(brushSize.value, 10);
-        if (currentTool === 'pen') { ctx.globalCompositeOperation = 'source-over'; ctx.strokeStyle = colorPicker.value; }
-        else { ctx.globalCompositeOperation = 'destination-out'; }
-      }
-      function draw(evt) {
-        if (!isDrawing) return; evt.preventDefault();
-        const currentPoint = getPointerPos(evt);
-        ctx.beginPath(); ctx.moveTo(lastPoint.x, lastPoint.y); ctx.lineTo(currentPoint.x, currentPoint.y); ctx.stroke();
-        lastPoint = currentPoint;
-      }
-      function stopDrawing() { if (isDrawing) { isDrawing = false; saveState(); } }
-
-      canvas.addEventListener('mousedown', startDrawing);
-      canvas.addEventListener('mousemove', draw);
-      canvas.addEventListener('mouseup', stopDrawing);
-      canvas.addEventListener('mouseout', stopDrawing);
-      canvas.addEventListener('touchstart', startDrawing, { passive: false });
-      canvas.addEventListener('touchmove', draw, { passive: false });
-      canvas.addEventListener('touchend', stopDrawing);
-
-      window.clearCanvas = function() {
-        if (confirm('Are you sure you want to clear the entire canvas?')) {
-          ctx.fillStyle = 'white'; ctx.fillRect(0, 0, canvas.width, canvas.height); saveState();
-          const clearBtn = document.getElementById('clearAllBtn');
-          if (clearBtn) {
-            const originalText = clearBtn.textContent;
-            clearBtn.textContent = '✔ Cleared'; clearBtn.style.background = '#ef7c8e'; clearBtn.style.color = 'white';
-            setTimeout(() => { clearBtn.textContent = originalText; clearBtn.style.background = ''; clearBtn.style.color = ''; }, 1500);
-          }
-        }
-      };
-
-      document.getElementById('imageUpload').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-              const maxWidth = 300, maxHeight = 300;
-              let { width, height } = img;
-              if (width > maxWidth || height > maxHeight) { const r = Math.min(maxWidth/width, maxHeight/height); width *= r; height *= r; }
-              const x = (canvas.width - width) / 2; const y = (canvas.height - height) / 2;
-              ctx.drawImage(img, x, y, width, height); saveState();
-            };
-            img.src = event.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-
-      window.savePoster = function(ev) {
-        const link = document.createElement('a');
-        link.download = 'mexican-culinary-heritage-poster.png';
-        link.href = canvas.toDataURL('image/png', 1.0);
-        link.click();
-        const btn = ev.target; const originalText = btn.textContent; btn.textContent = '✔ Saved!'; btn.disabled = true;
-        setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 2000);
-      };
+    function getDrawPos(evt) {
+      const rect = drawCanvas.getBoundingClientRect();
+      const scaleX = drawCanvas.width / rect.width;
+      const scaleY = drawCanvas.height / rect.height;
+      const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+      const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+      return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
     }
 
-    // References toggle
-    window.toggleReferences = function() {
+    function startDrawing(evt) {
+      if (noteModeActive) return; // ignore when placing notes
+      evt.preventDefault();
+      isDrawing = true;
+      lastPoint = getDrawPos(evt);
+      drawCtx.lineCap = 'round';
+      drawCtx.lineJoin = 'round';
+      drawCtx.lineWidth = parseInt(brushSize.value, 10);
+      if (currentTool === 'pen') { drawCtx.globalCompositeOperation = 'source-over'; drawCtx.strokeStyle = colorPicker.value; }
+      else { drawCtx.globalCompositeOperation = 'destination-out'; }
+    }
+    function drawMove(evt) {
+      if (noteModeActive) return;
+      if (!isDrawing) return;
+      evt.preventDefault();
+      const p = getDrawPos(evt);
+      drawCtx.beginPath();
+      drawCtx.moveTo(lastPoint.x, lastPoint.y);
+      drawCtx.lineTo(p.x, p.y);
+      drawCtx.stroke();
+      lastPoint = p;
+    }
+    function stopDrawing() { if (isDrawing) { isDrawing = false; saveDrawState(); } }
+
+    // Bind drawing to drawCanvas (not notesCanvas)
+    drawCanvas.addEventListener('mousedown', startDrawing);
+    drawCanvas.addEventListener('mousemove', drawMove);
+    drawCanvas.addEventListener('mouseup', stopDrawing);
+    drawCanvas.addEventListener('mouseout', stopDrawing);
+    drawCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+    drawCanvas.addEventListener('touchmove', drawMove, { passive: false });
+    drawCanvas.addEventListener('touchend', stopDrawing);
+
+    function clearCanvas() {
+      if (confirm('Are you sure you want to clear the entire canvas?')) {
+        drawCtx.fillStyle = 'white';
+        drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+        saveDrawState();
+      }
+    }
+    window.clearCanvas = clearCanvas;
+
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const maxW = 300, maxH = 300;
+          let w = img.width, h = img.height;
+          if (w > maxW || h > maxH) { const r = Math.min(maxW/w, maxH/h); w *= r; h *= r; }
+          const x = (drawCanvas.width - w) / 2;
+          const y = (drawCanvas.height - h) / 2;
+          drawCtx.drawImage(img, x, y, w, h);
+          saveDrawState();
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function undoLast() {
+      if (historyStep > 0) {
+        historyStep--;
+        const img = new Image();
+        img.onload = function() {
+          drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+          drawCtx.drawImage(img, 0, 0);
+        };
+        img.src = drawingHistory[historyStep];
+      }
+    }
+    window.undoLast = undoLast;
+
+    /* ====== Notes Layer (notesCanvas) with draggable post-its ====== */
+    const notesCanvas = document.getElementById('notesCanvas');
+    const notesCtx = notesCanvas.getContext('2d');
+
+    // Device-pixel ratio handling for crisp drawing (optional)
+    function fitHiDPI(canvas, ctx) {
+      const ratio = window.devicePixelRatio || 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      canvas.width = Math.floor(w * ratio);
+      canvas.height = Math.floor(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+    // Keep base sizes (already 1200x720), set transform for notesCtx only
+    fitHiDPI(notesCanvas, notesCtx);
+
+    let notes = []; // {x,y,w,h,text,fontPx}
+    let noteModeActive = false;
+    let dragging = null; // {index, offsetX, offsetY}
+    const noteInput = document.getElementById('noteText');
+    const noteSize = document.getElementById('noteSize');
+    const noteHint = document.getElementById('noteHint');
+
+    function activateNoteMode() {
+      if (!noteInput.value.trim()) {
+        noteInput.focus();
+        noteInput.placeholder = 'Type a tip… (required)';
+        return;
+      }
+      noteModeActive = true;
+      noteHint.style.display = 'block';
+      notesCanvas.style.cursor = 'copy';
+    }
+    window.activateNoteMode = activateNoteMode;
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && noteModeActive) {
+        noteModeActive = false;
+        noteHint.style.display = 'none';
+        notesCanvas.style.cursor = 'crosshair';
+      }
+    });
+
+    function wrapLines(ctx, text, maxWidth) {
+      const words = text.split(' ');
+      let line = '';
+      const lines = [];
+      for (let n = 0; n < words.length; n++) {
+        const test = line + words[n] + ' ';
+        if (ctx.measureText(test).width > maxWidth && n > 0) {
+          lines.push(line.trim());
+          line = words[n] + ' ';
+        } else {
+          line = test;
+        }
+      }
+      if (line) lines.push(line.trim());
+      return lines;
+    }
+
+    function drawRoundedRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function renderNotes() {
+      notesCtx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
+      notes.forEach((n, idx) => {
+        // shadow
+        notesCtx.save();
+        notesCtx.shadowColor = 'rgba(0,0,0,0.15)';
+        notesCtx.shadowBlur = 8;
+        notesCtx.shadowOffsetX = 2;
+        notesCtx.shadowOffsetY = 3;
+
+        // card
+        notesCtx.fillStyle = '#fff8c5';
+        notesCtx.strokeStyle = '#facc15';
+        notesCtx.lineWidth = 2;
+        drawRoundedRect(notesCtx, n.x, n.y, n.w, n.h, 10);
+        notesCtx.fill();
+        notesCtx.stroke();
+
+        // folded corner
+        notesCtx.shadowColor = 'transparent';
+        notesCtx.fillStyle = 'rgba(0,0,0,0.06)';
+        notesCtx.beginPath();
+        notesCtx.moveTo(n.x + n.w - 22, n.y);
+        notesCtx.lineTo(n.x + n.w, n.y);
+        notesCtx.lineTo(n.x + n.w, n.y + 22);
+        notesCtx.closePath();
+        notesCtx.fill();
+
+        // text
+        notesCtx.fillStyle = '#111827';
+        notesCtx.font = `bold ${n.fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
+        const padding = 12;
+        const lines = wrapLines(notesCtx, n.text, n.w - padding * 2);
+        const lineHeight = Math.round(n.fontPx * 1.35);
+        lines.forEach((ln, i) => {
+          notesCtx.fillText(ln, n.x + padding, n.y + padding + n.fontPx + i * lineHeight);
+        });
+
+        // selection ring if dragging/selected
+        if (dragging && dragging.index === idx) {
+          notesCtx.strokeStyle = '#4f46e5';
+          notesCtx.lineWidth = 2;
+          notesCtx.setLineDash([6, 4]);
+          drawRoundedRect(notesCtx, n.x - 2, n.y - 2, n.w + 4, n.h + 4, 12);
+          notesCtx.stroke();
+          notesCtx.setLineDash([]);
+        }
+
+        notesCtx.restore();
+      });
+    }
+
+    function placeNoteAt(x, y, text, fontPx) {
+      const maxTextWidth = 260;
+      notesCtx.save();
+      notesCtx.font = `bold ${fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
+      const lines = wrapLines(notesCtx, text, maxTextWidth);
+      const lineHeight = Math.round(fontPx * 1.35);
+      const textHeight = lines.length * lineHeight;
+      const padding = 12;
+      const w = maxTextWidth + padding * 2;
+      const h = textHeight + padding * 2;
+      // keep inside
+      if (x + w > notesCanvas.width) x = notesCanvas.width - w - 8;
+      if (y + h > notesCanvas.height) y = notesCanvas.height - h - 8;
+      notes.push({ x, y, w, h, text, fontPx });
+      notesCtx.restore();
+      renderNotes();
+    }
+
+    function getPointerOnNotes(evt) {
+      const rect = notesCanvas.getBoundingClientRect();
+      const scaleX = notesCanvas.width / rect.width;
+      const scaleY = notesCanvas.height / rect.height;
+      const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+      const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+      return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+    }
+
+    // Add/drag behavior
+    notesCanvas.addEventListener('mousedown', (e) => {
+      const p = getPointerOnNotes(e);
+      if (noteModeActive) {
+        const text = noteInput.value.trim();
+        const fontPx = parseInt(noteSize.value, 10) || 16;
+        if (text) placeNoteAt(p.x, p.y, text, fontPx);
+        // reset mode
+        noteModeActive = false;
+        noteHint.style.display = 'none';
+        notesCanvas.style.cursor = 'crosshair';
+        return;
+      }
+      // hit test topmost first
+      for (let i = notes.length - 1; i >= 0; i--) {
+        const n = notes[i];
+        if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h) {
+          // bring to front
+          const picked = notes.splice(i, 1)[0];
+          notes.push(picked);
+          const index = notes.length - 1;
+          dragging = { index, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
+          renderNotes();
+          return;
+        }
+      }
+      dragging = null;
+      renderNotes();
+    });
+
+    notesCanvas.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const p = getPointerOnNotes(e);
+      const n = notes[dragging.index];
+      n.x = p.x - dragging.offsetX;
+      n.y = p.y - dragging.offsetY;
+      // keep inside
+      n.x = Math.max(4, Math.min(n.x, notesCanvas.width - n.w - 4));
+      n.y = Math.max(4, Math.min(n.y, notesCanvas.height - n.h - 4));
+      renderNotes();
+    });
+
+    notesCanvas.addEventListener('mouseup', () => { dragging = null; renderNotes(); });
+    notesCanvas.addEventListener('mouseleave', () => { dragging = null; });
+    // Touch support
+    notesCanvas.addEventListener('touchstart', (e) => notesCanvas.dispatchEvent(new MouseEvent('mousedown', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    notesCanvas.addEventListener('touchmove',  (e) => { e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    notesCanvas.addEventListener('touchend',   () => notesCanvas.dispatchEvent(new MouseEvent('mouseup', {bubbles:true})));
+
+    /* -------- Save Poster (merge layers) -------- */
+    function savePoster(ev) {
+      const merged = document.createElement('canvas');
+      merged.width = drawCanvas.width;
+      merged.height = drawCanvas.height;
+      const mctx = merged.getContext('2d');
+      mctx.drawImage(drawCanvas, 0, 0);
+      mctx.drawImage(notesCanvas, 0, 0);
+      const link = document.createElement('a');
+      link.download = 'mexican-culinary-heritage-poster.png';
+      link.href = merged.toDataURL('image/png', 1.0);
+      link.click();
+      const btn = ev.target; const originalText = btn.textContent; btn.textContent = '✔ Saved!'; btn.disabled = true;
+      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 2000);
+    }
+    window.savePoster = savePoster;
+
+    /* -------- References toggle -------- */
+    function toggleReferences() {
       const content = document.getElementById('references-content');
       const icon = document.getElementById('toggle-icon');
       const isVisible = content.classList.contains('show');
       content.classList.toggle('show');
       icon.textContent = isVisible ? '▼' : '▲';
-    };
+    }
+    window.toggleReferences = toggleReferences;
 
     console.log('🌽 Mexican Culinary Heritage Activity loaded successfully!');
   </script>
