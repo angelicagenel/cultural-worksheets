@@ -1,290 +1,689 @@
+<!-- Source reference (do not remove): :contentReference[oaicite:0]{index=0} -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Tradiciones Culinarias Mexicanas – Actividad</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --brand:#4f46e5; --accent:#7c3aed;
-    --ink:#0f172a; --muted:#64748b;
-    --bg:#ffffff; --bg2:#f8fafc; --bg3:#eef2f7;
-    --success:#ef7c8e; --success2:#ffe8e3;
-    --radius:14px; --shadow:0 10px 24px rgba(0,0,0,.08);
-    --border:#e2e8f0;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:linear-gradient(135deg,#f8fafc,#e2e8f0);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink)}
-  .container{max-width:1200px;margin:auto;padding:24px}
-  h1{margin:0 0 16px;font-size:2rem;color:var(--brand)}
-  .card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin:20px 0}
-  .toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-bottom:14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px}
-  .group{display:flex;gap:.5rem;align-items:center;background:#fff;border:1px solid var(--border);border-radius:10px;padding:.5rem .75rem}
-  .btn{border:1px solid var(--border);background:#fff;border-radius:10px;padding:.55rem .9rem;font-weight:600;cursor:pointer}
-  .btn:hover{background:var(--bg3)}
-  .btn.primary{background:linear-gradient(135deg,var(--brand),var(--accent));border:none;color:#fff}
-  .canvas-wrap{position:relative;border:2px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
-  /* CANVAS: tamaño lógico fijo; escalado responsive */
-  .stage{display:block;width:100%;height:auto}
-  #media,#draw,#notes{position:absolute;inset:0}
-  #media{z-index:1}
-  #draw{z-index:2}
-  #notes{z-index:3}
-  /* Indicaciones / mini UI */
-  .hint{font-size:.8rem;color:var(--muted);margin-top:.5rem}
-  .notes-text{width:100%;min-height:160px;padding:14px;border:2px solid var(--border);border-radius:10px;background:var(--success2)}
-  .notes-ok{display:inline-block;margin-top:8px;background:var(--success);color:#fff;border-radius:999px;padding:.35rem .7rem;opacity:0;transition:.25s}
-  .notes-ok.show{opacity:1}
-  @media(max-width:768px){.container{padding:16px}}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explorando la Herencia Culinaria Mexicana — Actividad Interactiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand: #4f46e5;
+      --brand-light: #6366f1;
+      --accent: #7c3aed;
+      --accent-light: #8b5cf6;
+      --success: #ef7c8e;
+      --success-light: #ffe8e3;
+      --ink: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition: 0.25s ease;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0; padding:0;
+      font-family:'Inter',system-ui,Segoe UI,Roboto,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);
+      line-height:1.6;
+      scroll-behavior:smooth;
+    }
+
+    .container{max-width:1200px;margin:0 auto;padding:2rem 1.25rem}
+    .section{margin-bottom:2rem}
+    .card{
+      background:var(--bg-primary);
+      border:1px solid var(--border-light);
+      border-radius:var(--radius-lg);
+      padding:2rem;
+      box-shadow:var(--shadow-md);
+    }
+
+    /* Header */
+    .header{
+      background:linear-gradient(135deg,var(--bg-primary),var(--bg-secondary));
+      border:2px solid var(--border-light);
+      border-left:6px solid var(--brand);
+      border-radius:var(--radius-lg);
+      padding:2.25rem;
+      text-align:center;
+      box-shadow:var(--shadow-lg);
+      margin-bottom:2rem;
+    }
+    h1{font-family:'Crimson Text',serif;font-size:2.4rem;color:var(--brand);margin:0 0 .75rem}
+    .text-sm{font-size:.9rem;color:var(--text-muted)}
+    .header-links{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+    .header-link{display:inline-flex;gap:.5rem;align-items:center;padding:.6rem 1rem;border:1px solid var(--border-light);border-radius:10px;background:#fff;box-shadow:var(--shadow-sm);text-decoration:none}
+    .header-link:hover{border-color:var(--brand)}
+
+    /* Flip cards */
+    .flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1rem}
+    @media (max-width:1024px){.flip-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:768px){.flip-grid{grid-template-columns:1fr}}
+    .flip-card{perspective:1200px;height:500px;cursor:pointer}
+    .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.175,.885,.32,1.275)}
+    .flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+    .flip-front,.flip-back{
+      position:absolute;inset:0;background:#fff;border-radius:14px;border:2px solid var(--border-light);
+      box-shadow:var(--shadow-lg);padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;backface-visibility:hidden;overflow:auto;font-size:.95rem
+    }
+    .flip-front{border-top:6px solid var(--brand)}
+    .flip-back{border-top:6px solid var(--accent);transform:rotateY(180deg)}
+    .flip-badge{align-self:flex-start;background:linear-gradient(135deg,var(--brand),var(--brand-light));color:#fff;padding:.4rem .8rem;border-radius:999px;font-weight:600}
+    .translation-btn{align-self:flex-start;padding:.45rem .8rem;border:1px solid var(--border-medium);border-radius:10px;background:var(--bg-secondary);cursor:pointer}
+    .translation-btn.active,.translation-btn:hover{background:var(--brand);color:#fff}
+    .quote{font-family:'Crimson Text',serif;background:linear-gradient(135deg,#e0e7ff,#ddd6fe);border:2px solid var(--brand);border-radius:10px;padding:1rem}
+    .translation{display:none;background:var(--success-light);border-left:4px solid var(--success);padding:1rem;border-radius:10px}
+    .attribution{font-size:.8rem;color:var(--text-muted);background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:10px;padding:.6rem;margin-top:auto}
+    .flip-hint{font-size:.8rem;color:var(--text-light);text-align:center;margin-top:auto}
+
+    /* Notes textarea */
+    .notes-textarea{
+      width:100%;min-height:200px;border:2px solid var(--border-light);border-radius:12px;padding:1rem;background:#fffaf9
+    }
+    .notes-status{display:inline-flex;gap:.5rem;align-items:center;margin-top:.6rem;padding:.4rem .8rem;background:var(--success);color:#fff;border-radius:8px;opacity:0;transition:opacity .3s}
+    .notes-status.show{opacity:1}
+
+    /* Poster Studio */
+    .toolbar{
+      display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-bottom:1rem;padding:1rem;background:var(--bg-secondary);
+      border:1px solid var(--border-light);border-radius:12px
+    }
+    .toolbar-group{display:flex;gap:.6rem;align-items:center;padding:.6rem .8rem;background:#fff;border:1px solid var(--border-light);border-radius:10px;box-shadow:var(--shadow-sm)}
+    .btn{border:1px solid var(--border-medium);background:#fff;padding:.6rem .9rem;border-radius:10px;cursor:pointer}
+    .btn:hover{background:var(--bg-tertiary)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;border:none}
+    .btn-primary:hover{filter:brightness(.98)}
+    .size-display{min-width:44px;text-align:right}
+
+    /* Canvas wrapper with aspect-ratio */
+    .canvas-outer{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);border:2px solid var(--border-light);background:#fff}
+    .canvas-outer::before{content:"";display:block;aspect-ratio:1200/720;width:100%} /* keeps ratio responsive */
+    .canvas-stack{position:absolute;inset:0}
+    canvas{display:block;width:100%;height:100%}
+
+    /* Layer order */
+    #drawCanvas{z-index:1;position:absolute;inset:0;cursor:crosshair}
+    #mediaCanvas{z-index:2;position:absolute;inset:0;cursor:grab}
+    #notesCanvas{z-index:3;position:absolute;inset:0;cursor:grab}
+
+    .note-hint{font-size:.8rem;color:var(--text-light);margin-top:.4rem}
+
+    /* Step indicator & checklist */
+    .step-indicator{display:inline-flex;justify-content:center;align-items:center;width:2rem;height:2rem;background:var(--brand);color:#fff;border-radius:50%;font-weight:700;margin-right:.6rem}
+    .checklist{list-style:none;padding:0;margin:1rem 0}
+    .checklist li{display:flex;gap:.8rem;align-items:flex-start;padding:1rem;background:var(--success-light);border-left:4px solid var(--success);border-radius:12px;margin-bottom:.6rem}
+    .checklist li::before{content:"✔";display:inline-flex;justify-content:center;align-items:center;background:var(--success);color:#fff;width:1.4rem;height:1.4rem;border-radius:50%;font-weight:700}
+
+    /* Cultural note */
+    .cultural-note{background:linear-gradient(135deg,#ffe8e3,#f1f5f9);border-left:6px solid var(--success);border-radius:14px;padding:1.5rem}
+    .references-toggle{margin-top:.6rem;padding:.55rem .9rem;border-radius:10px;border:2px solid var(--success);background:var(--success-light);cursor:pointer}
+    .references-content{display:none;margin-top:.6rem;padding:1rem;border:1px solid var(--success);border-radius:10px;background:#fff}
+
+    /* Footer */
+    .footer{background:linear-gradient(135deg,#1e293b,#0f172a);color:#cbd5e1;padding:2rem;text-align:center;border-radius:14px;border:2px solid #334155;margin-top:2rem}
+
+    /* Accessibility */
+    button:focus,input:focus,textarea:focus,.flip-card:focus{outline:2px solid var(--brand);outline-offset:2px}
+    @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+  </style>
 </head>
 <body>
-<div class="container">
-  <h1>🌽 Tradiciones Culinarias Mexicanas</h1>
-
-  <div class="card">
-    <h2 style="margin:0 0 .75rem">5) Poster Studio – Síntesis visual</h2>
-    <p class="hint">Consejo: haz <strong>clic y arrastra</strong> sobre una imagen o un post-it para moverlos; haz clic en un área vacía para <strong>dibujar</strong>. Doble clic en un post-it abre sus enlaces.</p>
-
-    <div class="toolbar">
-      <div class="group">
-        <label>Color</label>
-        <input type="color" id="color" value="#4f46e5">
+  <div class="container">
+    <header class="header">
+      <h1>🌽 Exploring Mexican Culinary Heritage</h1>
+      <p class="text-sm">Lee testimonios, investiga, toma notas y crea un póster con dibujos, imágenes y post-its.</p>
+      <div class="header-links">
+        <a class="header-link" target="_blank" rel="noopener" href="https://www.spanish-learning-edge.com/post/mexican-food-traditions-an-enduring-heritage">📖 Related Blog Post</a>
       </div>
-      <div class="group">
-        <label>Tamaño</label>
-        <input type="range" id="size" min="2" max="50" value="8" style="width:120px">
-        <span id="sizeOut">8px</span>
+    </header>
+
+    <!-- Step 1 & 2 -->
+    <section class="section card">
+      <h2><span class="step-indicator">1</span>Testimonios</h2>
+      <p class="text-sm">Lee cada cita en español. Usa “Show English” si lo necesitas.</p>
+
+      <h2 style="margin-top:1rem;"><span class="step-indicator">2</span>Elige UN tema</h2>
+      <p class="text-sm">Haz clic en cualquier tarjeta para voltear y ver preguntas + fuentes.</p>
+
+      <div class="flip-grid">
+        <!-- Café -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Café Veracruz">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="flip-badge">☕ Café Veracruz</span>
+              <button class="translation-btn" data-trans="cafe">Show English</button>
+              <div class="quote">"El cambio climático está afectando nuestros patrones de cosecha... El café de sombra nos ayuda a proteger la biodiversidad mientras mantenemos viva nuestra tradición."</div>
+              <div class="translation" id="trans-cafe">"Climate change is affecting our harvest patterns... Shade-grown coffee helps protect biodiversity while we keep our tradition alive."</div>
+              <div class="attribution"><strong>Attribution:</strong> Coatepec, Veracruz Producer. MDPI <em>Sustainability</em>, 2024 (CC BY 4.0).</div>
+              <div class="flip-hint">Click to reveal ↻</div>
+            </div>
+            <div class="flip-back">
+              <h3>🌱 Economic Sustainability</h3>
+              <ul>
+                <li>¿Cómo generan estabilidad económica las cooperativas?</li>
+                <li>¿Qué mecanismos (sellos, ferias) lo hacen viable?</li>
+              </ul>
+              <div class="references-content" style="display:block;background:#f8fafc;border-color:#e5e7eb">
+                <strong>Links</strong>
+                <ul style="list-style:none;padding-left:0">
+                  <li><a target="_blank" rel="noopener" href="https://www.gob.mx/se/articulos/sabias-que-el-cafe-veracruz-tiene-denominacion-de-origen">SE — DO Café Veracruz</a></li>
+                  <li><a target="_blank" rel="noopener" href="https://www.mdpi.com/2071-1050/16/2/802">MDPI — Veracruz Coffee</a></li>
+                </ul>
+              </div>
+              <div class="flip-hint">Click to flip back ↻</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pan -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Pan de Fiesta">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="flip-badge">🍞 Pan de Fiesta</span>
+              <button class="translation-btn" data-trans="pan">Show English</button>
+              <div class="quote">"Esta tradición tiene 307 años... no es solo pan—es nuestra forma de crear redes de reciprocidad."</div>
+              <div class="translation" id="trans-pan">"This tradition has been in our community for 307 years... reciprocity networks."</div>
+              <div class="attribution"><strong>Attribution:</strong> San Juan Huactzinco. Registros públicos.</div>
+              <div class="flip-hint">Click to reveal ↻</div>
+            </div>
+            <div class="flip-back">
+              <h3>🤝 Indigenous Reciprocity</h3>
+              <ul>
+                <li>¿Dónde aparece la reciprocidad (trabajo/fiesta/trueque)?</li>
+                <li>¿Qué responsabilidades acompañan los beneficios?</li>
+              </ul>
+              <div class="references-content" style="display:block;background:#f8fafc;border-color:#e5e7eb">
+                <strong>Links</strong>
+                <ul style="list-style:none;padding-left:0">
+                  <li><a target="_blank" rel="noopener" href="https://ich.unesco.org/en/RL/traditional-mexican-cuisine-00400">UNESCO — Mexican Cuisine</a></li>
+                  <li><a target="_blank" rel="noopener" href="https://huactzinco.gob.mx/cultura/pan-de-fiesta/">Huactzinco — Pan de Fiesta</a></li>
+                </ul>
+              </div>
+              <div class="flip-hint">Click to flip back ↻</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amaranto -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Amaranto">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="flip-badge">🌾 Amaranto</span>
+              <button class="translation-btn" data-trans="amaranto">Show English</button>
+              <div class="quote">"En la época prehispánica, el amaranto conectaba a nuestros ancestros con los dioses... preservamos 6,000 años de historia."</div>
+              <div class="translation" id="trans-amaranto">"Amaranth connected ancestors with the gods... we preserve 6,000 years of history."</div>
+              <div class="attribution"><strong>Attribution:</strong> Temoac/Huazulco, Morelos. Informes académicos.</div>
+              <div class="flip-hint">Click to reveal ↻</div>
+            </div>
+            <div class="flip-back">
+              <h3>✊ Cultural Resistance</h3>
+              <ul>
+                <li>¿Cómo resisten a la homogeneización/globalización?</li>
+                <li>¿Qué elementos son irrenunciables para la identidad?</li>
+              </ul>
+              <div class="references-content" style="display:block;background:#f8fafc;border-color:#e5e7eb">
+                <strong>Links</strong>
+                <ul style="list-style:none;padding-left:0">
+                  <li><a target="_blank" rel="noopener" href="https://mediateca.inah.gob.mx/">Mediateca INAH</a></li>
+                  <li><a target="_blank" rel="noopener" href="https://www.nativeseeds.org/products/c020">Native Seeds — Huazulco</a></li>
+                </ul>
+              </div>
+              <div class="flip-hint">Click to flip back ↻</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button class="btn" id="undoBtn">↶ Undo</button>
-      <button class="btn" id="clearBtn">🗑️ Limpiar</button>
+    </section>
 
-      <input id="imgInput" type="file" accept="image/*" style="display:none">
-      <button class="btn" id="imgBtn">🖼️ Añadir imagen</button>
+    <!-- Step 3 -->
+    <section class="section card">
+      <h2><span class="step-indicator">3</span>Apuntes de investigación</h2>
+      <textarea id="notesBox" class="notes-textarea" placeholder="Evidencia → Análisis → Comparación local…"></textarea>
+      <div class="notes-status" id="notesStatus">💾 Guardado automático</div>
+    </section>
 
-      <div class="group">
-        <label>Mini Post-it</label>
-        <input id="noteText" type="text" placeholder="Texto o enlace…"
-               style="min-width:220px;padding:.45rem;border:1px solid var(--border);border-radius:8px">
-        <select id="noteSize" style="padding:.35rem;border:1px solid var(--border);border-radius:8px">
-          <option value="14">Pequeño</option>
-          <option value="16" selected>Mediano</option>
-          <option value="20">Grande</option>
-        </select>
-        <select id="noteColor" style="padding:.35rem;border:1px solid var(--border);border-radius:8px">
-          <option value="0" selected>Amarillo</option>
-          <option value="1">Azul</option>
-          <option value="2">Oro</option>
-          <option value="3">Rosa</option>
-          <option value="4">Lavanda</option>
-        </select>
-        <button class="btn" id="noteBtn">🗒️ Colocar nota</button>
+    <!-- Cultural note -->
+    <section class="section cultural-note">
+      <h3>🌡️ Nota cultural — Retos actuales</h3>
+      <p>Comunidades enfrentan presiones de cambio climático, globalización y desplazamiento cultural. Productores de café encaran lluvias erráticas; panaderos compiten con industria; artesanos del amaranto compiten con mercados masivos.</p>
+      <button class="references-toggle" onclick="toggleReferences()">📚 Ver fuentes <span id="toggle-icon">▼</span></button>
+      <div id="references-content" class="references-content">
+        <div class="text-sm">
+          Cabrera-Torres, J. et al., <em>Sustainability</em> (2024); UNESCO ICH (2010); Mediateca INAH; Native Seeds/Search; Secretaría de Cultura (MX); etc.
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4 Poster Studio -->
+    <section class="section card">
+      <h2><span class="step-indicator">4</span>Poster Studio: Collage Visual</h2>
+      <p class="text-sm">✏️ Dibuja en la capa inferior. 🖼️ Arrastra imágenes (siempre activo). 🗒️ Añade post-its y muévelos libremente.</p>
+
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <label>Color</label>
+          <input type="color" id="colorPicker" value="#4f46e5">
+        </div>
+        <div class="toolbar-group">
+          <label>Tamaño</label>
+          <input type="range" id="brushSize" min="2" max="50" value="8" style="width:110px">
+          <span class="size-display" id="sizeDisplay">8px</span>
+        </div>
+        <button class="btn" id="penTool">✏️ Pen</button>
+        <button class="btn" id="eraserTool">🧽 Eraser</button>
+        <button class="btn" onclick="undoLast()">↶ Undo</button>
+        <button class="btn" id="clearAllBtn" onclick="clearAll()">🗑️ Clear All</button>
+
+        <input type="file" id="imageUpload" accept="image/*" style="display:none">
+        <button class="btn" onclick="document.getElementById('imageUpload').click()">🖼️ Add Image</button>
+
+        <div class="toolbar-group">
+          <label>Mini Post-it</label>
+          <input id="noteText" type="text" placeholder="Escribe un tip o pega un link…" style="padding:.45rem .6rem;border:1px solid var(--border-light);border-radius:8px;min-width:220px">
+          <select id="noteSize" style="padding:.4rem;border:1px solid var(--border-light);border-radius:8px">
+            <option value="14">Pequeño</option>
+            <option value="16" selected>Mediano</option>
+            <option value="20">Grande</option>
+          </select>
+          <select id="noteColor" style="padding:.4rem;border:1px solid var(--border-light);border-radius:8px" title="Color">
+            <option value="0" selected>Amarillo</option>
+            <option value="1">Azul</option>
+            <option value="2">Oro</option>
+            <option value="3">Rosa</option>
+            <option value="4">Lila</option>
+          </select>
+          <button class="btn" onclick="activateNoteMode()">🗒️ Add Note</button>
+        </div>
+
+        <button class="btn btn-primary" onclick="savePoster(event)">💾 Guardar PNG</button>
       </div>
 
-      <button class="btn primary" id="saveBtn">💾 Guardar PNG</button>
-    </div>
+      <div class="canvas-outer">
+        <div class="canvas-stack">
+          <canvas id="drawCanvas" width="1200" height="720"></canvas>
+          <canvas id="mediaCanvas" width="1200" height="720"></canvas>
+          <canvas id="notesCanvas" width="1200" height="720"></canvas>
+        </div>
+      </div>
+      <p class="note-hint" id="noteHint" style="display:none">Tip: haz clic en el lienzo para colocar el post-it. Doble clic en un post-it con link para abrirlo. Esc para cancelar.</p>
+    </section>
 
-    <div class="canvas-wrap" id="stageWrap" style="aspect-ratio:1200/720">
-      <!-- capa imágenes (1) + dibujo (2) + notas (3) -->
-      <canvas id="media"  class="stage" width="1200" height="720"></canvas>
-      <canvas id="draw"   class="stage" width="1200" height="720"></canvas>
-      <canvas id="notes"  class="stage" width="1200" height="720"></canvas>
-    </div>
-    <p class="hint" id="noteHint" style="display:none">Haz clic en el lienzo para añadir tu nota. Esc para cancelar.</p>
+    <!-- Step 5 -->
+    <section class="section card">
+      <h2><span class="step-indicator">5</span>Presenta tus hallazgos</h2>
+      <ul class="checklist">
+        <li>Explica tu análisis (sostenibilidad/reciprocidad/resistencia).</li>
+        <li>Cita una fuente sólida y por qué es confiable.</li>
+        <li>Conecta con una práctica de tu familia/comunidad/país.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p><strong>Reconocimiento Cultural:</strong> Este conocimiento pertenece a las comunidades mexicanas que lo mantienen vivo.</p>
+      <p class="text-sm" style="margin-top:.6rem">© 2025 Spanish Learning Edge LLC.</p>
+    </footer>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0">Notas de investigación</h3>
-    <textarea id="longNotes" class="notes-text" placeholder="Evidencia → Análisis → Conexiones locales…"></textarea>
-    <span id="notesSaved" class="notes-ok">💾 Guardado</span>
-  </div>
-</div>
+  <script>
+    /* ---------- Flip cards ---------- */
+    document.querySelectorAll('.flip-card').forEach(card=>{
+      card.addEventListener('click',e=>{
+        if (e.target.closest('button,a')) return;
+        card.classList.toggle('is-flipped');
+      });
+      card.addEventListener('keydown',e=>{
+        if (e.key==='Enter'||e.key===' '){
+          e.preventDefault(); card.classList.toggle('is-flipped');
+        }
+      });
+    });
+    document.querySelectorAll('.translation-btn').forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        e.stopPropagation();
+        const box=document.getElementById('trans-'+btn.dataset.trans);
+        if(!box) return;
+        const on=box.style.display==='block';
+        box.style.display=on?'none':'block';
+        btn.classList.toggle('active',!on);
+        btn.textContent=on?'Show English':'Hide English';
+      });
+    });
 
-<script>
-/* ===================== Util/Metrics ===================== */
-const wrap = document.getElementById('stageWrap');
-const mediaCanvas = document.getElementById('media');
-const drawCanvas  = document.getElementById('draw');
-const notesCanvas = document.getElementById('notes');
-const mctx = mediaCanvas.getContext('2d');
-const dctx = drawCanvas.getContext('2d', { willReadFrequently:true });
-const nctx = notesCanvas.getContext('2d');
+    /* ---------- Notes autosave ---------- */
+    const notesBox=document.getElementById('notesBox');
+    const notesStatus=document.getElementById('notesStatus');
+    let saveT;
+    if (notesBox){
+      const saved=localStorage.getItem('mexican_heritage_notes');
+      if (saved) notesBox.value=saved;
+      notesBox.addEventListener('input',()=>{
+        clearTimeout(saveT);
+        saveT=setTimeout(()=>{
+          localStorage.setItem('mexican_heritage_notes',notesBox.value);
+          notesStatus.classList.add('show');
+          setTimeout(()=>notesStatus.classList.remove('show'),1200);
+        },400);
+      });
+    }
 
-function getPos(evt){
-  const r = wrap.getBoundingClientRect();
-  const scaleX = 1200 / r.width;        // coords lógicas
-  const scaleY = 720  / r.height;
-  const cX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-  const cY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-  return { x:(cX-r.left)*scaleX, y:(cY-r.top)*scaleY };
-}
+    /* ---------- References toggle ---------- */
+    function toggleReferences(){
+      const c=document.getElementById('references-content');
+      const i=document.getElementById('toggle-icon');
+      const on=c.classList.contains('show');
+      c.classList.toggle('show');
+      i.textContent=on?'▼':'▲';
+    }
+    window.toggleReferences=toggleReferences;
 
-/* ===================== Dibujo ===================== */
-const color = document.getElementById('color');
-const size = document.getElementById('size');
-const sizeOut = document.getElementById('sizeOut');
-size.addEventListener('input', ()=> sizeOut.textContent = size.value+'px');
+    /* ===========================================================
+       Poster Studio — 3 capas: draw (abajo), media (medio), notes (arriba)
+       Drag SIEMPRE activo en media/notes. Dibujo en capa inferior.
+       =========================================================== */
 
-dctx.fillStyle = '#fff'; dctx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
-let isDrawing=false, last={x:0,y:0};
-let history=[], step=-1;
-function saveState(){ step++; if(step<history.length) history.length=step; history.push(drawCanvas.toDataURL()); if(history.length>20){history.shift(); step--;}}
-saveState();
+    // Canvases & contexts
+    const drawCanvas  = document.getElementById('drawCanvas');
+    const mediaCanvas = document.getElementById('mediaCanvas');
+    const notesCanvas = document.getElementById('notesCanvas');
+    const drawCtx  = drawCanvas.getContext('2d', {willReadFrequently:true});
+    const mediaCtx = mediaCanvas.getContext('2d');
+    const notesCtx = notesCanvas.getContext('2d');
 
-function startDraw(p){ isDrawing=true; last=p; dctx.lineCap='round'; dctx.lineJoin='round'; dctx.lineWidth=parseInt(size.value,10); dctx.globalCompositeOperation='source-over'; dctx.strokeStyle=color.value; }
-function moveDraw(p){ if(!isDrawing) return; dctx.beginPath(); dctx.moveTo(last.x,last.y); dctx.lineTo(p.x,p.y); dctx.stroke(); last=p; }
-function endDraw(){ if(isDrawing){ isDrawing=false; saveState(); } }
-document.getElementById('undoBtn').onclick=function(){ if(step>0){ step--; const img=new Image(); img.onload=()=>{ dctx.clearRect(0,0,1200,720); dctx.drawImage(img,0,0); }; img.src=history[step]; } };
-document.getElementById('clearBtn').onclick=function(){ if(!confirm('¿Limpiar todo el póster?')) return; dctx.globalCompositeOperation='source-over'; dctx.clearRect(0,0,1200,720); dctx.fillStyle='#fff'; dctx.fillRect(0,0,1200,720); saveState(); images=[]; renderMedia(); notes=[]; renderNotes(); };
+    // Init: fondo blanco
+    drawCtx.fillStyle = '#fff';
+    drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
 
-/* ===================== Imágenes arrastrables ===================== */
-let images=[]; // {img,w,h,x,y}
-function renderMedia(){ mctx.clearRect(0,0,1200,720); images.forEach(o=> mctx.drawImage(o.img,o.x,o.y,o.w,o.h)); }
-document.getElementById('imgBtn').onclick=()=>document.getElementById('imgInput').click();
-document.getElementById('imgInput').addEventListener('change',e=>{
-  const f=e.target.files[0]; if(!f) return;
-  const rd=new FileReader();
-  rd.onload=ev=>{
-    const im=new Image();
-    im.onload=()=>{
-      const max=360; let w=im.width,h=im.height; const r=Math.min(max/w,max/h,1); w=Math.round(w*r); h=Math.round(h*r);
-      const x=(1200-w)/2, y=(720-h)/2;
-      images.push({img:im,w,h,x,y}); renderMedia();
+    // UI elements
+    const colorPicker = document.getElementById('colorPicker');
+    const brushSize   = document.getElementById('brushSize');
+    const sizeDisplay = document.getElementById('sizeDisplay');
+    const penTool     = document.getElementById('penTool');
+    const eraserTool  = document.getElementById('eraserTool');
+
+    sizeDisplay.textContent = brushSize.value + 'px';
+    brushSize.addEventListener('input', ()=> sizeDisplay.textContent = brushSize.value + 'px');
+
+    let currentTool='pen';
+    function setTool(tool){
+      currentTool = tool;
+      penTool.classList.toggle('active', tool==='pen');
+      eraserTool.classList.toggle('active', tool==='eraser');
+      // Drag SIEMPRE habilitado en media/notes; cursores amigables:
+      drawCanvas.style.cursor = tool==='pen' ? 'crosshair' : 'crosshair';
+      mediaCanvas.style.cursor = 'grab';
+      notesCanvas.style.cursor = 'grab';
+    }
+    penTool.addEventListener('click',()=>setTool('pen'));
+    eraserTool.addEventListener('click',()=>setTool('eraser'));
+    setTool('pen');
+
+    // Helpers: posición escalada
+    function getPos(canvas, evt){
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width  / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (evt.clientX - rect.left) * scaleX;
+      const y = (evt.clientY - rect.top)  * scaleY;
+      return {x,y};
+    }
+
+    /* ---------- Dibujo (solo en drawCanvas) ---------- */
+    let isDrawing=false, lastPoint={x:0,y:0};
+    let history=[], step=-1;
+    function saveDrawState(){
+      step++;
+      if (step < history.length) history.length = step;
+      history.push(drawCanvas.toDataURL());
+      if (history.length>20){ history.shift(); step--; }
+    }
+    saveDrawState();
+
+    drawCanvas.addEventListener('pointerdown',e=>{
+      if (!(currentTool==='pen' || currentTool==='eraser')) return;
+      isDrawing=true; drawCanvas.setPointerCapture(e.pointerId);
+      lastPoint=getPos(drawCanvas,e);
+      drawCtx.lineCap='round'; drawCtx.lineJoin='round'; drawCtx.lineWidth=parseInt(brushSize.value,10);
+      if (currentTool==='pen'){ drawCtx.globalCompositeOperation='source-over'; drawCtx.strokeStyle=colorPicker.value; }
+      else { drawCtx.globalCompositeOperation='destination-out'; }
+    });
+    drawCanvas.addEventListener('pointermove',e=>{
+      if (!isDrawing) return;
+      const p=getPos(drawCanvas,e);
+      drawCtx.beginPath(); drawCtx.moveTo(lastPoint.x,lastPoint.y); drawCtx.lineTo(p.x,p.y); drawCtx.stroke();
+      lastPoint=p;
+    });
+    function endDraw(){ if (isDrawing){ isDrawing=false; saveDrawState(); } }
+    drawCanvas.addEventListener('pointerup',endDraw);
+    drawCanvas.addEventListener('pointercancel',endDraw);
+    window.undoLast = function(){
+      if (step>0){ step--; const img=new Image(); img.onload=()=>{ drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height); drawCtx.drawImage(img,0,0); }; img.src=history[step]; }
     };
-    im.src=ev.target.result;
-  };
-  rd.readAsDataURL(f); e.target.value='';
-});
 
-/* ===================== Post-its arrastrables ===================== */
-const PAL = [
-  {bg:'#fff8c5', border:'#facc15'},
-  {bg:'#e0f2fe', border:'#38bdf8'},
-  {bg:'#fde68a', border:'#f59e0b'},
-  {bg:'#fee2e2', border:'#f87171'},
-  {bg:'#e9d5ff', border:'#a78bfa'}
-];
-const urlRx=/\bhttps?:\/\/[^\s)]+/gi;
-let notes=[]; // {x,y,w,h,text,font,bg,border,urls}
-const noteText=document.getElementById('noteText');
-const noteSize=document.getElementById('noteSize');
-const noteColor=document.getElementById('noteColor');
-const noteBtn=document.getElementById('noteBtn');
-const noteHint=document.getElementById('noteHint');
-let noteArm=false;
+    /* ---------- Imágenes arrastrables (mediaCanvas) ---------- */
+    let images=[]; // {img,w,h,x,y}
+    let draggingImg=null;
 
-function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-function wrapText(ctx, t, max){const ws=t.split(' ');let line='',out=[];for(let i=0;i<ws.length;i++){const test=line+ws[i]+' '; if(ctx.measureText(test).width>max&&i>0){out.push(line.trim());line=ws[i]+' ';}else{line=test;}} if(line) out.push(line.trim()); return out;}
-function renderNotes(){
-  nctx.clearRect(0,0,1200,720);
-  notes.forEach(n=>{
-    nctx.save();
-    nctx.shadowColor='rgba(0,0,0,.14)'; nctx.shadowBlur=8; nctx.shadowOffsetX=2; nctx.shadowOffsetY=3;
-    nctx.fillStyle=n.bg; nctx.strokeStyle=n.border; nctx.lineWidth=2;
-    rrect(nctx,n.x,n.y,n.w,n.h,10); nctx.fill(); nctx.stroke();
-    nctx.shadowColor='transparent';
-    nctx.fillStyle='#111827'; nctx.font=`bold ${n.font}px Inter`;
-    const pad=12, lh=Math.round(n.font*1.35), lines=wrapText(nctx,n.text,n.w-pad*2);
-    lines.forEach((ln,i)=> nctx.fillText(ln,n.x+pad,n.y+pad+n.font+i*lh));
-    if(n.urls?.length){ nctx.fillText('🔗', n.x+n.w-24, n.y+n.h-10); }
-    nctx.restore();
-  });
-}
-function placeNote(x,y,txt,font){
-  const pad=12, maxW=260;
-  nctx.save(); nctx.font=`bold ${font}px Inter`;
-  const lines=wrapText(nctx,txt,maxW); const lh=Math.round(font*1.35);
-  const w=maxW+pad*2, h=lines.length*lh+pad*2;
-  if(x+w>1200) x=1200-w-6; if(y+h>720) y=720-h-6;
-  const pal=PAL[parseInt(noteColor.value,10)]||PAL[0];
-  notes.push({x,y,w,h,text:txt,font,bg:pal.bg,border:pal.border,urls:(txt.match(urlRx)||[]).slice(0,5)});
-  nctx.restore(); renderNotes();
-}
-noteBtn.onclick=()=>{ if(!noteText.value.trim()){noteText.focus(); return;} noteArm=true; noteHint.style.display='block'; };
-window.addEventListener('keydown',e=>{ if(e.key==='Escape' && noteArm){ noteArm=false; noteHint.style.display='none'; }});
-
-/* ===================== Interacción unificada (drag o dibujar) ===================== */
-let dragging = null; // {type:'img'|'note', index, offX, offY}
-wrap.addEventListener('pointerdown',e=>{
-  const p=getPos(e);
-  // 1) si estamos armando nota → colocar
-  if(noteArm){ placeNote(p.x,p.y,noteText.value.trim(), parseInt(noteSize.value,10)||16); noteArm=false; noteHint.style.display='none'; return; }
-  // 2) buscar nota topmost
-  for(let i=notes.length-1;i>=0;i--){
-    const n=notes[i];
-    if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
-      const picked=notes.splice(i,1)[0]; notes.push(picked);
-      dragging={type:'note', index:notes.length-1, offX:p.x-picked.x, offY:p.y-picked.y};
-      wrap.setPointerCapture(e.pointerId); return;
+    function renderMedia(){
+      mediaCtx.clearRect(0,0,mediaCanvas.width,mediaCanvas.height);
+      images.forEach(o=> mediaCtx.drawImage(o.img,o.x,o.y,o.w,o.h));
     }
-  }
-  // 3) buscar imagen topmost
-  for(let i=images.length-1;i>=0;i--){
-    const o=images[i];
-    if(p.x>=o.x && p.x<=o.x+o.w && p.y>=o.y && p.y<=o.y+o.h){
-      const picked=images.splice(i,1)[0]; images.push(picked);
-      dragging={type:'img', index:images.length-1, offX:p.x-picked.x, offY:p.y-picked.y};
-      wrap.setPointerCapture(e.pointerId); return;
-    }
-  }
-  // 4) si no tocamos nada → dibujar
-  startDraw(p); wrap.setPointerCapture(e.pointerId);
-});
 
-wrap.addEventListener('pointermove',e=>{
-  const p=getPos(e);
-  if(dragging){
-    if(dragging.type==='img'){
-      const o=images[dragging.index];
-      o.x=Math.max(0, Math.min(p.x-dragging.offX, 1200-o.w));
-      o.y=Math.max(0, Math.min(p.y-dragging.offY, 720-o.h));
-      renderMedia();
-    }else{
-      const n=notes[dragging.index];
-      n.x=Math.max(4, Math.min(p.x-dragging.offX, 1200-n.w-4));
-      n.y=Math.max(4, Math.min(p.y-dragging.offY, 720-n.h-4));
-      renderNotes();
-    }
-  }else if(isDrawing){ moveDraw(p); }
-});
+    document.getElementById('imageUpload').addEventListener('change',e=>{
+      const file=e.target.files[0]; if(!file) return;
+      const reader=new FileReader();
+      reader.onload=ev=>{
+        const img=new Image();
+        img.onload=()=>{
+          const maxW=360,maxH=360; let w=img.width,h=img.height;
+          if (w>maxW || h>maxH){ const r=Math.min(maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); }
+          const x=Math.round((mediaCanvas.width - w)/2), y=Math.round((mediaCanvas.height - h)/2);
+          images.push({img,w,h,x,y}); renderMedia();
+        };
+        img.src=ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value='';
+    });
 
-function endAll(){ if(dragging){ dragging=null; } endDraw(); }
-wrap.addEventListener('pointerup',endAll);
-wrap.addEventListener('pointercancel',endAll);
-wrap.addEventListener('dblclick',e=>{
-  const p=getPos(e);
-  for(let i=notes.length-1;i>=0;i--){
-    const n=notes[i];
-    if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
-      if(!n.urls?.length) return;
-      if(n.urls.length===1){ window.open(n.urls[0],'_blank'); }
-      else{
-        const sel=prompt('¿Abrir cuál enlace?\n'+n.urls.map((u,i)=>`${i+1}. ${u}`).join('\n'));
-        const ix=parseInt(sel,10); if(!isNaN(ix)&&ix>=1&&ix<=n.urls.length) window.open(n.urls[ix-1],'_blank');
+    mediaCanvas.addEventListener('pointerdown',e=>{
+      const p=getPos(mediaCanvas,e);
+      for (let i=images.length-1;i>=0;i--){
+        const o=images[i];
+        if (p.x>=o.x && p.x<=o.x+o.w && p.y>=o.y && p.y<=o.y+o.h){
+          const picked=images.splice(i,1)[0]; images.push(picked);
+          draggingImg={ index:images.length-1, offX:p.x-picked.x, offY:p.y-picked.y };
+          mediaCanvas.setPointerCapture(e.pointerId);
+          mediaCanvas.style.cursor='grabbing';
+          renderMedia(); return;
+        }
       }
-      return;
+      draggingImg=null;
+    });
+    mediaCanvas.addEventListener('pointermove',e=>{
+      if (!draggingImg) return;
+      const p=getPos(mediaCanvas,e); const o=images[draggingImg.index];
+      o.x = Math.max(0, Math.min(p.x - draggingImg.offX, mediaCanvas.width  - o.w));
+      o.y = Math.max(0, Math.min(p.y - draggingImg.offY, mediaCanvas.height - o.h));
+      renderMedia();
+    });
+    function endDragImg(){ draggingImg=null; mediaCanvas.style.cursor='grab'; }
+    mediaCanvas.addEventListener('pointerup',endDragImg);
+    mediaCanvas.addEventListener('pointercancel',endDragImg);
+
+    /* ---------- Post-its arrastrables (notesCanvas) ---------- */
+    const NOTE_COLORS=[
+      {bg:'#fff8c5',border:'#facc15'},
+      {bg:'#e0f2fe',border:'#38bdf8'},
+      {bg:'#fde68a',border:'#f59e0b'},
+      {bg:'#fee2e2',border:'#f87171'},
+      {bg:'#e9d5ff',border:'#a78bfa'}
+    ];
+    const noteText=document.getElementById('noteText');
+    const noteSize=document.getElementById('noteSize');
+    const noteColor=document.getElementById('noteColor');
+    const noteHint=document.getElementById('noteHint');
+
+    let notes=[]; // {x,y,w,h,text,fontPx,bg,border,urls:[]}
+    let placingNote=false;
+    let draggingNote=null;
+    const urlRegex = /\bhttps?:\/\/[^\s)]+/gi;
+
+    function wrapLines(ctx,text,maxWidth){
+      const words=text.split(' '); let line=''; const lines=[];
+      for (let i=0;i<words.length;i++){
+        const test=line+words[i]+' ';
+        if (ctx.measureText(test).width>maxWidth && i>0){ lines.push(line.trim()); line=words[i]+' '; }
+        else line=test;
+      }
+      if (line) lines.push(line.trim());
+      return lines;
     }
-  }
-});
+    function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 
-/* ===================== Guardar PNG (fusiona capas) ===================== */
-document.getElementById('saveBtn').onclick=function(ev){
-  const merged=document.createElement('canvas'); merged.width=1200; merged.height=720;
-  const c=merged.getContext('2d'); c.drawImage(drawCanvas,0,0); images.forEach(o=>c.drawImage(o.img,o.x,o.y,o.w,o.h)); c.drawImage(notesCanvas,0,0);
-  const a=document.createElement('a'); a.download='poster.png'; a.href=merged.toDataURL('image/png',1.0); a.click();
-  const b=ev.target, t=b.textContent; b.textContent='✔ Guardado'; b.disabled=true; setTimeout(()=>{b.textContent=t; b.disabled=false;},1200);
-};
+    function renderNotes(){
+      notesCtx.clearRect(0,0,notesCanvas.width,notesCanvas.height);
+      notes.forEach((n,idx)=>{
+        notesCtx.save();
+        notesCtx.shadowColor='rgba(0,0,0,.15)'; notesCtx.shadowBlur=8; notesCtx.shadowOffsetX=2; notesCtx.shadowOffsetY=3;
+        notesCtx.fillStyle=n.bg; notesCtx.strokeStyle=n.border; notesCtx.lineWidth=2;
+        rrect(notesCtx,n.x,n.y,n.w,n.h,10); notesCtx.fill(); notesCtx.stroke();
+        // texto
+        notesCtx.shadowColor='transparent';
+        notesCtx.fillStyle='#111827'; notesCtx.font=`bold ${n.fontPx}px Inter,system-ui`;
+        const pad=12, lines=wrapLines(notesCtx,n.text,n.w-pad*2), lh=Math.round(n.fontPx*1.35);
+        lines.forEach((ln,i)=> notesCtx.fillText(ln,n.x+pad,n.y+pad+n.fontPx+i*lh));
+        // link hint
+        if (n.urls && n.urls.length) notesCtx.fillText('🔗', n.x+n.w-22, n.y+n.h-10);
+        // selección
+        if (draggingNote && draggingNote.index===idx){
+          notesCtx.setLineDash([6,4]); notesCtx.strokeStyle='#4f46e5';
+          rrect(notesCtx,n.x-2,n.y-2,n.w+4,n.h+4,12); notesCtx.stroke(); notesCtx.setLineDash([]);
+        }
+        notesCtx.restore();
+      });
+    }
 
-/* ===================== Notas largas autosave ===================== */
-const longNotes=document.getElementById('longNotes');
-const notesSaved=document.getElementById('notesSaved');
-let tmo=null;
-const KEY='mx_foodways_notes';
-const prev=localStorage.getItem(KEY); if(prev) longNotes.value=prev;
-longNotes.addEventListener('input',()=>{ clearTimeout(tmo); tmo=setTimeout(()=>{ localStorage.setItem(KEY,longNotes.value); notesSaved.classList.add('show'); setTimeout(()=>notesSaved.classList.remove('show'),1400); },500); });
+    function placeNote(x,y,text,fontPx){
+      const maxW=260, pad=12;
+      notesCtx.save(); notesCtx.font=`bold ${fontPx}px Inter,system-ui`;
+      const lines=wrapLines(notesCtx,text,maxW), lh=Math.round(fontPx*1.35);
+      const w=maxW+pad*2, h=lines.length*lh+pad*2;
+      if (x+w>notesCanvas.width)  x=notesCanvas.width - w - 8;
+      if (y+h>notesCanvas.height) y=notesCanvas.height - h - 8;
+      const pal=NOTE_COLORS[parseInt(noteColor.value,10)]||NOTE_COLORS[0];
+      const urls=(text.match(urlRegex)||[]).slice(0,5);
+      notes.push({x,y,w,h,text,fontPx,bg:pal.bg,border:pal.border,urls});
+      notesCtx.restore(); renderNotes();
+    }
 
-console.log('✅ Poster listo: draw + drag sin botón, imágenes y post-its arrastrables, responsive.');
-</script>
+    function activateNoteMode(){
+      if (!noteText.value.trim()){ noteText.focus(); noteText.placeholder='Escribe algo…'; return; }
+      placingNote=true; noteHint.style.display='block';
+      // drag sigue activo; cursor indicativo:
+      notesCanvas.style.cursor='copy';
+    }
+    window.activateNoteMode=activateNoteMode;
+
+    notesCanvas.addEventListener('pointerdown',e=>{
+      const p=getPos(notesCanvas,e); notesCanvas.setPointerCapture(e.pointerId);
+      if (placingNote){
+        const fontPx=parseInt(noteSize.value,10)||16;
+        placeNote(p.x,p.y,noteText.value.trim(),fontPx);
+        placingNote=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab';
+        return;
+      }
+      // pick top-most
+      for (let i=notes.length-1;i>=0;i--){
+        const n=notes[i];
+        if (p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
+          const picked=notes.splice(i,1)[0]; notes.push(picked);
+          draggingNote={ index:notes.length-1, offX:p.x-picked.x, offY:p.y-picked.y };
+          notesCanvas.style.cursor='grabbing'; renderNotes(); return;
+        }
+      }
+      draggingNote=null; renderNotes();
+    });
+    notesCanvas.addEventListener('pointermove',e=>{
+      if (!draggingNote) return;
+      const p=getPos(notesCanvas,e); const n=notes[draggingNote.index];
+      n.x=Math.max(4,Math.min(p.x-draggingNote.offX, notesCanvas.width  - n.w - 4));
+      n.y=Math.max(4,Math.min(p.y-draggingNote.offY, notesCanvas.height - n.h - 4));
+      renderNotes();
+    });
+    function endDragNote(){ draggingNote=null; notesCanvas.style.cursor='grab'; renderNotes(); }
+    notesCanvas.addEventListener('pointerup',endDragNote);
+    notesCanvas.addEventListener('pointercancel',endDragNote);
+
+    // Doble clic para abrir enlaces del post-it
+    notesCanvas.addEventListener('dblclick',e=>{
+      const p=getPos(notesCanvas,e);
+      for (let i=notes.length-1;i>=0;i--){
+        const n=notes[i];
+        if (p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
+          if (!n.urls || !n.urls.length) return;
+          if (n.urls.length===1) window.open(n.urls[0],'_blank');
+          else {
+            const choice=prompt('¿Qué enlace abrir?\n'+n.urls.map((u,ix)=>`${ix+1}. ${u}`).join('\n'));
+            const ix=parseInt(choice,10); if(!isNaN(ix)&&ix>=1&&ix<=n.urls.length) window.open(n.urls[ix-1],'_blank');
+          }
+          return;
+        }
+      }
+    });
+
+    // Esc cancela modo nota
+    window.addEventListener('keydown',e=>{
+      if (e.key==='Escape' && placingNote){
+        placingNote=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab';
+      }
+    });
+
+    /* ---------- Clear & Save ---------- */
+    function clearAll(){
+      if (!confirm('¿Borrar dibujo, imágenes y post-its?')) return;
+      // dibujo
+      drawCtx.globalCompositeOperation='source-over';
+      drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
+      drawCtx.fillStyle='#fff'; drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
+      history=[]; step=-1; saveDrawState();
+      // imágenes
+      images=[]; renderMedia();
+      // notas
+      notes=[]; renderNotes();
+      // feedback
+      const btn=document.getElementById('clearAllBtn'); const t=btn.textContent;
+      btn.textContent='✔ Cleared'; btn.disabled=true; setTimeout(()=>{btn.textContent=t; btn.disabled=false;},900);
+    }
+    window.clearAll=clearAll;
+
+    function savePoster(ev){
+      const merged=document.createElement('canvas');
+      merged.width=drawCanvas.width; merged.height=drawCanvas.height;
+      const mctx=merged.getContext('2d');
+      mctx.drawImage(drawCanvas,0,0);
+      images.forEach(o=> mctx.drawImage(o.img,o.x,o.y,o.w,o.h));
+      mctx.drawImage(notesCanvas,0,0);
+      const a=document.createElement('a');
+      a.download='mexican-culinary-heritage-poster.png';
+      a.href=merged.toDataURL('image/png',1.0); a.click();
+      const btn=ev.target, t=btn.textContent; btn.textContent='✔ Guardado'; btn.disabled=true; setTimeout(()=>{btn.textContent=t; btn.disabled=false;},1200);
+    }
+    window.savePoster=savePoster;
+
+    console.log('✅ Poster Studio listo: drag siempre activo (imágenes/post-its), dibujo estable.');
+  </script>
 </body>
 </html>
