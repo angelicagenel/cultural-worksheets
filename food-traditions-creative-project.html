@@ -5,134 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Exploring Mexican Culinary Heritage – Interactive Activity</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      --brand: #4f46e5;
-      --brand-light: #6366f1;
-      --accent: #7c3aed;
-      --accent-light: #8b5cf6;
-      --success: #ef7c8e;
-      --success-light: #ffe8e3;
-      --warning: #d97706;
-      --ink: #0f172a;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --bg-tertiary: #f1f5f9;
-      --border-light: #e2e8f0;
-      --border-medium: #cbd5e1;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --transition-fast: 0.15s ease-out;
-      --transition-medium: 0.25s ease-out;
-      --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --brand:#4f46e5; --brand-light:#6366f1; --accent:#7c3aed; --accent-light:#8b5cf6;
+      --success:#ef7c8e; --success-light:#ffe8e3; --warning:#d97706; --ink:#0f172a;
+      --text-muted:#64748b; --text-light:#94a3b8; --bg-primary:#ffffff; --bg-secondary:#f8fafc; --bg-tertiary:#f1f5f9;
+      --border-light:#e2e8f0; --border-medium:#cbd5e1;
+      --shadow-sm:0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+      --transition-fast:.15s ease-out; --transition-medium:.25s ease-out; --transition-slow:.35s cubic-bezier(0.4,0,0.2,1);
     }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--ink);
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      scroll-behavior: smooth;
-    }
-
-    /* Typography */
-    h1, h2, h3 { font-family: 'Crimson Text', serif; font-weight: 600; line-height: 1.2; margin: 0; }
-    h1 { font-size: 2.5rem; color: var(--brand); }
-    h2 { font-size: 1.875rem; color: var(--ink); margin-bottom: 1rem; }
-    h3 { font-size: 1.5rem; color: var(--brand); margin-bottom: 0.75rem; }
-    p { margin: 0 0 1rem; }
-    .text-sm { font-size: 0.875rem; color: var(--text-muted); }
-    .text-xs { font-size: 0.75rem; color: var(--text-light); }
-
-    a { color: var(--accent); text-decoration: none; transition: color var(--transition-fast); }
-    a:hover { color: var(--brand); }
-
-    /* Layout */
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .section { margin-bottom: 3rem; }
-
-    .card {
-      background: var(--bg-primary);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      transition: box-shadow var(--transition-medium);
-    }
-    .card:hover { box-shadow: var(--shadow-lg); }
-
-    /* Header */
-    .header {
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-      border: 2px solid var(--border-light);
-      border-left: 6px solid var(--brand);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      box-shadow: var(--shadow-xl);
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-    .header h1 { margin-bottom: 1rem; }
-    .header-links { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
-    .header-link {
-      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--bg-primary);
-      border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
-    }
-    .header-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--brand); }
-
-    /* Poster studio */
-    .toolbar {
-      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem;
-      padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-light);
-    }
-    .toolbar-group { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
-    .toolbar-group label { font-weight: 500; color: var(--text-muted); font-size: 0.875rem; }
-    .btn { appearance: none; border: 1px solid var(--border-medium); background: var(--bg-primary); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn:hover { background: var(--bg-tertiary); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn.active { background: var(--brand); color: white; border-color: var(--brand); }
-    .btn-primary { background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white; border: none; font-weight: 600; box-shadow: var(--shadow-md); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-    .canvas-wrapper { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-primary); box-shadow: var(--shadow-lg); border: 2px solid var(--border-light); }
-    #drawCanvas, #notesCanvas { width: 100%; height: auto; display: block; }
-    #drawCanvas { position: relative; z-index: 1; }
-    #notesCanvas { position: absolute; inset: 0; z-index: 2; cursor: crosshair; }
-
-    /* Footer */
-    .footer { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #cbd5e1; padding: 2.5rem; text-align: center; margin-top: 4rem; border-radius: var(--radius-lg); border: 2px solid #334155; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container { padding: 1rem; }
-      .header { padding: 2rem 1.5rem; text-align: center; }
-      .header h1 { font-size: 2rem; }
-      .toolbar { padding: 1rem; }
-      .toolbar-group { flex-wrap: wrap; }
-    }
-
-    /* Misc */
-    .loading { opacity: 0.7; pointer-events: none; }
-    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-    button:focus, input:focus, textarea:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--ink);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);scroll-behavior:smooth}
+    h1,h2,h3{font-family:'Crimson Text',serif;font-weight:600;line-height:1.2;margin:0}
+    h1{font-size:2.5rem;color:var(--brand)} h2{font-size:1.875rem;color:var(--ink);margin-bottom:1rem} h3{font-size:1.5rem;color:var(--brand);margin-bottom:.75rem}
+    p{margin:0 0 1rem} .text-sm{font-size:.875rem;color:var(--text-muted)} .text-xs{font-size:.75rem;color:var(--text-light)}
+    a{color:var(--accent);text-decoration:none;transition:color var(--transition-fast)} a:hover{color:var(--brand)}
+    .container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}
+    .section{margin-bottom:3rem}
+    .card{background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-md);transition:box-shadow var(--transition-medium)}
+    .card:hover{box-shadow:var(--shadow-lg)}
+    .header{background:linear-gradient(135deg,var(--bg-primary) 0%,var(--bg-secondary) 100%);border:2px solid var(--border-light);border-left:6px solid var(--brand);border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-xl);margin-bottom:3rem;text-align:center}
+    .header-links{display:flex;justify-content:center;gap:1rem;margin-top:1.25rem;flex-wrap:wrap}
+    .header-link{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.25rem;background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-md);font-weight:500;transition:all var(--transition-medium);box-shadow:var(--shadow-sm)}
+    .header-link:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--brand)}
+    .toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.5rem;padding:1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);border:1px solid var(--border-light)}
+    .toolbar-group{display:flex;gap:.75rem;align-items:center;padding:.75rem 1rem;background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+    .toolbar-group label{font-weight:500;color:var(--text-muted);font-size:.875rem}
+    .btn{appearance:none;border:1px solid var(--border-medium);background:var(--bg-primary);padding:.75rem 1.25rem;border-radius:var(--radius-md);cursor:pointer;font-weight:500;transition:all var(--transition-medium);box-shadow:var(--shadow-sm);display:inline-flex;align-items:center;gap:.5rem}
+    .btn:hover{background:var(--bg-tertiary);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+    .btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%);color:#fff;border:none;font-weight:600;box-shadow:var(--shadow-md)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .canvas-wrapper{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-primary);box-shadow:var(--shadow-lg);border:2px solid var(--border-light)}
+    #drawCanvas,#mediaCanvas,#notesCanvas{width:100%;height:auto;display:block}
+    #drawCanvas{position:relative;z-index:1}
+    /* NUEVA capa de imágenes arrastrables */
+    #mediaCanvas{position:absolute;inset:0;z-index:2;cursor:grab}
+    #notesCanvas{position:absolute;inset:0;z-index:3;cursor:crosshair}
+    .footer{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#cbd5e1;padding:2.5rem;text-align:center;margin-top:4rem;border-radius:var(--radius-lg);border:2px solid #334155}
+    @media (max-width:768px){.container{padding:1rem}.header{padding:2rem 1.5rem}.header h1{font-size:2rem}.toolbar{padding:1rem}.toolbar-group{flex-wrap:wrap}}
+    .loading{opacity:.7;pointer-events:none}
+    @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    button:focus,input:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:2px}
   </style>
 </head>
-
 <body>
   <div class="container">
-    <!-- Header -->
     <header class="header">
       <h1>🌽 Exploring Mexican Culinary Heritage</h1>
       <p class="text-sm">Include links to videos, add photos, draw, and place mini post-it notes to synthesize your research into a visual presentation.</p>
@@ -141,43 +63,32 @@
       </div>
     </header>
 
-    <!-- Poster Studio -->
     <section class="section card">
       <h2>Poster Studio: Create Your Visual Synthesis</h2>
       <p class="text-sm">Tip: Double-click a note to open its first link. Si hay varios links, te aparece un menú para elegir.</p>
 
       <div class="toolbar">
         <div class="toolbar-group">
-          <label>Color</label>
-          <input type="color" id="colorPicker" value="#4f46e5"/>
+          <label>Color</label><input type="color" id="colorPicker" value="#4f46e5"/>
         </div>
         <div class="toolbar-group">
-          <label>Size</label>
-          <input type="range" id="brushSize" min="2" max="50" value="8" style="width:120px;"/>
-          <span id="sizeDisplay">8px</span>
+          <label>Size</label><input type="range" id="brushSize" min="2" max="50" value="8" style="width:120px;"/><span id="sizeDisplay">8px</span>
         </div>
         <button class="btn" id="penTool" onclick="setTool('pen')">✏️ Pen</button>
         <button class="btn" id="eraserTool" onclick="setTool('eraser')">🧽 Eraser</button>
         <button class="btn" id="clearAllBtn" onclick="clearCanvas()">🗑️ Clear All</button>
         <button class="btn" onclick="undoLast()">↶ Undo</button>
-        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        <input type="file" id="imageUpload" accept="image/*" style="display:none">
         <button class="btn" onclick="document.getElementById('imageUpload').click()">🖼️ Add Image</button>
 
-        <!-- Mini Post-it text tools -->
         <div class="toolbar-group">
           <label for="noteText">Mini Post-it</label>
-          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:240px;">
-          <select id="noteSize" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;">
-            <option value="14">Small</option>
-            <option value="16" selected>Medium</option>
-            <option value="20">Large</option>
+          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:240px;">
+          <select id="noteSize" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px;">
+            <option value="14">Small</option><option value="16" selected>Medium</option><option value="20">Large</option>
           </select>
-          <select id="noteColor" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;">
-            <option value="0" selected>Yellow</option>
-            <option value="1">Blue</option>
-            <option value="2">Gold</option>
-            <option value="3">Rose</option>
-            <option value="4">Lavender</option>
+          <select id="noteColor" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px;">
+            <option value="0" selected>Yellow</option><option value="1">Blue</option><option value="2">Gold</option><option value="3">Rose</option><option value="4">Lavender</option>
           </select>
           <button class="btn" id="addNoteBtn" onclick="activateNoteMode()">🗒️ Add Note</button>
         </div>
@@ -185,15 +96,15 @@
         <button class="btn btn-primary" onclick="savePoster(event)">💾 Save Poster (PNG)</button>
       </div>
 
-      <div class="canvas-wrapper">
-        <!-- Two-layer canvas: drawing and notes -->
+      <div class="canvas-wrapper" id="canvasWrapper">
+        <!-- Orden de capas: dibujo (abajo) | imágenes (medio) | notas (arriba) -->
         <canvas id="drawCanvas" width="1200" height="720"></canvas>
+        <canvas id="mediaCanvas" width="1200" height="720"></canvas>
         <canvas id="notesCanvas" width="1200" height="720"></canvas>
       </div>
-      <p class="text-xs" id="noteHint" style="margin-top:0.5rem; display:none;">Click anywhere to place your note. Drag to move. Press Esc to cancel.</p>
+      <p class="text-xs" id="noteHint" style="margin-top:.5rem;display:none;">Click anywhere to place your note. Drag to move. Press Esc to cancel.</p>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
       <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Mexican communities who keep these traditions alive today.</p>
       <p class="text-xs">© 2025 Spanish Learning Edge LLC.</p>
@@ -201,13 +112,10 @@
   </div>
 
   <script>
-    /* ====== Drawing Layer (drawCanvas) ====== */
+    /* ====== Drawing Layer ====== */
     const drawCanvas = document.getElementById('drawCanvas');
     const drawCtx = drawCanvas.getContext('2d', { willReadFrequently: true });
-
-    // Initialize background
-    drawCtx.fillStyle = 'white';
-    drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+    drawCtx.fillStyle = 'white'; drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
     const colorPicker = document.getElementById('colorPicker');
     const brushSize = document.getElementById('brushSize');
@@ -219,19 +127,36 @@
     let isDrawing = false;
     let lastPoint = { x: 0, y: 0 };
 
+    const mediaCanvas = document.getElementById('mediaCanvas');
+    const mediaCtx = mediaCanvas.getContext('2d');
+    const notesCanvas = document.getElementById('notesCanvas');
+    const notesCtx = notesCanvas.getContext('2d');
+
+    // Control de herramientas: también gestiona pointer-events por capa
     function setTool(tool) {
       currentTool = tool;
       penTool.classList.toggle('active', tool === 'pen');
       eraserTool.classList.toggle('active', tool === 'eraser');
-      const nc = document.getElementById('notesCanvas');
-      if (nc) nc.style.cursor = tool === 'pen' ? 'crosshair' : 'grab';
+
+      // si estoy dibujando o borrando, las capas superiores NO deben capturar eventos
+      const drawingMode = tool === 'pen' || tool === 'eraser';
+      notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+      mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+
+      // Cursores
+      if (drawingMode) {
+        mediaCanvas.style.cursor = 'default';
+        notesCanvas.style.cursor = 'crosshair';
+      } else {
+        notesCanvas.style.cursor = 'grab';
+        mediaCanvas.style.cursor = 'grab';
+      }
     }
     window.setTool = setTool;
 
     sizeDisplay.textContent = brushSize.value + 'px';
     brushSize.addEventListener('input', () => sizeDisplay.textContent = brushSize.value + 'px');
 
-    // History for drawing layer only
     let drawingHistory = [];
     let historyStep = -1;
     function saveDrawState() {
@@ -252,7 +177,7 @@
     }
 
     function startDrawing(evt) {
-      if (noteModeActive) return; // ignore when placing notes
+      if (noteModeActive || currentTool === 'move' ) return;
       evt.preventDefault();
       isDrawing = true;
       lastPoint = getDrawPos(evt);
@@ -263,7 +188,6 @@
       else { drawCtx.globalCompositeOperation = 'destination-out'; }
     }
     function drawMove(evt) {
-      if (noteModeActive) return;
       if (!isDrawing) return;
       evt.preventDefault();
       const p = getDrawPos(evt);
@@ -275,43 +199,13 @@
     }
     function stopDrawing() { if (isDrawing) { isDrawing = false; saveDrawState(); } }
 
-    // Bind drawing to drawCanvas (not notesCanvas)
     drawCanvas.addEventListener('mousedown', startDrawing);
     drawCanvas.addEventListener('mousemove', drawMove);
     drawCanvas.addEventListener('mouseup', stopDrawing);
     drawCanvas.addEventListener('mouseout', stopDrawing);
-    drawCanvas.addEventListener('touchstart', startDrawing, { passive: false });
-    drawCanvas.addEventListener('touchmove', drawMove, { passive: false });
-    drawCanvas.addEventListener('touchend', stopDrawing);
-
-    function clearCanvas() {
-      if (confirm('Clear the entire canvas?')) {
-        drawCtx.fillStyle = 'white';
-        drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
-        saveDrawState();
-      }
-    }
-    window.clearCanvas = clearCanvas;
-
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-          const maxW = 360, maxH = 360;
-          let w = img.width, h = img.height;
-          if (w > maxW || h > maxH) { const r = Math.min(maxW/w, maxH/h); w *= r; h *= r; }
-          const x = (drawCanvas.width - w) / 2;
-          const y = (drawCanvas.height - h) / 2;
-          drawCtx.drawImage(img, x, y, w, h);
-          saveDrawState();
-        };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
+    drawCanvas.addEventListener('touchstart', startDrawing, { passive:false });
+    drawCanvas.addEventListener('touchmove',  drawMove, { passive:false });
+    drawCanvas.addEventListener('touchend',   stopDrawing);
 
     function undoLast() {
       if (historyStep > 0) {
@@ -326,150 +220,198 @@
     }
     window.undoLast = undoLast;
 
-    /* ====== Notes Layer (notesCanvas) with draggable post-its ====== */
-    const notesCanvas = document.getElementById('notesCanvas');
-    const notesCtx = notesCanvas.getContext('2d');
-
-    // Set default tool now that notesCanvas exists
-    setTool('pen');
-
-    // HiDPI for crisp notes
-    (function fitHiDPI(canvas, ctx) {
+    /* ====== Capa de Imágenes (arrastrables) ====== */
+    // HiDPI para media y notes
+    (function fitHiDPI(canvas, ctx){
       const ratio = window.devicePixelRatio || 1;
       const w = canvas.width, h = canvas.height;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
-      canvas.width = Math.floor(w * ratio);
-      canvas.height = Math.floor(h * ratio);
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    })(mediaCanvas, mediaCtx);
+
+    let images = []; // {img,w,h,x,y}
+    let draggingImg = null; // {index, offsetX, offsetY}
+
+    function renderMedia(){
+      mediaCtx.clearRect(0,0,mediaCanvas.width,mediaCanvas.height);
+      images.forEach(o => mediaCtx.drawImage(o.img, o.x, o.y, o.w, o.h));
+    }
+
+    document.getElementById('imageUpload').addEventListener('change', function(e){
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        const img = new Image();
+        img.onload = function(){
+          const maxW = 360, maxH = 360;
+          let w = img.width, h = img.height;
+          if (w > maxW || h > maxH){ const r = Math.min(maxW/w, maxH/h); w = Math.round(w*r); h = Math.round(h*r); }
+          const x = Math.round((mediaCanvas.width - w)/2);
+          const y = Math.round((mediaCanvas.height - h)/2);
+          images.push({img, w, h, x, y});
+          renderMedia();
+          // activar modo mover imágenes
+          setTool('move');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      // reset input to allow re-upload same file
+      e.target.value = '';
+    });
+
+    function getPointerOn(canvas, evt){
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const cx = evt.touches ? evt.touches[0].clientX : evt.clientX;
+      const cy = evt.touches ? evt.touches[0].clientY : evt.clientY;
+      return { x: (cx - rect.left) * scaleX, y: (cy - rect.top) * scaleY };
+    }
+
+    // Interacción imágenes
+    mediaCanvas.addEventListener('mousedown', (e)=>{
+      if (currentTool === 'pen' || currentTool === 'eraser') return;
+      const p = getPointerOn(mediaCanvas, e);
+      for (let i = images.length - 1; i >= 0; i--){
+        const o = images[i];
+        if (p.x >= o.x && p.x <= o.x + o.w && p.y >= o.y && p.y <= o.y + o.h){
+          const picked = images.splice(i,1)[0]; images.push(picked);
+          const idx = images.length - 1;
+          draggingImg = { index: idx, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
+          mediaCanvas.style.cursor = 'grabbing';
+          renderMedia();
+          return;
+        }
+      }
+      draggingImg = null;
+    });
+
+    mediaCanvas.addEventListener('mousemove', (e)=>{
+      if (!draggingImg) return;
+      const p = getPointerOn(mediaCanvas, e);
+      const o = images[draggingImg.index];
+      o.x = p.x - draggingImg.offsetX;
+      o.y = p.y - draggingImg.offsetY;
+      // límites
+      o.x = Math.max(0, Math.min(o.x, mediaCanvas.width - o.w));
+      o.y = Math.max(0, Math.min(o.y, mediaCanvas.height - o.h));
+      renderMedia();
+    });
+
+    const endDragImg = ()=>{ draggingImg = null; mediaCanvas.style.cursor = 'grab'; };
+    mediaCanvas.addEventListener('mouseup', endDragImg);
+    mediaCanvas.addEventListener('mouseleave', endDragImg);
+
+    // Touch para imágenes
+    mediaCanvas.addEventListener('touchstart', (e)=> mediaCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    mediaCanvas.addEventListener('touchmove',  (e)=>{ e.preventDefault(); mediaCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    mediaCanvas.addEventListener('touchend',   ()=> mediaCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
+
+    /* ====== Notas (post-its) ====== */
+    (function fitHiDPI(canvas, ctx){
+      const ratio = window.devicePixelRatio || 1;
+      const w = canvas.width, h = canvas.height;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     })(notesCanvas, notesCtx);
 
-    // Palette for notes
     const NOTE_COLORS = [
-      { bg: '#fff8c5', border: '#facc15' }, // Yellow
-      { bg: '#e0f2fe', border: '#38bdf8' }, // Blue
-      { bg: '#fde68a', border: '#f59e0b' }, // Gold
-      { bg: '#fee2e2', border: '#f87171' }, // Rose
-      { bg: '#e9d5ff', border: '#a78bfa' }  // Lavender
+      { bg:'#fff8c5', border:'#facc15' }, { bg:'#e0f2fe', border:'#38bdf8' },
+      { bg:'#fde68a', border:'#f59e0b' }, { bg:'#fee2e2', border:'#f87171' },
+      { bg:'#e9d5ff', border:'#a78bfa' }
     ];
 
     let notes = []; // {x,y,w,h,text,fontPx,bg,border,urls:[]}
     let noteModeActive = false;
-    let dragging = null; // {index, offsetX, offsetY}
+    let draggingNote = null; // {index, offsetX, offsetY}
     const noteInput = document.getElementById('noteText');
     const noteSize  = document.getElementById('noteSize');
     const noteColor = document.getElementById('noteColor');
     const noteHint  = document.getElementById('noteHint');
 
-    function activateNoteMode() {
-      if (!noteInput.value.trim()) {
-        noteInput.focus();
-        noteInput.placeholder = 'Type a tip… (required)';
-        return;
+    function activateNoteMode(){
+      if (!noteInput.value.trim()){
+        noteInput.focus(); noteInput.placeholder = 'Type a tip… (required)'; return;
       }
       noteModeActive = true;
+      setTool('note'); // habilita pointer-events arriba
       noteHint.style.display = 'block';
       notesCanvas.style.cursor = 'copy';
     }
     window.activateNoteMode = activateNoteMode;
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && noteModeActive) {
-        noteModeActive = false;
-        noteHint.style.display = 'none';
+    window.addEventListener('keydown',(e)=>{
+      if (e.key === 'Escape' && noteModeActive){
+        noteModeActive = false; noteHint.style.display = 'none';
         notesCanvas.style.cursor = 'crosshair';
+        setTool('move');
       }
     });
 
-    // URL detection in note text
     const urlRegex = /\bhttps?:\/\/[^\s)]+/gi;
 
-    function wrapLines(ctx, text, maxWidth) {
+    function wrapLines(ctx, text, maxWidth){
       const words = text.split(' ');
-      let line = '';
-      const lines = [];
-      for (let n = 0; n < words.length; n++) {
+      let line = '', lines = [];
+      for (let n=0; n<words.length; n++){
         const test = line + words[n] + ' ';
-        if (ctx.measureText(test).width > maxWidth && n > 0) {
-          lines.push(line.trim());
-          line = words[n] + ' ';
-        } else {
-          line = test;
-        }
+        if (ctx.measureText(test).width > maxWidth && n>0){ lines.push(line.trim()); line = words[n] + ' '; }
+        else { line = test; }
       }
       if (line) lines.push(line.trim());
       return lines;
     }
 
-    function drawRoundedRect(ctx, x, y, w, h, r) {
+    function drawRoundedRect(ctx,x,y,w,h,r){
       ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y, x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x, y + h, r);
-      ctx.arcTo(x, y + h, x, y, r);
-      ctx.arcTo(x, y, x + w, y, r);
+      ctx.moveTo(x+r, y);
+      ctx.arcTo(x+w, y, x+w, y+h, r);
+      ctx.arcTo(x+w, y+h, x, y+h, r);
+      ctx.arcTo(x, y+h, x, y, r);
+      ctx.arcTo(x, y, x+w, y, r);
       ctx.closePath();
     }
 
-    function renderNotes() {
-      notesCtx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
-      notes.forEach((n, idx) => {
+    function renderNotes(){
+      notesCtx.clearRect(0,0,notesCanvas.width,notesCanvas.height);
+      notes.forEach((n, idx)=>{
         notesCtx.save();
-        notesCtx.shadowColor = 'rgba(0,0,0,0.15)';
-        notesCtx.shadowBlur = 8;
-        notesCtx.shadowOffsetX = 2;
-        notesCtx.shadowOffsetY = 3;
-
-        // card
-        notesCtx.fillStyle   = n.bg    || '#fff8c5';
-        notesCtx.strokeStyle = n.border|| '#facc15';
-        notesCtx.lineWidth = 2;
+        notesCtx.shadowColor='rgba(0,0,0,0.15)'; notesCtx.shadowBlur=8; notesCtx.shadowOffsetX=2; notesCtx.shadowOffsetY=3;
+        notesCtx.fillStyle = n.bg || '#fff8c5';
+        notesCtx.strokeStyle = n.border || '#facc15';
+        notesCtx.lineWidth=2;
         drawRoundedRect(notesCtx, n.x, n.y, n.w, n.h, 10);
-        notesCtx.fill();
-        notesCtx.stroke();
+        notesCtx.fill(); notesCtx.stroke();
 
-        // folded corner
-        notesCtx.shadowColor = 'transparent';
-        notesCtx.fillStyle = 'rgba(0,0,0,0.06)';
-        notesCtx.beginPath();
-        notesCtx.moveTo(n.x + n.w - 22, n.y);
-        notesCtx.lineTo(n.x + n.w, n.y);
-        notesCtx.lineTo(n.x + n.w, n.y + 22);
-        notesCtx.closePath();
-        notesCtx.fill();
+        notesCtx.shadowColor='transparent';
+        notesCtx.fillStyle='rgba(0,0,0,0.06)';
+        notesCtx.beginPath(); notesCtx.moveTo(n.x+n.w-22,n.y); notesCtx.lineTo(n.x+n.w,n.y); notesCtx.lineTo(n.x+n.w,n.y+22); notesCtx.closePath(); notesCtx.fill();
 
-        // text
-        notesCtx.fillStyle = '#111827';
-        notesCtx.font = `bold ${n.fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
-        const padding = 12;
-        const lines = wrapLines(notesCtx, n.text, n.w - padding * 2);
+        notesCtx.fillStyle='#111827';
+        notesCtx.font=`bold ${n.fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
+        const padding=12;
+        const lines = wrapLines(notesCtx, n.text, n.w - padding*2);
         const lineHeight = Math.round(n.fontPx * 1.35);
-        lines.forEach((ln, i) => {
-          notesCtx.fillText(ln, n.x + padding, n.y + padding + n.fontPx + i * lineHeight);
-        });
+        lines.forEach((ln,i)=> notesCtx.fillText(ln, n.x+padding, n.y+padding+n.fontPx + i*lineHeight));
 
-        // link indicator
-        if (n.urls && n.urls.length) {
-          notesCtx.fillStyle = '#2563eb';
-          notesCtx.font = `bold ${Math.max(12, n.fontPx - 2)}px Inter`;
+        if (n.urls && n.urls.length){
+          notesCtx.fillStyle='#2563eb';
+          notesCtx.font=`bold ${Math.max(12, n.fontPx-2)}px Inter`;
           notesCtx.fillText('🔗', n.x + n.w - 26, n.y + n.h - 12);
         }
 
-        // selection ring
-        if (dragging && dragging.index === idx) {
-          notesCtx.strokeStyle = '#4f46e5';
-          notesCtx.lineWidth = 2;
-          notesCtx.setLineDash([6, 4]);
-          drawRoundedRect(notesCtx, n.x - 2, n.y - 2, n.w + 4, n.h + 4, 12);
-          notesCtx.stroke();
-          notesCtx.setLineDash([]);
+        if (draggingNote && draggingNote.index === idx){
+          notesCtx.strokeStyle='#4f46e5'; notesCtx.lineWidth=2; notesCtx.setLineDash([6,4]);
+          drawRoundedRect(notesCtx, n.x-2, n.y-2, n.w+4, n.h+4, 12); notesCtx.stroke(); notesCtx.setLineDash([]);
         }
-
         notesCtx.restore();
       });
     }
 
-    function placeNoteAt(x, y, text, fontPx) {
+    function placeNoteAt(x,y,text,fontPx){
       const maxTextWidth = 260;
       notesCtx.save();
       notesCtx.font = `bold ${fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
@@ -477,121 +419,127 @@
       const lineHeight = Math.round(fontPx * 1.35);
       const textHeight = lines.length * lineHeight;
       const padding = 12;
-      const w = maxTextWidth + padding * 2;
-      const h = textHeight + padding * 2;
+      const w = maxTextWidth + padding*2;
+      const h = textHeight + padding*2;
 
-      // keep inside
       if (x + w > notesCanvas.width) x = notesCanvas.width - w - 8;
       if (y + h > notesCanvas.height) y = notesCanvas.height - h - 8;
 
-      // chosen palette
-      const idx = parseInt(noteColor?.value ?? '0', 10);
-      const palette = NOTE_COLORS[idx] || NOTE_COLORS[0];
-
-      // extract URLs
-      const urls = (text.match(urlRegex) || []).slice(0, 5);
+      const palette = NOTE_COLORS[parseInt(noteColor?.value ?? '0',10)] || NOTE_COLORS[0];
+      const urls = (text.match(urlRegex) || []).slice(0,5);
 
       notes.push({ x, y, w, h, text, fontPx, bg: palette.bg, border: palette.border, urls });
       notesCtx.restore();
       renderNotes();
     }
 
-    function getPointerOnNotes(evt) {
-      const rect = notesCanvas.getBoundingClientRect();
-      const scaleX = notesCanvas.width / rect.width;
-      const scaleY = notesCanvas.height / rect.height;
-      const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-      const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-      return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
-    }
+    function getPointerOnNotes(evt){ return getPointerOn(notesCanvas, evt); }
 
-    // Add/drag behavior
-    notesCanvas.addEventListener('mousedown', (e) => {
+    notesCanvas.addEventListener('mousedown',(e)=>{
       const p = getPointerOnNotes(e);
-      if (noteModeActive) {
+      if (noteModeActive){
         const text = noteInput.value.trim();
-        const fontPx = parseInt(noteSize.value, 10) || 16;
+        const fontPx = parseInt(noteSize.value,10) || 16;
         if (text) placeNoteAt(p.x, p.y, text, fontPx);
-        // reset mode
-        noteModeActive = false;
-        noteHint.style.display = 'none';
-        notesCanvas.style.cursor = 'crosshair';
+        noteModeActive = false; noteHint.style.display='none'; notesCanvas.style.cursor='crosshair';
+        setTool('move');
         return;
       }
-      // hit test topmost first
-      for (let i = notes.length - 1; i >= 0; i--) {
+      // Selección/arrastre
+      for (let i = notes.length - 1; i >= 0; i--){
         const n = notes[i];
-        if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h) {
-          // bring to front
-          const picked = notes.splice(i, 1)[0];
-          notes.push(picked);
+        if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h){
+          const picked = notes.splice(i,1)[0]; notes.push(picked);
           const index = notes.length - 1;
-          dragging = { index, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
-          renderNotes();
-          return;
+          draggingNote = { index, offsetX: p.x - picked.x, offsetY: p.y - picked.y };
+          notesCanvas.style.cursor='grabbing';
+          renderNotes(); return;
         }
       }
-      dragging = null;
-      renderNotes();
+      draggingNote = null; renderNotes();
     });
 
-    notesCanvas.addEventListener('mousemove', (e) => {
-      if (!dragging) return;
+    notesCanvas.addEventListener('mousemove',(e)=>{
+      if (!draggingNote) return;
       const p = getPointerOnNotes(e);
-      const n = notes[dragging.index];
-      n.x = p.x - dragging.offsetX;
-      n.y = p.y - dragging.offsetY;
-      // keep inside
+      const n = notes[draggingNote.index];
+      n.x = p.x - draggingNote.offsetX; n.y = p.y - draggingNote.offsetY;
       n.x = Math.max(4, Math.min(n.x, notesCanvas.width - n.w - 4));
       n.y = Math.max(4, Math.min(n.y, notesCanvas.height - n.h - 4));
       renderNotes();
     });
 
-    notesCanvas.addEventListener('mouseup', () => { dragging = null; renderNotes(); });
-    notesCanvas.addEventListener('mouseleave', () => { dragging = null; });
+    const endDragNote = ()=>{ draggingNote = null; notesCanvas.style.cursor='grab'; renderNotes(); };
+    notesCanvas.addEventListener('mouseup', endDragNote);
+    notesCanvas.addEventListener('mouseleave', ()=>{ draggingNote=null; });
 
-    // Double-click to open links
-    notesCanvas.addEventListener('dblclick', (e) => {
+    notesCanvas.addEventListener('dblclick',(e)=>{
       const p = getPointerOnNotes(e);
-      for (let i = notes.length - 1; i >= 0; i--) {
+      for (let i = notes.length - 1; i >= 0; i--){
         const n = notes[i];
-        if (p.x >= n.x && p.x <= n.x + n.w && p.y >= n.y && p.y <= n.y + n.h) {
+        if (p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
           if (!n.urls || !n.urls.length) return;
-          if (n.urls.length === 1) {
-            window.open(n.urls[0], '_blank');
-          } else {
-            const choice = prompt('Open which link?\n' + n.urls.map((u, idx) => `${idx+1}. ${u}`).join('\n'));
-            const idx = parseInt(choice, 10);
-            if (!isNaN(idx) && idx >= 1 && idx <= n.urls.length) window.open(n.urls[idx-1], '_blank');
+          if (n.urls.length === 1){ window.open(n.urls[0],'_blank'); }
+          else{
+            const choice = prompt('Open which link?\n' + n.urls.map((u,idx)=> `${idx+1}. ${u}`).join('\n'));
+            const idx = parseInt(choice,10);
+            if (!isNaN(idx) && idx>=1 && idx<=n.urls.length) window.open(n.urls[idx-1],'_blank');
           }
           return;
         }
       }
     });
 
-    // Touch support
-    notesCanvas.addEventListener('touchstart', (e) => notesCanvas.dispatchEvent(new MouseEvent('mousedown', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
-    notesCanvas.addEventListener('touchmove',  (e) => { e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
-    notesCanvas.addEventListener('touchend',   () => notesCanvas.dispatchEvent(new MouseEvent('mouseup', {bubbles:true})));
+    // Touch para notas
+    notesCanvas.addEventListener('touchstart',(e)=> notesCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    notesCanvas.addEventListener('touchmove', (e)=>{ e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    notesCanvas.addEventListener('touchend',  ()=> notesCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
 
-    /* -------- Save Poster (merge layers) -------- */
-    function savePoster(ev) {
+    /* ====== Clear All (todo) ====== */
+    function clearCanvas(){
+      if (!confirm('Clear the entire poster (drawing, images, and notes)?')) return;
+
+      // Dibujo
+      drawCtx.globalCompositeOperation = 'source-over';
+      drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
+      drawCtx.fillStyle = 'white'; drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
+      drawingHistory = []; historyStep = -1; saveDrawState();
+
+      // Imágenes
+      images = []; renderMedia();
+
+      // Notas
+      notes = []; renderNotes();
+    }
+    window.clearCanvas = clearCanvas;
+
+    /* ====== Guardar (merge de 3 capas) ====== */
+    function savePoster(ev){
       const merged = document.createElement('canvas');
-      merged.width = drawCanvas.width;
-      merged.height = drawCanvas.height;
+      merged.width = drawCanvas.width; merged.height = drawCanvas.height;
       const mctx = merged.getContext('2d');
+      // base dibujo
       mctx.drawImage(drawCanvas, 0, 0);
+      // imágenes (redibujamos para asegurar exactitud HiDPI)
+      images.forEach(o => mctx.drawImage(o.img, o.x, o.y, o.w, o.h));
+      // notas: renderizamos el bitmap actual de notesCanvas
       mctx.drawImage(notesCanvas, 0, 0);
+
       const link = document.createElement('a');
       link.download = 'mexican-culinary-heritage-poster.png';
       link.href = merged.toDataURL('image/png', 1.0);
       link.click();
-      const btn = ev.target; const originalText = btn.textContent; btn.textContent = '✔ Saved!'; btn.disabled = true;
-      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1500);
+
+      const btn = ev.target; const originalText = btn.textContent;
+      btn.textContent = '✔ Saved!'; btn.disabled = true;
+      setTimeout(()=>{ btn.textContent = originalText; btn.disabled = false; }, 1500);
     }
     window.savePoster = savePoster;
 
-    console.log('🎨 Poster Studio loaded successfully');
+    // Estado inicial: herramienta pluma activa y capas superiores sin capturar eventos
+    setTool('pen');
+
+    console.log('🎨 Poster Studio loaded with draggable images, working pen, and full clear.');
   </script>
 </body>
 </html>
