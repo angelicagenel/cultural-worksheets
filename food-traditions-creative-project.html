@@ -91,6 +91,55 @@
     .checklist li{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;padding:1rem;background:var(--success-light);border-radius:var(--radius-md);border-left:4px solid var(--success)}
     .checklist li::before{content:"✓";background:var(--success);color:#fff;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.875rem;flex-shrink:0}
 
+     /* Cultural Note + References */
+.cultural-note{
+  background: linear-gradient(135deg,#ffe8e3 0%,#f1f5f9 100%);
+  border-left: 6px solid var(--success);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-lg);
+}
+.cultural-note h3{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Botón mostrar/ocultar referencias */
+.references-toggle{
+  background: var(--success-light);
+  border: 2px solid var(--success);
+  color: var(--ink);
+  padding: .75rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-sm);
+}
+.references-toggle:hover{
+  background: var(--success);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Contenedor colapsable */
+.references-content{
+  display: none;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,.8);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--success);
+  animation: fadeIn var(--transition-medium);
+}
+.references-content.show{ display:block; }
     .footer{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#cbd5e1;padding:2.5rem;text-align:center;margin-top:4rem;border-radius:var(--radius-lg);border:2px solid #334155}
 
     @media (max-width:768px){
