@@ -353,9 +353,7 @@
           <label>Color</label>
           <input type="color" id="colorPicker" value="#4f46e5"/>
         </div>
-        <div class="
-
-          <div class="toolbar-group">
+        <div class="toolbar-group">
           <label>Size</label>
           <input type="range" id="brushSize" min="2" max="50" value="8" style="width:100px;"/>
           <span id="sizeDisplay">8px</span>
@@ -648,7 +646,6 @@
     });
 
     mediaCanvas.addEventListener('mousedown', (e)=>{
-      if (currentTool === 'pen' || currentTool === 'eraser') return;
       const p = getPos(mediaCanvas, e);
       for (let i = images.length - 1; i >= 0; i--){
         const o = images[i];
@@ -914,8 +911,6 @@
       const mctx = merged.getContext('2d');
 
       // base dibujo
-      mctx.drawImage(
-        // base dibujo
       mctx.drawImage(drawCanvas, 0, 0);
       // imágenes (desde su lista para evitar escalado HiDPI)
       images.forEach(o => mctx.drawImage(o.img, o.x, o.y, o.w, o.h));
@@ -946,6 +941,3 @@
   </script>
 </body>
 </html>
-
-        
-          
