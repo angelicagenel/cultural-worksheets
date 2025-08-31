@@ -460,32 +460,24 @@
       });
     });
 
-    /* -------- Translation toggle -------- */
-    document.querySelectorAll('.translation-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const transId = 'trans-' + this.dataset.trans;
-        const translationBox = document.getElementById(transId);
-        if (translationBox) {
-          const isVisible = translationBox.style.display === 'block';
-          translationBox.style.display = isVisible ? 'none' : 'block';
-          this.textContent = isVisible ? 'Show English' : 'Hide English';
-          this.classList.toggle('active', !isVisible);
-        }
+    /* -------- Expand/collapse research links inside cards -------- */
+    document.querySelectorAll('.toggle-research').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const list = this.closest('.flip-card-back').querySelector('.research-links ul');
+        list.classList.toggle('show');
+        this.textContent = list.classList.contains('show') ? 'Hide Links ▲' : 'Show Links ▼';
       });
     });
 
-    /* -------- Notes autosave -------- */
+    /* -------- Notes autosave indicator (Step 3) -------- */
     const notesBox = document.getElementById('notesBox');
     const notesStatus = document.getElementById('notesStatus');
     let saveTimeout;
     if (notesBox) {
-      const savedNotes = localStorage.getItem('mexican_heritage_notes');
-      if (savedNotes) notesBox.value = savedNotes;
+      // No usar localStorage según las instrucciones
       notesBox.addEventListener('input', function() {
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
-          localStorage.setItem('mexican_heritage_notes', notesBox.value);
           notesStatus.classList.add('show');
           setTimeout(() => { notesStatus.classList.remove('show'); }, 2000);
         }, 500);
@@ -494,38 +486,38 @@
 
     /* ====== Poster Studio ====== */
     const drawCanvas  = document.getElementById('drawCanvas');
-    const drawCtx     = drawCanvas.getContext('2d', { willReadFrequently: true });
     const mediaCanvas = document.getElementById('mediaCanvas');
-    const mediaCtx    = mediaCanvas.getContext('2d');
     const notesCanvas = document.getElementById('notesCanvas');
-    const notesCtx    = notesCanvas.getContext('2d');
+
+    const drawCtx  = drawCanvas.getContext('2d');
+    const mediaCtx = mediaCanvas.getContext('2d');
+    const notesCtx = notesCanvas.getContext('2d');
 
     // Base blanca para dibujo
     drawCtx.fillStyle = 'white';
     drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-    // HiDPI para media y notas
-    function fitHiDPI(canvas, ctx){
-      const ratio = window.devicePixelRatio || 1;
-      const w = 1200, h = 720; // tamaño lógico
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      canvas.width = Math.floor(w * ratio); canvas.height = Math.floor(h * ratio);
+    // Ajustes de escalado para pantallas HiDPI
+    [drawCanvas, mediaCanvas, notesCanvas].forEach(c => {
+      const ratio = Math.ceil(window.devicePixelRatio || 1);
+      const { width, height } = c;
+      c.width  = width  * ratio;
+      c.height = height * ratio;
+      c.style.width  = width  + 'px';
+      c.style.height = height + 'px';
+      const ctx = c.getContext('2d');
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    }
-    fitHiDPI(mediaCanvas, mediaCtx);
-    fitHiDPI(notesCanvas, notesCtx);
+    });
 
-    // Util pos
+    // Utilidad: posición relativa del puntero
     function getPos(canvas, evt) {
       const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-      const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-      return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+      const x = (evt.clientX || (evt.touches && evt.touches[0]?.clientX) || 0) - rect.left;
+      const y = (evt.clientY || (evt.touches && evt.touches[0]?.clientY) || 0) - rect.top;
+      return { x: Math.round(x), y: Math.round(y) };
     }
 
-    // Toolbar / tools
+    /* ===== Toolbar / tools ===== */
     const colorPicker = document.getElementById('colorPicker');
     const brushSize   = document.getElementById('brushSize');
     const sizeDisplay = document.getElementById('sizeDisplay');
@@ -536,22 +528,19 @@
     function setTool(tool) {
       currentTool = tool;
       [penTool, eraserTool].forEach(b => b && b.classList.remove('active'));
-      if (tool === 'pen') penTool.classList.add('active');
+      if (tool === 'pen')    penTool.classList.add('active');
       else if (tool === 'eraser') eraserTool.classList.add('active');
 
-      // Always allow image dragging, only disable notes layer for drawing tools
       const drawingMode = (tool === 'pen' || tool === 'eraser');
+
+      // En modo dibujo, desactivar eventos en capas superiores para que drawCanvas reciba el mouse
+      mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
       notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
 
-      // Set cursors appropriately
-      if (drawingMode) { 
-        mediaCanvas.style.cursor = 'grab'; // Allow dragging even in drawing mode
-        notesCanvas.style.cursor = 'crosshair'; 
-      }
-      else { 
-        mediaCanvas.style.cursor = 'grab'; 
-        notesCanvas.style.cursor = 'grab'; 
-      }
+      // Cursores
+      drawCanvas.style.cursor  = drawingMode ? 'crosshair' : 'default';
+      mediaCanvas.style.cursor = 'grab';
+      notesCanvas.style.cursor = drawingMode ? 'default' : 'grab';
     }
     window.setTool = setTool;
     setTool('pen');
@@ -559,17 +548,53 @@
     sizeDisplay.textContent = brushSize.value + 'px';
     brushSize.addEventListener('input', () => sizeDisplay.textContent = brushSize.value + 'px');
 
-    /* ===== Dibujo ===== */
-    let isDrawing = false, lastPoint = {x:0,y:0};
-    // Historial
-    let drawingHistory = [], historyStep = -1;
-    function saveDrawState(){
-      historyStep++;
-      if (historyStep < drawingHistory.length) drawingHistory.length = historyStep;
-      drawingHistory.push(drawCanvas.toDataURL());
-      if (drawingHistory.length > 20) { drawingHistory.shift(); historyStep--; }
+    // ===== Historial unificado (dibujo + imágenes + notas) =====
+    let history = [];
+    let historyIndex = -1;
+
+    function cloneImages(arr) {
+      return arr.map(o => ({ img: o.img, w: o.w, h: o.h, x: o.x, y: o.y }));
     }
-    saveDrawState();
+    function cloneNotes(arr) {
+      return JSON.parse(JSON.stringify(arr));
+    }
+    function snapshotState(label = '') {
+      const drawSnapshot  = drawCanvas.toDataURL();
+      const mediaSnapshot = cloneImages(images);
+      const notesSnapshot = cloneNotes(notes);
+
+      historyIndex++;
+      if (historyIndex < history.length) history.length = historyIndex; // cortar "futuro"
+      history.push({ drawSnapshot, mediaSnapshot, notesSnapshot, label });
+
+      if (history.length > 40) { history.shift(); historyIndex--; }
+    }
+    function restoreState(state) {
+      const img = new Image();
+      img.onload = function() {
+        drawCtx.globalCompositeOperation = 'source-over';
+        drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        drawCtx.drawImage(img, 0, 0);
+      };
+      img.src = state.drawSnapshot;
+
+      images = cloneImages(state.mediaSnapshot);
+      notes  = cloneNotes(state.notesSnapshot);
+      renderMedia();
+      renderNotes();
+    }
+    function undoLast() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        restoreState(history[historyIndex]);
+      }
+    }
+    window.undoLast = undoLast;
+
+    // Snapshot inicial
+    snapshotState('init');
+        /* ===== Dibujo ===== */
+    let isDrawing = false, lastPoint = {x:0,y:0};
 
     function startDrawing(evt){
       if (!(currentTool === 'pen' || currentTool === 'eraser')) return;
@@ -582,6 +607,7 @@
       if (currentTool === 'pen') { drawCtx.globalCompositeOperation = 'source-over'; drawCtx.strokeStyle = colorPicker.value; }
       else { drawCtx.globalCompositeOperation = 'destination-out'; }
     }
+
     function drawMove(evt){
       if (!isDrawing) return;
       evt.preventDefault();
@@ -592,40 +618,37 @@
       drawCtx.stroke();
       lastPoint = p;
     }
-    function stopDrawing(){ if (isDrawing){ isDrawing = false; saveDrawState(); } }
 
+    function stopDrawing() {
+      if (isDrawing) {
+        isDrawing = false;
+        snapshotState('draw-end');
+      }
+    }
+
+    // Mouse
     drawCanvas.addEventListener('mousedown', startDrawing);
     drawCanvas.addEventListener('mousemove', drawMove);
     drawCanvas.addEventListener('mouseup', stopDrawing);
-    drawCanvas.addEventListener('mouseout', stopDrawing);
-    drawCanvas.addEventListener('touchstart', startDrawing, { passive:false });
-    drawCanvas.addEventListener('touchmove',  drawMove, { passive:false });
-    drawCanvas.addEventListener('touchend',   stopDrawing);
+    drawCanvas.addEventListener('mouseleave', stopDrawing);
 
-    function undoLast(){
-      if (historyStep > 0) {
-        historyStep--;
-        const img = new Image();
-        img.onload = function() {
-          drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-          drawCtx.drawImage(img, 0, 0);
-        };
-        img.src = drawingHistory[historyStep];
-      }
-    }
-    window.undoLast = undoLast;
+    // Touch
+    drawCanvas.addEventListener('touchstart', (e)=> drawCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    drawCanvas.addEventListener('touchmove',  (e)=>{ e.preventDefault(); drawCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    drawCanvas.addEventListener('touchend',   ()=> drawCanvas.dispatchEvent(new MouseEvent('mouseup', {bubbles:true})));
 
-    /* ===== Imágenes arrastrables (mediaCanvas) ===== */
+        /* ===== Imágenes arrastrables (mediaCanvas) ===== */
     let images = []; // {img,w,h,x,y}
     let draggingImg = null;
 
-    function renderMedia(){
-      mediaCtx.clearRect(0,0,mediaCanvas.width, mediaCanvas.height);
+    function renderMedia() {
+      mediaCtx.clearRect(0, 0, mediaCanvas.width, mediaCanvas.height);
       images.forEach(o => mediaCtx.drawImage(o.img, o.x, o.y, o.w, o.h));
     }
 
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
-      const file = e.target.files[0];
+    // Subir imagen
+    document.getElementById('imageUpload').addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(event) {
@@ -638,6 +661,7 @@
           const y = Math.round((mediaCanvas.height - h) / 2);
           images.push({ img, w, h, x, y });
           renderMedia();
+          snapshotState('image-added');
         };
         img.src = event.target.result;
       };
@@ -645,6 +669,7 @@
       e.target.value = ''; // permitir re-subir el mismo archivo
     });
 
+    // Drag con mouse
     mediaCanvas.addEventListener('mousedown', (e)=>{
       const p = getPos(mediaCanvas, e);
       for (let i = images.length - 1; i >= 0; i--){
@@ -659,24 +684,28 @@
       }
       draggingImg = null;
     });
-
     mediaCanvas.addEventListener('mousemove', (e)=>{
       if (!draggingImg) return;
       const p = getPos(mediaCanvas, e);
       const o = images[draggingImg.index];
-      o.x = Math.max(0, Math.min(p.x - draggingImg.offsetX, mediaCanvas.width - o.w));
-      o.y = Math.max(0, Math.min(p.y - draggingImg.offsetY, mediaCanvas.height - o.h));
+      o.x = p.x - draggingImg.offsetX; o.y = p.y - draggingImg.offsetY;
       renderMedia();
     });
 
-    const endDragImg = ()=>{ draggingImg = null; mediaCanvas.style.cursor = 'grab'; };
+    const endDragImg = () => {
+      if (draggingImg) snapshotState('image-drag-end');
+      draggingImg = null;
+      mediaCanvas.style.cursor = 'grab';
+    };
     mediaCanvas.addEventListener('mouseup', endDragImg);
     mediaCanvas.addEventListener('mouseleave', endDragImg);
+
+    // Touch para imágenes
     mediaCanvas.addEventListener('touchstart', (e)=> mediaCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
     mediaCanvas.addEventListener('touchmove',  (e)=>{ e.preventDefault(); mediaCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
     mediaCanvas.addEventListener('touchend',   ()=> mediaCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
 
-    /* ===== Notas (post-its) ===== */
+        /* ===== Notas (post-its) ===== */
     const NOTE_COLORS = [
       { bg: '#fff8c5', border: '#facc15' }, // Yellow
       { bg: '#e0f2fe', border: '#38bdf8' }, // Blue
@@ -697,35 +726,40 @@
     const urlRegex = /\bhttps?:\/\/[^\s)]+/gi;
 
     function wrapLines(ctx, text, maxWidth) {
-      const words = text.split(' ');
-      let line = '';
+      const words = text.split(/\s+/);
       const lines = [];
-      for (let n = 0; n < words.length; n++) {
-        const test = line + words[n] + ' ';
-        if (ctx.measureText(test).width > maxWidth && n > 0) { lines.push(line.trim()); line = words[n] + ' '; }
-        else { line = test; }
+      let line = '';
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line ? `${line} ${words[i]}` : words[i];
+        if (ctx.measureText(testLine).width > maxWidth) {
+          if (line) lines.push(line);
+          line = words[i];
+        } else {
+          line = testLine;
+        }
       }
-      if (line) lines.push(line.trim());
+      if (line) lines.push(line);
       return lines;
     }
     function drawRoundedRect(ctx, x, y, w, h, r) {
       ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y, x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x, y + h, r);
-      ctx.arcTo(x, y + h, x, y, r);
-      ctx.arcTo(x, y, x + w, y, r);
+      ctx.moveTo(x+r, y);
+      ctx.arcTo(x+w, y, x+w, y+h, r);
+      ctx.arcTo(x+w, y+h, x, y+h, r);
+      ctx.arcTo(x, y+h, x, y, r);
+      ctx.arcTo(x, y, x+w, y, r);
       ctx.closePath();
     }
+
     function renderNotes() {
       notesCtx.clearRect(0, 0, notesCanvas.width, notesCanvas.height);
       notes.forEach((n, idx) => {
         notesCtx.save();
-        notesCtx.shadowColor = 'rgba(0,0,0,0.15)';
-        notesCtx.shadowBlur = 8;
-        notesCtx.shadowOffsetX = 2;
+        notesCtx.shadowColor = 'rgba(0,0,0,0.12)';
+        notesCtx.shadowBlur = 6;
         notesCtx.shadowOffsetY = 3;
 
+        // nota
         notesCtx.fillStyle   = n.bg;
         notesCtx.strokeStyle = n.border;
         notesCtx.lineWidth = 2;
@@ -733,7 +767,7 @@
         notesCtx.fill();
         notesCtx.stroke();
 
-        // folded corner
+        // fold
         notesCtx.shadowColor = 'transparent';
         notesCtx.fillStyle = 'rgba(0,0,0,0.06)';
         notesCtx.beginPath();
@@ -743,7 +777,7 @@
         notesCtx.closePath();
         notesCtx.fill();
 
-        // text
+        // texto
         notesCtx.fillStyle = '#111827';
         notesCtx.font = `bold ${n.fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
         const padding = 12;
@@ -753,14 +787,14 @@
           notesCtx.fillText(ln, n.x + padding, n.y + padding + n.fontPx + i * lineHeight);
         });
 
-        // link indicator
+        // indicador de links
         if (n.urls && n.urls.length) {
           notesCtx.fillStyle = '#2563eb';
-          notesCtx.font = `bold ${Math.max(12, n.fontPx - 2)}px Inter`;
-          notesCtx.fillText('🔗', n.x + n.w - 26, n.y + n.h - 12);
+          notesCtx.font = `bold ${Math.max(12, n.fontPx - 2)}px Inter, system-ui`;
+          notesCtx.fillText('🔗', n.x + n.w - 22, n.y + n.h - 10);
         }
 
-        // selection ring
+        // selección (cuando arrastras)
         if (draggingNote && draggingNote.index === idx) {
           notesCtx.strokeStyle = '#4f46e5';
           notesCtx.lineWidth = 2;
@@ -774,27 +808,25 @@
       });
     }
     function placeNoteAt(x, y, text, fontPx) {
-      const maxTextWidth = 260;
-      notesCtx.save();
-      notesCtx.font = `bold ${fontPx}px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
-      const lines = wrapLines(notesCtx, text, maxTextWidth);
-      const lineHeight = Math.round(fontPx * 1.35);
-      const textHeight = lines.length * lineHeight;
-      const padding = 12;
-      const w = maxTextWidth + padding * 2;
-      const h = textHeight + padding * 2;
+      const col  = NOTE_COLORS[parseInt(noteColor.value,10) || 0] || NOTE_COLORS[0];
+      const wMin = 160, wMax = 260;
+      notesCtx.font = `bold ${fontPx}px Inter, system-ui`;
+      const words = text.split(/\s+/);
+      let line = '', lines = [], w = 0;
+      for (const word of words) {
+        const test = (line ? line + ' ' : '') + word;
+        if (notesCtx.measureText(test).width > wMax - 24) { lines.push(line); line = word; }
+        else { line = test; }
+      }
+      if (line) lines.push(line);
+      w = Math.min(wMax, Math.max(wMin, Math.round(Math.max(...lines.map(l=>notesCtx.measureText(l).width)) + 24)));
+      const h = Math.round(24 + (fontPx * 1.35) * lines.length + 12);
 
-      if (x + w > notesCanvas.width) x = notesCanvas.width - w - 8;
-      if (y + h > notesCanvas.height) y = notesCanvas.height - h - 8;
-
-      const palette = NOTE_COLORS[parseInt(noteColor?.value ?? '0', 10)] || NOTE_COLORS[0];
-      const urls = (text.match(urlRegex) || []).slice(0, 5);
-
-      notes.push({ x, y, w, h, text, fontPx, bg: palette.bg, border: palette.border, urls });
-      notesCtx.restore();
-      renderNotes();
+      const urls = (text.match(urlRegex) || []).map(u => u.trim());
+      notes.push({ x: Math.max(8, x - Math.round(w/2)), y: Math.max(8, y - Math.round(h/2)), w, h, text, fontPx, bg: col.bg, border: col.border, urls });
     }
-    function pointerOnNotes(evt){ return getPos(notesCanvas, evt); }
+
+    function pointerOnNotes(evt) { return getPos(notesCanvas, evt); }
 
     function activateNoteMode() {
       if (!noteText.value.trim()) {
@@ -809,17 +841,17 @@
     }
     window.activateNoteMode = activateNoteMode;
 
+    // Mouse para notas
     notesCanvas.addEventListener('mousedown', (e) => {
       if (notesCanvas.style.pointerEvents === 'none') return; // en modo dibujo
       const p = pointerOnNotes(e);
       if (noteModeActive) {
         const text = noteText.value.trim();
         const fontPx = parseInt(noteSize.value, 10) || 16;
-        if (text) placeNoteAt(p.x, p.y, text, fontPx);
+        if (text) { placeNoteAt(p.x, p.y, text, fontPx); renderNotes(); snapshotState('note-added'); }
         // reset
         noteModeActive = false;
         noteHint.style.display = 'none';
-        setTool('pen');
         notesCanvas.style.cursor = 'grab';
         return;
       }
@@ -843,15 +875,19 @@
       if (!draggingNote) return;
       const p = pointerOnNotes(e);
       const n = notes[draggingNote.index];
-      n.x = Math.max(4, Math.min(p.x - draggingNote.offsetX, notesCanvas.width - n.w - 4));
-      n.y = Math.max(4, Math.min(p.y - draggingNote.offsetY, notesCanvas.height - n.h - 4));
+      n.x = p.x - draggingNote.offsetX; n.y = p.y - draggingNote.offsetY;
       renderNotes();
     });
-    const endDragNote = ()=>{ draggingNote = null; notesCanvas.style.cursor = 'grab'; renderNotes(); };
+    const endDragNote = () => {
+      if (draggingNote) snapshotState('note-drag-end');
+      draggingNote = null;
+      notesCanvas.style.cursor = 'grab';
+      renderNotes();
+    };
     notesCanvas.addEventListener('mouseup', endDragNote);
     notesCanvas.addEventListener('mouseleave', ()=>{ draggingNote = null; });
 
-    // Double-click to open links
+    // Double-click para abrir links
     notesCanvas.addEventListener('dblclick', (e) => {
       const p = pointerOnNotes(e);
       for (let i = notes.length - 1; i >= 0; i--) {
@@ -860,7 +896,7 @@
           if (!n.urls || !n.urls.length) return;
           if (n.urls.length === 1) window.open(n.urls[0], '_blank');
           else {
-            const choice = prompt('Open which link?\n' + n.urls.map((u, idx) => `${idx+1}. ${u}`).join('\n'));
+            const choice = prompt('Open which link?\\n' + n.urls.map((u, idx) => `${idx+1}. ${u}`).join('\\n'));
             const idx = parseInt(choice, 10);
             if (!isNaN(idx) && idx >= 1 && idx <= n.urls.length) window.open(n.urls[idx-1], '_blank');
           }
@@ -869,9 +905,9 @@
       }
     });
 
-    // Touch for notes
-    notesCanvas.addEventListener('touchstart', (e) => notesCanvas.dispatchEvent(new MouseEvent('mousedown', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
-    notesCanvas.addEventListener('touchmove',  (e) => { e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove', {clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
+    // Touch para notas
+    notesCanvas.addEventListener('touchstart', (e) => notesCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})), {passive:false});
+    notesCanvas.addEventListener('touchmove',  (e) => { e.preventDefault(); notesCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX, clientY:e.touches[0].clientY, bubbles:true})); }, {passive:false});
     notesCanvas.addEventListener('touchend',   () => notesCanvas.dispatchEvent(new MouseEvent('mouseup', {bubbles:true})));
 
     // Esc para cancelar modo nota
@@ -879,55 +915,47 @@
       if (e.key === 'Escape' && noteModeActive) {
         noteModeActive = false;
         noteHint.style.display = 'none';
-        setTool('pen');
+        notesCanvas.style.cursor = 'grab';
       }
     });
 
-    /* ===== Clear All (todo) ===== */
+        /* -------- Clear All -------- */
     function clearCanvas() {
       if (!confirm('Are you sure you want to clear the entire poster (drawing, images, and notes)?')) return;
 
-      // Dibujo
+      // Dibujo (fondo blanco)
       drawCtx.globalCompositeOperation = 'source-over';
       drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-      drawCtx.fillStyle = 'white'; drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
-      drawingHistory = []; historyStep = -1; saveDrawState();
+      drawCtx.fillStyle = 'white';
+      drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-      // Imágenes
+      // Imágenes y Notas
       images = []; renderMedia();
+      notes  = []; renderNotes();
 
-      // Notas
-      notes = []; renderNotes();
-
+      snapshotState('clear-all');
       setTool('pen');
     }
     window.clearCanvas = clearCanvas;
 
     /* -------- Save Poster (merge 3 capas) -------- */
     function savePoster(ev) {
-      const merged = document.createElement('canvas');
-      merged.width = drawCanvas.width;
-      merged.height = drawCanvas.height;
-      const mctx = merged.getContext('2d');
+      const merged = document.createElement('canvas')
+      merged.width = drawCanvas.width; merged.height = drawCanvas.height;
+      const mx = merged.getContext('2d');
+      mx.fillStyle = 'white';
+      mx.fillRect(0, 0, merged.width, merged.height);
+      mx.drawImage(drawCanvas, 0, 0);
+      mx.drawImage(mediaCanvas, 0, 0);
+      mx.drawImage(notesCanvas, 0, 0);
 
-      // base dibujo
-      mctx.drawImage(drawCanvas, 0, 0);
-      // imágenes (desde su lista para evitar escalado HiDPI)
-      images.forEach(o => mctx.drawImage(o.img, o.x, o.y, o.w, o.h));
-      // notas
-      mctx.drawImage(notesCanvas, 0, 0);
-
-      const link = document.createElement('a');
-      link.download = 'mexican-culinary-heritage-poster.png';
-      link.href = merged.toDataURL('image/png', 1.0);
-      link.click();
-
-      const btn = ev.target; const originalText = btn.textContent; btn.textContent = '✓ Saved!'; btn.disabled = true;
-      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1500);
+      const a = document.createElement('a');
+      a.download = 'poster.png';
+      a.href = merged.toDataURL('image/png');
+      a.click();
     }
-    window.savePoster = savePoster;
 
-    /* -------- References toggle -------- */
+        /* -------- References toggle -------- */
     function toggleReferences() {
       const content = document.getElementById('references-content');
       const icon = document.getElementById('toggle-icon');
@@ -937,7 +965,7 @@
     }
     window.toggleReferences = toggleReferences;
 
-    console.log('🌽 Poster Studio ready: pen/eraser OK, Clear All total, draggable images, colored sticky notes.');
-  </script>
+    console.log('🌽 Poster Studio listo: pluma/eraser OK, Undo global (dibujo+imágenes+notas), post-its arrastrables, Clear All con historial.');
+</script>
 </body>
 </html>
