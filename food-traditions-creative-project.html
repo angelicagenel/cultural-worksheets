@@ -285,13 +285,77 @@
     </section>
 
     <section class="section cultural-note">
-      <h3>🌡️ Closing Reflection — Current Challenges</h3>
-      <p>Across Mexico's culinary heritage, communities navigate climate change, globalization, and cultural displacement…</p>
-      <button class="references-toggle" onclick="toggleReferences()">📚 View Academic References <span id="toggle-icon">▼</span></button>
-      <div class="references-content" id="references-content">
-        <div class="text-xs"><strong>Works Cited (MLA Format)</strong><br><br>UNESCO… etc.</div>
-      </div>
-    </section>
+  <h3>🌡️ Closing Reflection — Current Challenges</h3>
+  <p>
+    Across Mexico's culinary heritage, communities navigate converging pressures from climate change, economic globalization, and cultural displacement. Coffee producers in Veracruz face erratic rainfall disrupting harvest calendars, while traditional bakers in Tlaxcala compete with industrial bread production. Amaranth artisans in Morelos confront market displacement, and indigenous communities nationwide experience erosion of traditional ecological knowledge through youth migration.
+  </p>
+  <p>
+    Climate change threatens to displace 1.4–6.7 million Mexicans by 2080, while trade agreements have already displaced over 1 million farmers. Food sovereignty movements increasingly recognize that preserving culinary heritage requires defending indigenous rights, supporting women's knowledge systems, and maintaining community-controlled agriculture.
+  </p>
+  <button class="references-toggle" onclick="toggleReferences()">📚 View Academic References <span id="toggle-icon">▼</span></button>
+  <div class="references-content" id="references-content">
+    <div class="text-xs">
+      <strong>Works Cited (MLA Format)</strong><br><br>
+      Cabrera-Torres, Jose, et al. "Panorama of Coffee Cultivation in the Central Zone of Veracruz State, Mexico: Identification of Main Stressors and Challenges to Face." <em>Sustainability</em>, vol. 16, no. 2, 2024, article 802. <em>MDPI</em>, doi:10.3390/su16020802.<br><br>
+      "Climate Change in Mexico." <em>Wikipedia</em>, 2 June 2025, en.wikipedia.org/wiki/Climate_change_in_Mexico.<br><br>
+      Municipio de San Juan Huactzinco. "Pan de Fiesta." <em>Official Municipal Website</em>, huactzinco.gob.mx/cultura/pan-de-fiesta/.<br><br>
+      Native Seeds/Search. "Amaranth 'Huazulco Alegría' – Variety Information." <em>Native Seeds/SEARCH</em>, nativeseeds.org/products/c020.<br><br>
+      Secretaría de Cultura. "Boletines de Prensa." <em>Gobierno de México</em>, gob.mx/cultura/prensa/.<br><br>
+      "Sin Maíz, No Hay País: How Free Trade Hurts Indigenous Food Sovereignty in Mexico." <em>Center for World Indigenous Studies</em>, 19 Feb. 2025, cwis.org/2025/02/sin-maiz-no-hay-pais-how-free-trade-hurts-indigenous-food-sovereignty-in-mexico/.<br><br>
+      UNESCO. "Traditional Mexican Cuisine: Ancestral, Ongoing Community Culture." <em>Intangible Cultural Heritage Lists</em>, 2010, ich.unesco.org/en/RL/traditional-mexican-cuisine-00400.
+    </div>
+  </div>
+</section>
+
+    /* Cultural Note + References */
+.cultural-note{
+  background: linear-gradient(135deg,#ffe8e3 0%,#f1f5f9 100%);
+  border-left: 6px solid var(--success);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-lg);
+}
+.cultural-note h3{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Botón mostrar/ocultar referencias */
+.references-toggle{
+  background: var(--success-light);
+  border: 2px solid var(--success);
+  color: var(--ink);
+  padding: .75rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-sm);
+}
+.references-toggle:hover{
+  background: var(--success);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Contenedor colapsable */
+.references-content{
+  display: none;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,.8);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--success);
+  animation: fadeIn var(--transition-medium);
+}
+.references-content.show{ display:block; }
 
     <footer class="footer">
       <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Mexican communities who keep these traditions alive today.</p>
