@@ -7,84 +7,168 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root{
-      --brand:#4f46e5;--brand-light:#6366f1;--accent:#7c3aed;--accent-light:#8b5cf6;--success:#ef7c8e;--success-light:#ffe8e3;
-      --warning:#d97706;--ink:#0f172a;--text-muted:#64748b;--text-light:#94a3b8;--bg-primary:#ffffff;--bg-secondary:#f8fafc;--bg-tertiary:#f1f5f9;
-      --border-light:#e2e8f0;--border-medium:#cbd5e1;--shadow-sm:0 1px 2px 0 rgb(0 0 0 / 0.05);--shadow-md:0 4px 6px -1px rgb(0 0 0 / 0.1),0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg:0 10px 15px -3px rgb(0 0 0 / 0.1),0 4px 6px -4px rgb(0 0 0 / 0.1);--shadow-xl:0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);
-      --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--transition-fast:0.15s ease-out;--transition-medium:0.25s ease-out;--transition-slow:0.35s cubic-bezier(0.4,0,0.2,1);
+      --brand: #4f46e5;
+      --brand-light: #6366f1;
+      --accent: #7c3aed;
+      --accent-light: #8b5cf6;
+      --success: #ef7c8e;
+      --success-light: #ffe8e3;
+      --warning: #d97706;
+      --ink: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --transition-fast: 0.15s ease-out;
+      --transition-medium: 0.25s ease-out;
+      --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--ink);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);scroll-behavior:smooth}
-    h1,h2,h3{font-family:'Crimson Text',serif;font-weight:600;line-height:1.2;margin:0}
-    h1{font-size:2.5rem;color:var(--brand)} h2{font-size:1.875rem;color:var(--ink);margin-bottom:1rem} h3{font-size:1.5rem;color:var(--brand);margin-bottom:.75rem}
-    p{margin:0 0 1rem} .text-sm{font-size:.875rem;color:var(--text-muted)} .text-xs{font-size:.75rem;color:var(--text-light)}
-    a{color:var(--accent);text-decoration:none;transition:color var(--transition-fast)} a:hover{color:var(--brand)}
-    .container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem} .section{margin-bottom:3rem}
-    .card{background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-md);transition:box-shadow var(--transition-medium)}
-    .card:hover{box-shadow:var(--shadow-lg)}
-    .header{background:linear-gradient(135deg,var(--bg-primary) 0%,var(--bg-secondary) 100%);border:2px solid var(--border-light);border-left:6px solid var(--brand);border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-xl);margin-bottom:3rem;text-align:center}
-    .header h1{margin-bottom:1rem}
-    .header-links{display:flex;justify-content:center;gap:1rem;margin-top:1.25rem;flex-wrap:wrap}
-    .header-link{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.25rem;background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-md);font-weight:500;transition:all var(--transition-medium);box-shadow:var(--shadow-sm)}
-    .header-link:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--brand)}
-    .flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;max-width:100%}
-    @media (max-width:1024px){.flip-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
-    @media (max-width:768px){.flip-grid{grid-template-columns:1fr;gap:1rem}}
-    .flip-card{perspective:1200px;height:500px;cursor:pointer;transition:transform var(--transition-medium);width:100%}
-    .flip-card:hover{transform:scale(1.02)} .flip-card:focus{outline:3px solid var(--brand);outline-offset:4px}
-    .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.175,.885,.32,1.275)}
-    .flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
-    .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-lg);border:2px solid var(--border-light);background:var(--bg-primary);box-shadow:var(--shadow-lg);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;overflow-y:auto;font-size:.9rem}
-    .flip-front{border-top:6px solid var(--brand)} .flip-back{border-top:6px solid var(--accent);transform:rotateY(180deg)}
-    .flip-badge{align-self:flex-start;background:linear-gradient(135deg,var(--brand) 0%,var(--brand-light) 100%);color:#fff;padding:.5rem 1rem;border-radius:999px;font-size:.875rem;font-weight:600;box-shadow:var(--shadow-md)}
-    .translation-btn{align-self:flex-start;background:var(--bg-secondary);border:1px solid var(--border-medium);padding:.5rem 1rem;border-radius:var(--radius-md);font-size:.8rem;font-weight:500;cursor:pointer;transition:all var(--transition-medium);box-shadow:var(--shadow-sm)}
-    .translation-btn:hover,.translation-btn.active{background:var(--brand);color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-md)}
-    .quote{font-family:'Crimson Text',serif;font-size:.95rem;line-height:1.5;font-style:italic;color:var(--ink);background:linear-gradient(135deg,#e0e7ff 0%,#ddd6fe 100%);padding:1rem;border-radius:var(--radius-md);border:2px solid var(--brand);margin:.5rem 0}
-    .attribution{font-size:.75rem;color:var(--text-muted);padding:.75rem;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-light);margin-top:auto}
-    .translation{display:none;font-style:italic;color:var(--text-muted);background:var(--success-light);padding:1rem;border-radius:var(--radius-sm);border-left:4px solid var(--success);font-size:.85rem;margin:.5rem 0;animation:fadeIn var(--transition-medium)}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-    .flip-hint{margin-top:auto;text-align:center;color:var(--text-light);font-size:.8rem;padding:.75rem;background:var(--bg-tertiary);border-radius:var(--radius-sm);animation:pulse 2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
-    .research-topic h3{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;font-size:1.2rem}
-    .research-topic ul{margin:0 0 .75rem 0;padding-left:1.25rem}
-    .research-topic li{margin-bottom:.5rem;color:var(--text-muted);font-size:.85rem;line-height:1.4}
-    .research-links{background:var(--bg-tertiary);padding:.75rem;border-radius:var(--radius-md);max-height:180px;overflow-y:auto;flex:1}
-    .research-links strong{display:block;margin-bottom:.5rem;font-size:.9rem}
-    .research-links ul{margin:0;padding:0;list-style:none}
-    .research-links li{margin-bottom:.5rem}
-    .research-links a{display:block;padding:.5rem;background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-sm);transition:all var(--transition-medium);box-shadow:var(--shadow-sm);font-size:.8rem}
-    .research-links a:hover{background:var(--brand);color:#fff;transform:translateX(4px);box-shadow:var(--shadow-md)}
-    .notes-textarea{width:100%;min-height:200px;border:2px solid var(--border-light);border-radius:var(--radius-md);padding:1.5rem;font-family:inherit;font-size:1rem;line-height:1.6;resize:vertical;transition:border-color var(--transition-medium);background:var(--success-light)}
-    .notes-textarea:focus{outline:none;border-color:var(--success);background:var(--bg-primary);box-shadow:0 0 0 3px rgb(239 124 142 / 0.1)}
-    .notes-status{display:inline-flex;align-items:center;gap:.5rem;margin-top:.75rem;padding:.5rem 1rem;background:var(--success);color:#fff;border-radius:var(--radius-sm);font-size:.875rem;font-weight:500;opacity:0;transition:opacity var(--transition-medium)}
-    .notes-status.show{opacity:1}
-    .cultural-note{background:linear-gradient(135deg,#ffe8e3 0%,#f1f5f9 100%);border-left:6px solid var(--success);border-radius:var(--radius-lg);padding:2rem;margin:2rem 0;box-shadow:var(--shadow-lg)}
-    .cultural-note h3{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
-    .references-toggle{background:var(--success-light);border:2px solid var(--success);color:var(--ink);padding:.75rem 1.25rem;border-radius:var(--radius-md);cursor:pointer;font-weight:500;margin-top:1rem;transition:all var(--transition-medium);display:inline-flex;align-items:center;gap:.5rem}
-    .references-toggle:hover{background:var(--success);color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-md)}
-    .references-content{display:none;margin-top:1rem;padding:1.5rem;background:rgba(255,255,255,.8);border-radius:var(--radius-sm);border:1px solid var(--success);animation:fadeIn var(--transition-medium)}
-    .references-content.show{display:block}
-    .toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.5rem;padding:1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);border:1px solid var(--border-light)}
-    .toolbar-group{display:flex;gap:.75rem;align-items:center;padding:.75rem 1rem;background:var(--bg-primary);border:1px solid var(--border-light);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
-    .toolbar-group label{font-weight:500;color:var(--text-muted);font-size:.875rem}
-    .btn{appearance:none;border:1px solid var(--border-medium);background:var(--bg-primary);padding:.75rem 1.25rem;border-radius:var(--radius-md);cursor:pointer;font-weight:500;transition:all var(--transition-medium);box-shadow:var(--shadow-sm);display:inline-flex;align-items:center;gap:.5rem}
-    .btn:hover{background:var(--bg-tertiary);transform:translateY(-1px);box-shadow:var(--shadow-md)}
-    .btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
-    .btn-primary{background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%);color:#fff;border:none;font-weight:600;box-shadow:var(--shadow-md)}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-    .canvas-wrapper{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-primary);box-shadow:var(--shadow-lg);border:2px solid var(--border-light)}
-    #drawCanvas,#mediaCanvas,#notesCanvas{display:block}
-    #drawCanvas{position:relative;z-index:1}
-    #mediaCanvas{position:absolute;inset:0;z-index:2;cursor:grab}
-    #notesCanvas{position:absolute;inset:0;z-index:3}
-    .step-indicator{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;background:var(--brand);color:#fff;border-radius:50%;font-weight:600;margin-right:1rem}
-    .checklist{list-style:none;padding:0;margin:1.5rem 0}
-    .checklist li{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;padding:1rem;background:var(--success-light);border-radius:var(--radius-md);border-left:4px solid var(--success)}
-    .checklist li::before{content:"✓";background:var(--success);color:#fff;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.875rem;flex-shrink:0}
-    .footer{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#cbd5e1;padding:2.5rem;text-align:center;margin-top:4rem;border-radius:var(--radius-lg);border:2px solid #334155}
-    @media (max-width:768px){.
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px; line-height: 1.6; color: var(--ink);
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3 { font-family: 'Crimson Text', serif; font-weight: 600; line-height: 1.2; margin: 0; }
+    h1 { font-size: 2.5rem; color: var(--brand); }
+    h2 { font-size: 1.875rem; color: var(--ink); margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; color: var(--brand); margin-bottom: 0.75rem; }
+    p { margin: 0 0 1rem; }
+    .text-sm { font-size: 0.875rem; color: var(--text-muted); }
+    .text-xs { font-size: 0.75rem; color: var(--text-light); }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--brand); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .section { margin-bottom: 3rem; }
+    .card {
+      background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+      padding: 2rem; box-shadow: var(--shadow-md); transition: box-shadow var(--transition-medium);
+    }
+    .card:hover { box-shadow: var(--shadow-lg); }
+    .header {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      border: 2px solid var(--border-light); border-left: 6px solid var(--brand);
+      border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-xl);
+      margin-bottom: 3rem; text-align: center;
+    }
+    .header h1 { margin-bottom: 1rem; }
+    .header-links { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .header-link {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--bg-primary);
+      border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
+    }
+    .header-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+    .flip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; max-width: 100%; }
+    @media (max-width: 1024px) { .flip-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; } }
+    @media (max-width: 768px) { .flip-grid { grid-template-columns: 1fr; gap: 1rem; } }
+    .flip-card { perspective: 1200px; height: 500px; cursor: pointer; transition: transform var(--transition-medium); width: 100%; }
+    .flip-card:hover { transform: scale(1.02); }
+    .flip-card:focus { outline: 3px solid var(--brand); outline-offset: 4px; }
+    .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .flip-card.is-flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius-lg); border: 2px solid var(--border-light);
+      background: var(--bg-primary); box-shadow: var(--shadow-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; overflow-y: auto; font-size: 0.9rem;
+    }
+    .flip-front { border-top: 6px solid var(--brand); }
+    .flip-back  { border-top: 6px solid var(--accent); transform: rotateY(180deg); }
+    .flip-badge {
+      align-self: flex-start; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+      color: white; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; box-shadow: var(--shadow-md);
+    }
+    .translation-btn {
+      align-self: flex-start; background: var(--bg-secondary); border: 1px solid var(--border-medium);
+      padding: 0.5rem 1rem; border-radius: var(--radius-md); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all var(--transition-medium); box-shadow: var(--shadow-sm);
+    }
+    .translation-btn:hover, .translation-btn.active { background: var(--brand); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .quote {
+      font-family: 'Crimson Text', serif; font-size: 0.95rem; line-height: 1.5; font-style: italic; color: var(--ink);
+      background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%); padding: 1rem; border-radius: var(--radius-md); border: 2px solid var(--brand); margin: 0.5rem 0;
+    }
+    .attribution { font-size: 0.75rem; color: var(--text-muted); padding: 0.75rem; background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: auto; }
+    .translation {
+      display: none; font-style: italic; color: var(--text-muted);
+      background: var(--success-light); padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid var(--success);
+      font-size: 0.85rem; margin: 0.5rem 0; animation: fadeIn var(--transition-medium);
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .flip-hint { margin-top: auto; text-align: center; color: var(--text-light); font-size: 0.8rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: var(--radius-sm); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+    .research-topic h3 { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 1.2rem; }
+    .research-topic ul { margin: 0 0 0.75rem 0; padding-left: 1.25rem; }
+    .research-topic li { margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.85rem; line-height: 1.4; }
+    .research-links { background: var(--bg-tertiary); padding: 0.75rem; border-radius: var(--radius-md); max-height: 180px; overflow-y: auto; flex: 1; }
+    .research-links strong { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .research-links ul { margin: 0; padding: 0; list-style: none; }
+    .research-links li { margin-bottom: 0.5rem; }
+    .research-links a {
+      display: block; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm); transition: all var(--transition-medium); box-shadow: var(--shadow-sm); font-size: 0.8rem;
+    }
+    .research-links a:hover { background: var(--brand); color: white; transform: translateX(4px); box-shadow: var(--shadow-md); }
+    .notes-textarea { width: 100%; min-height: 200px; border: 2px solid var(--border-light); border-radius: var(--radius-md); padding: 1.5rem; font-family: inherit; font-size: 1rem; line-height: 1.6; resize: vertical; transition: border-color var(--transition-medium); background: var(--success-light); }
+    .notes-textarea:focus { outline: none; border-color: var(--success); background: var(--bg-primary); box-shadow: 0 0 0 3px rgb(239 124 142 / 0.1); }
+    .notes-status { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--success); color: white; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500; opacity: 0; transition: opacity var(--transition-medium); }
+    .notes-status.show { opacity: 1; }
+    .cultural-note { background: linear-gradient(135deg, #ffe8e3 0%, #f1f5f9 100%); border-left: 6px solid var(--success); border-radius: var(--radius-lg); padding: 2rem; margin: 2rem 0; box-shadow: var(--shadow-lg); }
+    .cultural-note h3 { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .references-toggle { background: var(--success-light); border: 2px solid var(--success); color: var(--ink); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; margin-top: 1rem; transition: all var(--transition-medium); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .references-toggle:hover { background: var(--success); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .references-content { display: none; margin-top: 1rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.8); border-radius: var(--radius-sm); border: 1px solid var(--success); animation: fadeIn var(--transition-medium); }
+    .references-content.show { display: block; }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem;
+      padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-light);
+    }
+    .toolbar-group { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+    .toolbar-group label { font-weight: 500; color: var(--text-muted); font-size: 0.875rem; }
+    .btn { appearance: none; border: 1px solid var(--border-medium); background: var(--bg-primary); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all var(--transition-medium); box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn:hover { background: var(--bg-tertiary); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn.active { background: var(--brand); color: white; border-color: var(--brand); }
+    .btn-primary { background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color: white; border: none; font-weight: 600; box-shadow: var(--shadow-md); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .canvas-wrapper { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-primary); box-shadow: var(--shadow-lg); border: 2px solid var(--border-light); }
+    #drawCanvas, #mediaCanvas, #notesCanvas { display: block; width: 100%; height: auto; }
+    #drawCanvas { position: relative; z-index: 1; }
+    #mediaCanvas { position: absolute; inset: 0; z-index: 2; cursor: grab; }
+    #notesCanvas { position: absolute; inset: 0; z-index: 3; }
+    .step-indicator { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--brand); color: white; border-radius: 50%; font-weight: 600; margin-right: 1rem; }
+    .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+    .checklist li { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: var(--success-light); border-radius: var(--radius-md); border-left: 4px solid var(--success); }
+    .checklist li::before { content: "✓"; background: var(--success); color: white; width: 1.5rem; height: 1.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.875rem; flex-shrink: 0; }
+    .footer { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #cbd5e1; padding: 2.5rem; text-align: center; margin-top: 4rem; border-radius: var(--radius-lg); border: 2px solid #334155; }
 
-     <body>
+        /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .header { padding: 2rem 1.5rem; text-align: center; }
+      .header h1 { font-size: 2rem; }
+      .flip-card { height: 450px; }
+      .toolbar { padding: 1rem; }
+      .toolbar-group { flex-wrap: wrap; }
+    }
+    /* Misc */
+    .loading { opacity: 0.7; pointer-events: none; }
+    .flip-card.transitioning { pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    button:focus, input:focus, textarea:focus, .flip-card:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+  </style>
+</head>
+<body>
   <div class="container">
     <header class="header">
       <h1>🌽 Exploring Mexican Culinary Heritage</h1>
@@ -94,7 +178,7 @@
       </div>
     </header>
 
-    <section class="section card">
+        <section class="section card">
       <h2><span class="step-indicator">1</span>Read the Testimonials</h2>
       <p class="text-sm"><strong>Purpose:</strong> Build cultural understanding from community voices. <strong>What to do:</strong> Read each short quote in Spanish. Click <em>Show English</em> as needed to confirm meaning.</p>
 
@@ -108,8 +192,8 @@
             <div class="flip-front">
               <span class="flip-badge">☕ Café Veracruz</span>
               <button class="translation-btn" data-trans="cafe">Show English</button>
-              <div class="quote">"El cambio climático está afectando nuestros patrones de cosecha...</div>
-              <div class="translation" id="trans-cafe">"Climate change is affecting our harvest patterns...</div>
+              <div class="quote">"El cambio climático está afectando nuestros patrones de cosecha. Las lluvias ya no llegan cuando esperamos, pero seguimos adaptándonos como lo hicieron nuestros abuelos. El café de sombra nos ayuda a proteger la biodiversidad mientras mantenemos viva nuestra tradición."</div>
+              <div class="translation" id="trans-cafe">"Climate change is affecting our harvest patterns. The rains no longer arrive when we expect them, but we keep adapting as our elders did. Shade-grown coffee helps protect biodiversity while we keep our tradition alive."</div>
               <div class="attribution"><strong>Attribution:</strong> Coatepec, Veracruz Producer. Source: MDPI <em>Sustainability</em>, 2024 (CC BY 4.0).</div>
               <div class="flip-hint">Click card to reveal research topic ↻</div>
             </div>
@@ -140,9 +224,9 @@
             <div class="flip-front">
               <span class="flip-badge">🍞 Pan de Fiesta</span>
               <button class="translation-btn" data-trans="pan">Show English</button>
-              <div class="quote">"Esta tradición tiene 307 años en nuestra comunidad...</div>
-              <div class="translation" id="trans-pan">"This tradition has been in our community for 307 years...</div>
-              <div class="attribution"><strong>Attribution:</strong> Traditional Baker, San Juan Huactzinco...</div>
+              <div class="quote">"Esta tradición tiene 307 años en nuestra comunidad. El pan de fiesta no es solo pan—es nuestra forma de crear redes de reciprocidad. Cuando horneamos para una celebración, fortalecemos los lazos que nos unen como pueblo."</div>
+              <div class="translation" id="trans-pan">"This tradition has been in our community for 307 years. Celebration bread is not just bread—it is our way of building reciprocity networks. When we bake for a celebration, we strengthen the bonds that unite us as a people."</div>
+              <div class="attribution"><strong>Attribution:</strong> Traditional Baker, San Juan Huactzinco. Source: Congreso del Estado de Tlaxcala / Secretaría de Cultura (public records).</div>
               <div class="flip-hint">Click card to reveal research topic ↻</div>
             </div>
             <div class="flip-back">
@@ -156,7 +240,9 @@
                 <div class="research-links">
                   <ul>
                     <li><a href="https://ich.unesco.org/en/RL/traditional-mexican-cuisine-00400" target="_blank" rel="noopener">UNESCO — Traditional Mexican Cuisine</a></li>
+                    <li><a href="https://sic.cultura.gob.mx/index.php?table=frpintangible" target="_blank" rel="noopener">Sistema de Información Cultural — Registry</a></li>
                     <li><a href="https://huactzinco.gob.mx/cultura/pan-de-fiesta/" target="_blank" rel="noopener">Municipio de Huactzinco — Pan de Fiesta</a></li>
+                    <li><a href="https://www.gob.mx/cultura/" target="_blank" rel="noopener">Secretaría de Cultura — Programs</a></li>
                   </ul>
                 </div>
               </div>
@@ -166,14 +252,14 @@
         </div>
 
         <!-- Amaranth Card -->
-        <div class="flip-card" tabindex="0" role="button" aria-label="Amaranth testimonial and research topic">
+        <div class="flip-card" tabindex="0" role="button" aria-label="Amaranto testimonial and research topic">
           <div class="flip-inner">
             <div class="flip-front">
               <span class="flip-badge">🌾 Amaranto</span>
               <button class="translation-btn" data-trans="amaranto">Show English</button>
-              <div class="quote">"En la época prehispánica, el amaranto conectaba a nuestros ancestros...</div>
-              <div class="translation" id="trans-amaranto">"In pre-Hispanic times, amaranth connected our ancestors...</div>
-              <div class="attribution"><strong>Attribution:</strong> Artisan, Temoac/Huazulco, Morelos...</div>
+              <div class="quote">"En la época prehispánica, el amaranto conectaba a nuestros ancestros con los dioses. Hoy, las 'alegrías' que producimos conectan pasado y presente y sostienen a nuestras familias mientras preservamos 6,000 años de historia."</div>
+              <div class="translation" id="trans-amaranto">"In pre-Hispanic times, amaranth connected our ancestors with the gods. Today, the 'alegrías' we make connect past and present, providing income for our families while we preserve 6,000 years of history."</div>
+              <div class="attribution"><strong>Attribution:</strong> Artisan, Temoac/Huazulco, Morelos. Source: Sistema de Información Cultural & academic reports.</div>
               <div class="flip-hint">Click card to reveal research topic ↻</div>
             </div>
             <div class="flip-back">
@@ -181,13 +267,15 @@
                 <h3>🦾 Cultural Resistance</h3>
                 <ul>
                   <li>In what ways do these practices resist homogenization/globalization?</li>
-                  <li>Which elements are non-negotiable for identity?</li>
+                  <li>Which elements of the tradition are non-negotiable for community identity?</li>
                 </ul>
                 <strong>Research Links (CC/Public)</strong>
                 <div class="research-links">
                   <ul>
                     <li><a href="https://ich.unesco.org/en/RL/traditional-mexican-cuisine-00400" target="_blank" rel="noopener">UNESCO — Traditional Mexican Cuisine</a></li>
                     <li><a href="https://mediateca.inah.gob.mx/" target="_blank" rel="noopener">Mediateca INAH — Collections</a></li>
+                    <li><a href="https://www.gob.mx/cultura/prensa/" target="_blank" rel="noopener">Secretaría de Cultura — Press</a></li>
+                    <li><a href="https://www.nativeseeds.org/products/c020" target="_blank" rel="noopener">Native Seeds/Search — Huazulco Amaranth</a></li>
                   </ul>
                 </div>
               </div>
@@ -200,13 +288,14 @@
 
     <section class="section card">
       <h2><span class="step-indicator">3</span>Research & Comparative Analysis</h2>
-      <p class="text-sm">Investigate your chosen focus area...</p>
+      <p class="text-sm">Investigate your chosen focus area. Document evidence that supports your analysis of how this foodway demonstrates sustainability, reciprocity, or resistance. Then contrast your findings with food traditions in your family, local community, or a specific region in your country. Explain whether they demonstrate similar patterns of sustainability, reciprocity, or resistance.</p>
       <textarea id="notesBox" class="notes-textarea" placeholder="Evidence → Analysis → Local comparison… "></textarea>
       <div class="notes-status" id="notesStatus">💾 Saved automatically</div>
     </section>
+
         <section class="section card">
       <h2><span class="step-indicator">4</span>Poster Studio: Create Your Visual Synthesis</h2>
-      <p class="text-sm">Include links to videos, add photos, and draw...</p>
+      <p class="text-sm">Include links to videos, add photos, and draw to synthesize your research findings into a visual presentation. Connect your analysis to patterns from your family, community, or country.</p>
 
       <div class="toolbar">
         <div class="toolbar-group">
@@ -229,12 +318,18 @@
 
         <div class="toolbar-group">
           <label for="noteText">Mini Post-it</label>
-          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:220px">
-          <select id="noteSize" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px">
-            <option value="14">Small</option><option value="16" selected>Medium</option><option value="20">Large</option>
+          <input id="noteText" type="text" placeholder="Type a tip or paste a link…" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px;min-width:220px">
+          <select id="noteSize" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px">
+            <option value="14">Small</option>
+            <option value="16" selected>Medium</option>
+            <option value="20">Large</option>
           </select>
-          <select id="noteColor" title="Note color" style="padding:.5rem;border:1px solid var(--border-light);border-radius:8px">
-            <option value="0" selected>Yellow</option><option value="1">Blue</option><option value="2">Gold</option><option value="3">Rose</option><option value="4">Lavender</option>
+          <select id="noteColor" title="Note color" style="padding:0.5rem;border:1px solid var(--border-light);border-radius:8px">
+            <option value="0" selected>Yellow</option>
+            <option value="1">Blue</option>
+            <option value="2">Gold</option>
+            <option value="3">Rose</option>
+            <option value="4">Lavender</option>
           </select>
           <button class="btn" id="addNoteBtn" onclick="activateNoteMode()">🗒️ Add Note</button>
         </div>
@@ -242,375 +337,404 @@
         <button class="btn btn-primary" onclick="savePoster()">💾 Save Poster (PNG)</button>
       </div>
 
-      <div class="canvas-wrapper" style="width:100%;max-width:1200px;margin-inline:auto">
-        <!-- Dimensiones fijas para coord. simples -->
+      <div class="canvas-wrapper" style="max-width:1200px;margin-inline:auto">
         <canvas id="drawCanvas"  width="1200" height="720"></canvas>
         <canvas id="mediaCanvas" width="1200" height="720"></canvas>
         <canvas id="notesCanvas" width="1200" height="720"></canvas>
       </div>
-      <p class="text-xs" id="noteHint" style="margin-top:.5rem;display:none">Tip: click anywhere on the canvas to place your note. Drag notes to reposition. Press Esc to cancel.</p>
+      <p class="text-xs" id="noteHint" style="margin-top:0.5rem;display:none;">Tip: click anywhere on the canvas to place your note. Drag notes to reposition. Press Esc to cancel.</p>
+    </section>
+
+    <section class="section card">
+      <h2><span class="step-indicator">5</span>Present Your Findings</h2>
+      <p class="text-sm">Present your research analysis using your visual synthesis as a guide.</p>
+      <ul class="checklist">
+        <li>(a) Clearly explain your analysis about sustainability, reciprocity, or resistance.</li>
+        <li>(b) Cite the strongest piece of evidence and say why it's credible.</li>
+        <li>(c) Contrast with your personal example (family, community, or country).</li>
+      </ul>
     </section>
 
     <section class="section cultural-note">
       <h3>🌡️ Cultural Note — Closing Reflection</h3>
-      <p>Across Mexico's culinary heritage, communities navigate...</p>
+      <p>
+        Across Mexico's culinary heritage, communities navigate converging pressures from climate change, economic globalization, and cultural displacement. Coffee producers in Veracruz face erratic rainfall disrupting harvest calendars, while traditional bakers in Tlaxcala compete with industrial bread production. Amaranth artisans in Morelos confront market displacement, and indigenous communities nationwide experience erosion of traditional ecological knowledge through youth migration.
+      </p>
+      <p>
+        Climate change threatens to displace 1.4–6.7 million Mexicans by 2080, while trade agreements have already displaced over 1 million farmers. Food sovereignty movements increasingly recognize that preserving culinary heritage requires defending indigenous rights, supporting women's knowledge systems, and maintaining community-controlled agriculture.
+      </p>
       <button class="references-toggle" onclick="toggleReferences()">📚 View Academic References <span id="toggle-icon">▼</span></button>
       <div class="references-content" id="references-content">
-        <div class="text-xs"><strong>Works Cited (MLA Format)</strong><br><br>…</div>
+        <div class="text-xs">
+          <strong>Works Cited (MLA Format)</strong><br><br>
+          Cabrera-Torres, Jose, et al. "Panorama of Coffee Cultivation in the Central Zone of Veracruz State, Mexico: Identification of Main Stressors and Challenges to Face." <em>Sustainability</em>, vol. 16, no. 2, 2024, article 802. <em>MDPI</em>, doi:10.3390/su16020802.<br><br>
+          "Climate Change in Mexico." <em>Wikipedia</em>, 2 June 2025, en.wikipedia.org/wiki/Climate_change_in_Mexico.<br><br>
+          Municipio de San Juan Huactzinco. "Pan de Fiesta." <em>Official Municipal Website</em>, huactzinco.gob.mx/cultura/pan-de-fiesta/.<br><br>
+          Native Seeds/Search. "Amaranth 'Huazulco Alegría' — Variety Information." <em>Native Seeds/SEARCH</em>, nativeseeds.org/products/c020.<br><br>
+          Secretaría de Cultura. "Boletines de Prensa." <em>Gobierno de México</em>, gob.mx/cultura/prensa/.<br><br>
+          "Sin Maíz, No Hay País: How Free Trade Hurts Indigenous Food Sovereignty in Mexico." <em>CIWS</em>, 19 Feb. 2025.<br><br>
+          UNESCO. "Traditional Mexican Cuisine: Ancestral, Ongoing Community Culture." 2010, ich.unesco.org/en/RL/traditional-mexican-cuisine-00400.
+        </div>
       </div>
     </section>
 
     <footer class="footer">
-      <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Mexican communities...</p>
-      <p style="margin-top:1.5rem;">© 2025 Spanish Learning Edge LLC. All rights reserved.</p>
+      <p><strong>Cultural Recognition:</strong> This knowledge belongs to the Mexican communities who keep these traditions alive today. Their ancestral wisdom must be respected as a living tradition, not as a historical curiosity.</p>
+      <p style="margin-top: 1.5rem;">© 2025 Spanish Learning Edge LLC. All rights reserved.</p>
       <p class="text-xs">Designed using instructional expertise and AI-assisted tools. Not for redistribution without permission.</p>
     </footer>
   </div>
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  /* -------- Flip cards -------- */
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('button, a')) return;
-      card.classList.add('transitioning');
-      card.classList.toggle('is-flipped');
-      setTimeout(()=>card.classList.remove('transitioning'),800);
-    });
-    card.addEventListener('keydown',(e)=>{
-      if(e.key==='Enter'||e.key===' '){
-        e.preventDefault();
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    /* Flip cards */
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('button, a')) return;
         card.classList.add('transitioning');
         card.classList.toggle('is-flipped');
         setTimeout(()=>card.classList.remove('transitioning'),800);
-      }
+      });
+      card.addEventListener('keydown',(e)=>{
+        if(e.key==='Enter'||e.key===' '){
+          e.preventDefault();
+          card.classList.add('transitioning');
+          card.classList.toggle('is-flipped');
+          setTimeout(()=>card.classList.remove('transitioning'),800);
+        }
+      });
     });
-  });
 
-  // Show English buttons
-  document.querySelectorAll('.translation-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const id = btn.dataset.trans;
-      const el = document.getElementById('trans-'+id);
-      if(!el) return;
-      const on = el.style.display === 'block';
-      el.style.display = on ? 'none' : 'block';
-      btn.classList.toggle('active', !on);
-      btn.textContent = on ? 'Show English' : 'Hide English';
+    /* Mostrar/ocultar traducciones */
+    document.querySelectorAll('.translation-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const el = document.getElementById('trans-' + btn.dataset.trans);
+        if(!el) return;
+        const on = el.style.display === 'block';
+        el.style.display = on ? 'none' : 'block';
+        btn.classList.toggle('active', !on);
+        btn.textContent = on ? 'Show English' : 'Hide English';
+      });
     });
-  });
 
-  /* -------- Notes autosave indicator (Step 3) -------- */
-  const notesBox = document.getElementById('notesBox');
-  const notesStatus = document.getElementById('notesStatus');
-  let saveTimeout;
-  notesBox?.addEventListener('input', () => {
-    clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(()=>{
-      notesStatus.classList.add('show');
-      setTimeout(()=>notesStatus.classList.remove('show'),2000);
-    },500);
-  });
+    /* Autosave (Step 3) */
+    const notesBox = document.getElementById('notesBox');
+    const notesStatus = document.getElementById('notesStatus');
+    let saveTimeout;
+    notesBox?.addEventListener('input', () => {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(()=>{
+        notesStatus.classList.add('show');
+        setTimeout(()=>notesStatus.classList.remove('show'),2000);
+      },500);
+    });
 
-  /* ======= Poster Studio ======= */
-  // Canvases & contexts
-  const drawCanvas  = document.getElementById('drawCanvas');
-  const mediaCanvas = document.getElementById('mediaCanvas');
-  const notesCanvas = document.getElementById('notesCanvas');
-  const drawCtx  = drawCanvas.getContext('2d');
-  const mediaCtx = mediaCanvas.getContext('2d');
-  const notesCtx = notesCanvas.getContext('2d');
+    /* Poster Studio: canvases y contextos */
+    const drawCanvas  = document.getElementById('drawCanvas');
+    const mediaCanvas = document.getElementById('mediaCanvas');
+    const notesCanvas = document.getElementById('notesCanvas');
+    const drawCtx  = drawCanvas.getContext('2d');
+    const mediaCtx = mediaCanvas.getContext('2d');
+    const notesCtx = notesCanvas.getContext('2d');
 
-  // Fondo blanco base del lienzo de dibujo
-  drawCtx.fillStyle = 'white';
-  drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
+    // fondo blanco del lienzo de dibujo
+    drawCtx.fillStyle = 'white';
+    drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
 
-  // Tooling
-  const colorPicker = document.getElementById('colorPicker');
-  const brushSize   = document.getElementById('brushSize');
-  const sizeDisplay = document.getElementById('sizeDisplay');
-  const penTool     = document.getElementById('penTool');
-  const eraserTool  = document.getElementById('eraserTool');
+    /* Herramientas */
+    const colorPicker = document.getElementById('colorPicker');
+    const brushSize   = document.getElementById('brushSize');
+    const sizeDisplay = document.getElementById('sizeDisplay');
+    const penTool     = document.getElementById('penTool');
+    const eraserTool  = document.getElementById('eraserTool');
 
-  let currentTool = 'pen';
-  function setTool(tool){
-    currentTool = tool;
-    [penTool, eraserTool].forEach(b=>b.classList.remove('active'));
-    if(tool==='pen') penTool.classList.add('active');
-    if(tool==='eraser') eraserTool.classList.add('active');
+    let currentTool = 'pen';
+    function setTool(tool){
+      currentTool = tool;
+      [penTool, eraserTool].forEach(b=>b.classList.remove('active'));
+      if(tool==='pen') penTool.classList.add('active');
+      if(tool==='eraser') eraserTool.classList.add('active');
 
-    const drawingMode = (tool==='pen'||tool==='eraser');
-    // En modo dibujo, desactiva eventos en capas superiores para que drawCanvas reciba el mouse
-    mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
-    notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+      const drawingMode = (tool==='pen'||tool==='eraser');
+      mediaCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
+      notesCanvas.style.pointerEvents = drawingMode ? 'none' : 'auto';
 
-    drawCanvas.style.cursor  = drawingMode ? 'crosshair' : 'default';
-    mediaCanvas.style.cursor = 'grab';
-    notesCanvas.style.cursor = drawingMode ? 'default' : 'grab';
-  }
-  window.setTool = setTool;
-  setTool('pen');
-  sizeDisplay.textContent = brushSize.value + 'px';
-  brushSize.addEventListener('input',()=> sizeDisplay.textContent = brushSize.value + 'px');
+      drawCanvas.style.cursor  = drawingMode ? 'crosshair' : 'default';
+      mediaCanvas.style.cursor = 'grab';
+      notesCanvas.style.cursor = drawingMode ? 'default' : 'grab';
+    }
+    window.setTool = setTool;
+    setTool('pen');
 
-  // Estado global
-  let images = [];   // {img,w,h,x,y}
-  let notes  = [];   // {x,y,w,h,text,fontPx,bg,border,urls:[]}
+    sizeDisplay.textContent = brushSize.value + 'px';
+    brushSize.addEventListener('input',()=> sizeDisplay.textContent = brushSize.value + 'px');
 
-  // Historial unificado
-  let history = [], historyIndex = -1;
-  const cloneImages = arr => arr.map(o=>({img:o.img,w:o.w,h:o.h,x:o.x,y:o.y}));
-  const cloneNotes  = arr => JSON.parse(JSON.stringify(arr));
-  function snapshot(label=''){
-    const drawSnap = drawCanvas.toDataURL();
-    const mediaSnap= cloneImages(images);
-    const notesSnap= cloneNotes(notes);
-    historyIndex++;
-    if(historyIndex < history.length) history.length = historyIndex;
-    history.push({drawSnap,mediaSnap,notesSnap,label});
-    if(history.length>50){ history.shift(); historyIndex--; }
-  }
-  function restore(st){
-    const im = new Image();
-    im.onload = ()=>{
-      drawCtx.globalCompositeOperation = 'source-over';
-      drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
-      drawCtx.drawImage(im,0,0);
-    };
-    im.src = st.drawSnap;
-    images = cloneImages(st.mediaSnap);
-    notes  = cloneNotes(st.notesSnap);
-    renderMedia(); renderNotes();
-  }
-  function undoLast(){
-    if(historyIndex>0){ historyIndex--; restore(history[historyIndex]); }
-  }
-  window.undoLast = undoLast;
-  snapshot('init');
+    /* Historial (dibujo + imágenes + notas) */
+    let images = [];   // {img,w,h,x,y}
+    let notes  = [];   // {x,y,w,h,text,fontPx,bg,border,urls:[]}
+    let history = [], historyIndex = -1;
 
-    /* ===== Dibujo ===== */
-  let isDrawing=false, last={x:0,y:0};
-  const getPos = (canvas, evt)=>{
-    const r = canvas.getBoundingClientRect();
-    const x = (evt.clientX ?? evt.touches?.[0]?.clientX ?? 0) - r.left;
-    const y = (evt.clientY ?? evt.touches?.[0]?.clientY ?? 0) - r.top;
-    return {x:Math.round(x), y:Math.round(y)};
-  };
-  function startDraw(e){
-    if(!(currentTool==='pen' || currentTool==='eraser')) return;
-    e.preventDefault();
-    isDrawing=true;
-    last=getPos(drawCanvas,e);
-    drawCtx.lineCap='round'; drawCtx.lineJoin='round';
-    drawCtx.lineWidth=parseInt(brushSize.value,10);
-    if(currentTool==='pen'){ drawCtx.globalCompositeOperation='source-over'; drawCtx.strokeStyle=colorPicker.value; }
-    else{ drawCtx.globalCompositeOperation='destination-out'; }
-  }
-  function moveDraw(e){
-    if(!isDrawing) return;
-    e.preventDefault();
-    const p=getPos(drawCanvas,e);
-    drawCtx.beginPath(); drawCtx.moveTo(last.x,last.y); drawCtx.lineTo(p.x,p.y); drawCtx.stroke();
-    last=p;
-  }
-  function endDraw(){
-    if(isDrawing){ isDrawing=false; snapshot('draw-end'); }
-  }
-  drawCanvas.addEventListener('mousedown',startDraw);
-  drawCanvas.addEventListener('mousemove',moveDraw);
-  drawCanvas.addEventListener('mouseup',endDraw);
-  drawCanvas.addEventListener('mouseleave',endDraw);
-  drawCanvas.addEventListener('touchstart',e=>drawCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true})),{passive:false});
-  drawCanvas.addEventListener('touchmove',e=>{e.preventDefault();drawCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true}))},{passive:false});
-  drawCanvas.addEventListener('touchend',()=>drawCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
+    const cloneImages = arr => arr.map(o=>({img:o.img,w:o.w,h:o.h,x:o.x,y:o.y}));
+    const cloneNotes  = arr => JSON.parse(JSON.stringify(arr));
 
-  /* ===== Imágenes ===== */
-  const mediaCtx = document.getElementById('mediaCanvas').getContext('2d');
-  function renderMedia(){
-    mediaCtx.clearRect(0,0,mediaCanvas.width,mediaCanvas.height);
-    images.forEach(o=> mediaCtx.drawImage(o.img,o.x,o.y,o.w,o.h));
-  }
-  document.getElementById('imageUpload').addEventListener('change',(e)=>{
-    const file = e.target.files?.[0]; if(!file) return;
-    const rd = new FileReader();
-    rd.onload = ev=>{
+    function snapshot(label=''){
+      const drawSnap = drawCanvas.toDataURL();
+      const mediaSnap= cloneImages(images);
+      const notesSnap= cloneNotes(notes);
+      historyIndex++;
+      if(historyIndex < history.length) history.length = historyIndex;
+      history.push({drawSnap,mediaSnap,notesSnap,label});
+      if(history.length>50){ history.shift(); historyIndex--; }
+    }
+    function restore(st){
       const im = new Image();
       im.onload = ()=>{
-        let w=im.width, h=im.height; const maxW=360,maxH=360;
-        if(w>maxW||h>maxH){ const r=Math.min(maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); }
-        const x=Math.round((mediaCanvas.width - w)/2), y=Math.round((mediaCanvas.height - h)/2);
-        images.push({img:im,w,h,x,y}); renderMedia(); snapshot('image-added');
+        drawCtx.globalCompositeOperation='source-over';
+        drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
+        drawCtx.drawImage(im,0,0);
       };
-      im.src = ev.target.result;
-    };
-    rd.readAsDataURL(file); e.target.value='';
-  });
-  let draggingImg=null;
-  mediaCanvas.addEventListener('mousedown',(e)=>{
-    const p=getPos(mediaCanvas,e);
-    for(let i=images.length-1;i>=0;i--){
-      const o=images[i];
-      if(p.x>=o.x && p.x<=o.x+o.w && p.y>=o.y && p.y<=o.y+o.h){
-        const picked=images.splice(i,1)[0]; images.push(picked);
-        draggingImg={index:images.length-1,offsetX:p.x-picked.x,offsetY:p.y-picked.y};
-        mediaCanvas.style.cursor='grabbing'; renderMedia(); return;
-      }
+      im.src = st.drawSnap;
+      images = cloneImages(st.mediaSnap);
+      notes  = cloneNotes(st.notesSnap);
+      renderMedia(); renderNotes();
     }
-    draggingImg=null;
-  });
-  mediaCanvas.addEventListener('mousemove',(e)=>{
-    if(!draggingImg) return;
-    const p=getPos(mediaCanvas,e); const o=images[draggingImg.index];
-    o.x=p.x-draggingImg.offsetX; o.y=p.y-draggingImg.offsetY; renderMedia();
-  });
-  function endDragImg(){
-    if(draggingImg) snapshot('image-drag-end');
-    draggingImg=null; mediaCanvas.style.cursor='grab';
-  }
-  mediaCanvas.addEventListener('mouseup',endDragImg);
-  mediaCanvas.addEventListener('mouseleave',endDragImg);
-  mediaCanvas.addEventListener('touchstart',e=>mediaCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true})),{passive:false});
-  mediaCanvas.addEventListener('touchmove',e=>{e.preventDefault();mediaCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true}))},{passive:false});
-  mediaCanvas.addEventListener('touchend',()=>mediaCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
+    function undoLast(){
+      if(historyIndex>0){ historyIndex--; restore(history[historyIndex]); }
+    }
+    window.undoLast = undoLast;
+    snapshot('init');
 
-  /* ===== Notas ===== */
-  const notesCtx = document.getElementById('notesCanvas').getContext('2d');
-  const NOTE_COLORS = [
-    { bg:'#fff8c5', border:'#facc15' },{ bg:'#e0f2fe', border:'#38bdf8' },
-    { bg:'#fde68a', border:'#f59e0b' },{ bg:'#fee2e2', border:'#f87171' },
-    { bg:'#e9d5ff', border:'#a78bfa' }
-  ];
-  const noteText  = document.getElementById('noteText');
-  const noteSize  = document.getElementById('noteSize');
-  const noteColor = document.getElementById('noteColor');
-  const noteHint  = document.getElementById('noteHint');
-  let noteMode=false, draggingNote=null;
-  const urlRegex=/\bhttps?:\/\/[^\s)]+/gi;
+    /* Dibujo */
+    let isDrawing=false, last={x:0,y:0};
+    function getPos(canvas, evt){
+      const r = canvas.getBoundingClientRect();
+      const x = (evt.clientX ?? evt.touches?.[0]?.clientX ?? 0) - r.left;
+      const y = (evt.clientY ?? evt.touches?.[0]?.clientY ?? 0) - r.top;
+      return {x:Math.round(x), y:Math.round(y)};
+    }
+    function startDraw(e){
+      if(!(currentTool==='pen' || currentTool==='eraser')) return;
+      e.preventDefault();
+      isDrawing=true;
+      last=getPos(drawCanvas,e);
+      drawCtx.lineCap='round'; drawCtx.lineJoin='round';
+      drawCtx.lineWidth=parseInt(brushSize.value,10);
+      if(currentTool==='pen'){ drawCtx.globalCompositeOperation='source-over'; drawCtx.strokeStyle=colorPicker.value; }
+      else{ drawCtx.globalCompositeOperation='destination-out'; }
+    }
+    function moveDraw(e){
+      if(!isDrawing) return;
+      e.preventDefault();
+      const p=getPos(drawCanvas,e);
+      drawCtx.beginPath(); drawCtx.moveTo(last.x,last.y); drawCtx.lineTo(p.x,p.y); drawCtx.stroke();
+      last=p;
+    }
+    function endDraw(){
+      if(isDrawing){ isDrawing=false; snapshot('draw-end'); }
+    }
+    drawCanvas.addEventListener('mousedown',startDraw);
+    drawCanvas.addEventListener('mousemove',moveDraw);
+    drawCanvas.addEventListener('mouseup',endDraw);
+    drawCanvas.addEventListener('mouseleave',endDraw);
+    drawCanvas.addEventListener('touchstart',e=>drawCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true})),{passive:false});
+    drawCanvas.addEventListener('touchmove',e=>{e.preventDefault();drawCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true}))},{passive:false});
+    drawCanvas.addEventListener('touchend',()=>drawCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
 
-  function wrapLines(ctx,text,maxW){
-    const words=text.split(/\s+/), lines=[]; let line='';
-    for(const w of words){ const t=line?`${line} ${w}`:w; if(ctx.measureText(t).width>maxW){ if(line) lines.push(line); line=w; } else { line=t; } }
-    if(line) lines.push(line); return lines;
-  }
-  function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
-  function renderNotes(){
-    notesCtx.clearRect(0,0,notesCanvas.width,notesCanvas.height);
-    notes.forEach((n,i)=>{
-      notesCtx.save();
-      notesCtx.shadowColor='rgba(0,0,0,0.12)'; notesCtx.shadowBlur=6; notesCtx.shadowOffsetY=3;
-      notesCtx.fillStyle=n.bg; notesCtx.strokeStyle=n.border; notesCtx.lineWidth=2; rr(notesCtx,n.x,n.y,n.w,n.h,10); notesCtx.fill(); notesCtx.stroke();
-      notesCtx.shadowColor='transparent'; notesCtx.fillStyle='rgba(0,0,0,0.06)'; notesCtx.beginPath(); notesCtx.moveTo(n.x+n.w-22,n.y); notesCtx.lineTo(n.x+n.w,n.y); notesCtx.lineTo(n.x+n.w,n.y+22); notesCtx.closePath(); notesCtx.fill();
-      notesCtx.fillStyle='#111827'; notesCtx.font=`bold ${n.fontPx}px Inter, system-ui`;
-      const pad=12, lines=wrapLines(notesCtx,n.text,n.w-pad*2), lh=Math.round(n.fontPx*1.35);
-      lines.forEach((ln,j)=> notesCtx.fillText(ln,n.x+pad,n.y+pad+n.fontPx+j*lh));
-      if(n.urls?.length){ notesCtx.fillStyle='#2563eb'; notesCtx.font=`bold ${Math.max(12,n.fontPx-2)}px Inter`; notesCtx.fillText('🔗',n.x+n.w-22,n.y+n.h-10); }
-      if(draggingNote && draggingNote.index===i){ notesCtx.strokeStyle='#4f46e5'; notesCtx.setLineDash([6,4]); rr(notesCtx,n.x-2,n.y-2,n.w+4,n.h+4,12); notesCtx.stroke(); notesCtx.setLineDash([]); }
-      notesCtx.restore();
+    /* Imágenes */
+    function renderMedia(){
+      mediaCtx.clearRect(0,0,mediaCanvas.width,mediaCanvas.height);
+      images.forEach(o=> mediaCtx.drawImage(o.img,o.x,o.y,o.w,o.h));
+    }
+    document.getElementById('imageUpload').addEventListener('change',(e)=>{
+      const file = e.target.files?.[0]; if(!file) return;
+      const rd = new FileReader();
+      rd.onload = ev=>{
+        const im = new Image();
+        im.onload = ()=>{
+          let w=im.width, h=im.height; const maxW=360,maxH=360;
+          if(w>maxW||h>maxH){ const r=Math.min(maxW/w,maxH/h); w=Math.round(w*r); h=Math.round(h*r); }
+          const x=Math.round((mediaCanvas.width - w)/2), y=Math.round((mediaCanvas.height - h)/2);
+          images.push({img:im,w,h,x,y}); renderMedia(); snapshot('image-added');
+        };
+        im.src = ev.target.result;
+      };
+      rd.readAsDataURL(file); e.target.value='';
     });
-  }
-  function placeNote(x,y,text,fontPx){
-    const col=NOTE_COLORS[parseInt(noteColor.value,10)||0]||NOTE_COLORS[0];
-    const wMin=160,wMax=260; notesCtx.font=`bold ${fontPx}px Inter`;
-    const words=text.split(/\s+/); let line='', lines=[], w=0;
-    for(const wd of words){ const t=line?line+' '+wd:wd; if(notesCtx.measureText(t).width>wMax-24){ lines.push(line); line=wd; } else { line=t; } }
-    if(line) lines.push(line);
-    w=Math.min(wMax,Math.max(wMin,Math.round(Math.max(...lines.map(l=>notesCtx.measureText(l).width))+24)));
-    const h=Math.round(24+(fontPx*1.35)*lines.length+12);
-    const urls=(text.match(urlRegex)||[]).map(u=>u.trim());
-    notes.push({x:Math.max(8,x-Math.round(w/2)),y:Math.max(8,y-Math.round(h/2)),w,h,text,fontPx,bg:col.bg,border:col.border,urls});
-  }
-  function activateNoteMode(){
-    if(!noteText.value.trim()){ noteText.focus(); noteText.placeholder='Type a tip… (required)'; return; }
-    noteMode=true; noteHint.style.display='block'; setTool('note'); notesCanvas.style.cursor='copy';
-  }
-  window.activateNoteMode=activateNoteMode;
-
-  const pointerOnNotes = (e)=> getPos(notesCanvas,e);
-
-  notesCanvas.addEventListener('mousedown',(e)=>{
-    if(notesCanvas.style.pointerEvents==='none') return; // si estás dibujando
-    const p=pointerOnNotes(e);
-    if(noteMode){
-      const text=noteText.value.trim(); const fontPx=parseInt(noteSize.value,10)||16;
-      if(text){ placeNote(p.x,p.y,text,fontPx); renderNotes(); snapshot('note-added'); }
-      noteMode=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab'; return;
-    }
-    for(let i=notes.length-1;i>=0;i--){
-      const n=notes[i];
-      if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
-        const picked=notes.splice(i,1)[0]; notes.push(picked);
-        const idx=notes.length-1;
-        draggingNote={index:idx,offsetX:p.x-picked.x,offsetY:p.y-picked.y};
-        notesCanvas.style.cursor='grabbing'; renderNotes(); return;
-      }
-    }
-    draggingNote=null; renderNotes();
-  });
-  notesCanvas.addEventListener('mousemove',(e)=>{
-    if(!draggingNote) return;
-    const p=pointerOnNotes(e); const n=notes[draggingNote.index];
-    n.x=p.x-draggingNote.offsetX; n.y=p.y-draggingNote.offsetY; renderNotes();
-  });
-  function endDragNote(){
-    if(draggingNote) snapshot('note-drag-end');
-    draggingNote=null; notesCanvas.style.cursor='grab'; renderNotes();
-  }
-  notesCanvas.addEventListener('mouseup',endDragNote);
-  notesCanvas.addEventListener('mouseleave',()=>{draggingNote=null});
-
-  notesCanvas.addEventListener('dblclick',(e)=>{
-    const p=pointerOnNotes(e);
-    for(let i=notes.length-1;i>=0;i--){
-      const n=notes[i];
-      if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
-        if(!n.urls?.length) return;
-        if(n.urls.length===1) window.open(n.urls[0],'_blank');
-        else{
-          const choice=prompt('Open which link?\n'+n.urls.map((u,j)=>`${j+1}. ${u}`).join('\n'));
-          const idx=parseInt(choice,10);
-          if(!isNaN(idx) && idx>=1 && idx<=n.urls.length) window.open(n.urls[idx-1],'_blank');
+    let draggingImg=null;
+    mediaCanvas.addEventListener('mousedown',(e)=>{
+      const p=getPos(mediaCanvas,e);
+      for(let i=images.length-1;i>=0;i--){
+        const o=images[i];
+        if(p.x>=o.x && p.x<=o.x+o.w && p.y>=o.y && p.y<=o.y+o.h){
+          const picked=images.splice(i,1)[0]; images.push(picked);
+          draggingImg={index:images.length-1,offsetX:p.x-picked.x,offsetY:p.y-picked.y};
+          mediaCanvas.style.cursor='grabbing'; renderMedia(); return;
         }
-        return;
       }
+      draggingImg=null;
+    });
+    mediaCanvas.addEventListener('mousemove',(e)=>{
+      if(!draggingImg) return;
+      const p=getPos(mediaCanvas,e); const o=images[draggingImg.index];
+      o.x=p.x-draggingImg.offsetX; o.y=p.y-draggingImg.offsetY; renderMedia();
+    });
+    function endDragImg(){
+      if(draggingImg) snapshot('image-drag-end');
+      draggingImg=null; mediaCanvas.style.cursor='grab';
     }
+    mediaCanvas.addEventListener('mouseup',endDragImg);
+    mediaCanvas.addEventListener('mouseleave',endDragImg);
+    mediaCanvas.addEventListener('touchstart',e=>mediaCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true})),{passive:false});
+    mediaCanvas.addEventListener('touchmove',e=>{e.preventDefault();mediaCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:e.touches[0].clientX,clientY:e.touches[0].clientY,bubbles:true}))},{passive:false});
+    mediaCanvas.addEventListener('touchend',()=>mediaCanvas.dispatchEvent(new MouseEvent('mouseup',{bubbles:true})));
+
+        /* Notas */
+    const NOTE_COLORS = [
+      { bg:'#fff8c5', border:'#facc15' }, { bg:'#e0f2fe', border:'#38bdf8' },
+      { bg:'#fde68a', border:'#f59e0b' }, { bg:'#fee2e2', border:'#f87171' },
+      { bg:'#e9d5ff', border:'#a78bfa' }
+    ];
+    const noteText  = document.getElementById('noteText');
+    const noteSize  = document.getElementById('noteSize');
+    const noteColor = document.getElementById('noteColor');
+    const noteHint  = document.getElementById('noteHint');
+    let noteMode=false, draggingNote=null;
+    const urlRegex=/\bhttps?:\/\/[^\s)]+/gi;
+
+    function wrapLines(ctx,text,maxW){
+      const words=text.split(/\s+/), lines=[]; let line='';
+      for(const w of words){ const t=line?`${line} ${w}`:w; if(ctx.measureText(t).width>maxW){ if(line) lines.push(line); line=w; } else { line=t; } }
+      if(line) lines.push(line); return lines;
+    }
+    function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y,y); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+    function renderNotes(){
+      notesCtx.clearRect(0,0,notesCanvas.width,notesCanvas.height);
+      notes.forEach((n,i)=>{
+        notesCtx.save();
+        notesCtx.shadowColor='rgba(0,0,0,0.12)'; notesCtx.shadowBlur=6; notesCtx.shadowOffsetY=3;
+        notesCtx.fillStyle=n.bg; notesCtx.strokeStyle=n.border; notesCtx.lineWidth=2; rr(notesCtx,n.x,n.y,n.w,n.h,10); notesCtx.fill(); notesCtx.stroke();
+        // fold
+        notesCtx.shadowColor='transparent'; notesCtx.fillStyle='rgba(0,0,0,0.06)';
+        notesCtx.beginPath(); notesCtx.moveTo(n.x+n.w-22,n.y); notesCtx.lineTo(n.x+n.w,n.y); notesCtx.lineTo(n.x+n.w,n.y+22); notesCtx.closePath(); notesCtx.fill();
+        // texto
+        notesCtx.fillStyle='#111827'; notesCtx.font=`bold ${n.fontPx}px Inter, system-ui`;
+        const pad=12, lines=wrapLines(notesCtx,n.text,n.w-pad*2), lh=Math.round(n.fontPx*1.35);
+        lines.forEach((ln,j)=> notesCtx.fillText(ln,n.x+pad,n.y+pad+n.fontPx+j*lh));
+        if(n.urls?.length){ notesCtx.fillStyle='#2563eb'; notesCtx.font=`bold ${Math.max(12,n.fontPx-2)}px Inter`; notesCtx.fillText('🔗',n.x+n.w-22,n.y+n.h-10); }
+        if(draggingNote && draggingNote.index===i){ notesCtx.strokeStyle='#4f46e5'; notesCtx.setLineDash([6,4]); rr(notesCtx,n.x-2,n.y-2,n.w+4,n.h+4,12); notesCtx.stroke(); notesCtx.setLineDash([]); }
+        notesCtx.restore();
+      });
+    }
+    function placeNote(x,y,text,fontPx){
+      const col=NOTE_COLORS[parseInt(noteColor.value,10)||0]||NOTE_COLORS[0];
+      const wMin=160,wMax=260; notesCtx.font=`bold ${fontPx}px Inter`;
+      const words=text.split(/\s+/); let line='', lines=[], w=0;
+      for(const wd of words){ const t=line?line+' '+wd:wd; if(notesCtx.measureText(t).width>wMax-24){ lines.push(line); line=wd; } else { line=t; } }
+      if(line) lines.push(line);
+      w=Math.min(wMax,Math.max(wMin,Math.round(Math.max(...lines.map(l=>notesCtx.measureText(l).width))+24)));
+      const h=Math.round(24+(fontPx*1.35)*lines.length+12);
+      const urls=(text.match(urlRegex)||[]).map(u=>u.trim());
+      notes.push({x:Math.max(8,x-Math.round(w/2)),y:Math.max(8,y-Math.round(h/2)),w,h,text,fontPx,bg:col.bg,border:col.border,urls});
+    }
+    function activateNoteMode(){
+      if(!noteText.value.trim()){ noteText.focus(); noteText.placeholder='Type a tip… (required)'; return; }
+      noteMode=true; noteHint.style.display='block'; setTool('note'); notesCanvas.style.cursor='copy';
+    }
+    window.activateNoteMode = activateNoteMode;
+
+    const pointerOnNotes = (e)=> getPos(notesCanvas,e);
+    notesCanvas.addEventListener('mousedown',(e)=>{
+      if(notesCanvas.style.pointerEvents==='none') return; // estás dibujando
+      const p=pointerOnNotes(e);
+      if(noteMode){
+        const text=noteText.value.trim(); const fontPx=parseInt(noteSize.value,10)||16;
+        if(text){ placeNote(p.x,p.y,text,fontPx); renderNotes(); snapshot('note-added'); }
+        noteMode=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab'; return;
+      }
+      // hit-test topmost
+      for(let i=notes.length-1;i>=0;i--){
+        const n=notes[i];
+        if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
+          const picked=notes.splice(i,1)[0]; notes.push(picked);
+          const idx=notes.length-1;
+          draggingNote={index:idx,offsetX:p.x-picked.x,offsetY:p.y-picked.y};
+          notesCanvas.style.cursor='grabbing'; renderNotes(); return;
+        }
+      }
+      draggingNote=null; renderNotes();
+    });
+    notesCanvas.addEventListener('mousemove',(e)=>{
+      if(!draggingNote) return;
+      const p=pointerOnNotes(e); const n=notes[draggingNote.index];
+      n.x=p.x-draggingNote.offsetX; n.y=p.y-draggingNote.offsetY; renderNotes();
+    });
+    function endDragNote(){
+      if(draggingNote) snapshot('note-drag-end');
+      draggingNote=null; notesCanvas.style.cursor='grab'; renderNotes();
+    }
+    notesCanvas.addEventListener('mouseup',endDragNote);
+    notesCanvas.addEventListener('mouseleave',()=>{draggingNote=null});
+
+    // abrir enlaces con doble clic
+    notesCanvas.addEventListener('dblclick',(e)=>{
+      const p=pointerOnNotes(e);
+      for(let i=notes.length-1;i>=0;i--){
+        const n=notes[i];
+        if(p.x>=n.x && p.x<=n.x+n.w && p.y>=n.y && p.y<=n.y+n.h){
+          if(!n.urls?.length) return;
+          if(n.urls.length===1) window.open(n.urls[0],'_blank');
+          else{
+            const choice=prompt('Open which link?\n'+n.urls.map((u,j)=>`${j+1}. ${u}`).join('\n'));
+            const idx=parseInt(choice,10);
+            if(!isNaN(idx) && idx>=1 && idx<=n.urls.length) window.open(n.urls[idx-1],'_blank');
+          }
+          return;
+        }
+      }
+    });
+
+    // Esc para cancelar modo nota
+    window.addEventListener('keydown',(e)=>{
+      if(e.key==='Escape' && noteMode){ noteMode=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab'; }
+    });
+
+    /* Clear/Save */
+    function clearCanvas(){
+      if(!confirm('Clear the entire poster (drawing, images, and notes)?')) return;
+      drawCtx.globalCompositeOperation='source-over';
+      drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
+      drawCtx.fillStyle='white'; drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
+      images=[]; renderMedia(); notes=[]; renderNotes();
+      snapshot('clear-all'); setTool('pen');
+    }
+    window.clearCanvas = clearCanvas;
+
+    function savePoster(){
+      const merged=document.createElement('canvas');
+      merged.width=drawCanvas.width; merged.height=drawCanvas.height;
+      const mx=merged.getContext('2d');
+      mx.fillStyle='white'; mx.fillRect(0,0,merged.width,merged.height);
+      mx.drawImage(drawCanvas,0,0); mx.drawImage(mediaCanvas,0,0); mx.drawImage(notesCanvas,0,0);
+      const a=document.createElement('a'); a.download='poster.png'; a.href=merged.toDataURL('image/png'); a.click();
+    }
+    window.savePoster = savePoster;
+
+    /* Referencias */
+    function toggleReferences(){
+      const content=document.getElementById('references-content');
+      const icon=document.getElementById('toggle-icon');
+      const open=content.classList.contains('show');
+      content.classList.toggle('show'); icon.textContent = open ? '▼' : '▲';
+    }
+    window.toggleReferences = toggleReferences;
+
+    console.log('✅ Poster Studio listo: pluma/eraser OK, Undo global, imágenes y notas arrastrables, Clear/Save funcionando.');
   });
-
-  window.addEventListener('keydown',(e)=>{
-    if(e.key==='Escape' && noteMode){ noteMode=false; noteHint.style.display='none'; notesCanvas.style.cursor='grab'; }
-  });
-
-  /* ===== Clear / Save ===== */
-  function clearCanvas(){
-    if(!confirm('Clear the entire poster (drawing, images, and notes)?')) return;
-    drawCtx.globalCompositeOperation='source-over';
-    drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
-    drawCtx.fillStyle='white'; drawCtx.fillRect(0,0,drawCanvas.width,drawCanvas.height);
-    images=[]; renderMedia(); notes=[]; renderNotes();
-    snapshot('clear-all'); setTool('pen');
-  }
-  window.clearCanvas = clearCanvas;
-
-  function savePoster(){
-    const merged=document.createElement('canvas');
-    merged.width=drawCanvas.width; merged.height=drawCanvas.height;
-    const mx=merged.getContext('2d');
-    mx.fillStyle='white'; mx.fillRect(0,0,merged.width,merged.height);
-    mx.drawImage(drawCanvas,0,0); mx.drawImage(mediaCanvas,0,0); mx.drawImage(notesCanvas,0,0);
-    const a=document.createElement('a'); a.download='poster.png'; a.href=merged.toDataURL('image/png'); a.click();
-  }
-  window.savePoster = savePoster;
-
-  /* ===== References toggle ===== */
-  function toggleReferences(){
-    const content=document.getElementById('references-content');
-    const icon=document.getElementById('toggle-icon');
-    const open=content.classList.contains('show');
-    content.classList.toggle('show'); icon.textContent = open ? '▼' : '▲';
-  }
-  window.toggleReferences = toggleReferences;
-
-  console.log('✅ Poster Studio ready: pen/eraser OK, global Undo, draggable notes, Clear/Save working.');
-}); // DOMContentLoaded
-</script>
+  </script>
 </body>
 </html>
+
+  
+    
+    
